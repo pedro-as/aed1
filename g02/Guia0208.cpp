@@ -1,16 +1,16 @@
 /*
- * Guia0207.cpp - v0.4 - 18/3/2021
+ * Guia0208.cpp - v0.4 - 18/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
  * No Linux  : g++ -o Guia02E2 ./Guia02E2cpp
- * No Windows: g++ -o Guia02E2.exe ./Guia0207.cpp
+ * No Windows: g++ -o Guia02E2.exe ./Guia0208.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0207
- * No Windows:   Guia0207
+ * No Linux  : ./Guia0208
+ * No Windows:   Guia0208
  * 
  */
 
@@ -290,6 +290,32 @@ public:
         // fechar o arquivo
         archive.close();
     }
+    /*
+    playActions - metodo para receber comandos de arquivo
+    @param fileName - nome do arquivo
+    */
+    void playActions(const char *fileName)
+    {
+        // definir dados
+        int action;
+        // definir arquivos de onde ler dados
+        std::ifstream archive(fileName);
+
+        // repetir enquanto houver dados
+        archive >> action; // tentar ler a primeira linha
+        while (! archive.eof()) // testar se nao encontrado o fim
+        {
+            // mostrar mais um comando
+            IO_print(IO_toString(action));
+            delay(stepDelay);
+            // executar mais um comando
+            execute(action);
+            // tentar ler a proxima linha
+            archive >> action; // tentar ler a proxima linha
+        }
+        // fechar o arquivo
+        archive.close();
+    }
 };
 
 
@@ -307,12 +333,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0207.txt");
+    decorateWorld("Guia0208.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0207.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0208.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(3);                 // definir velocidade padrao
@@ -326,7 +352,8 @@ int main()
     robot->create(1, 1, NORTH, 0, "Karel");
 
     // executar e gravar acoes
-    robot->recordActions("Tarefa0207.txt");
+    robot->recordActions("Tarefa0208.txt");
+    robot->playActions("Tarefa0208.txt");
 
     // encerrar operacoes no ambiente
     world->close();
@@ -354,4 +381,5 @@ Versao    Teste
  0.5     01. (OK)    teste exibindo numero de marcadores capturados
  0.6     01. (OK)    teste controlando o robo com comandos interativos
  0.7     01. (OK)    teste controlando o robo e gravando acoes
+ 0.8     01. (OK)    teste gravando tarefa e reproduzindo-a a seguir
 */

@@ -1,8 +1,15 @@
 # ignore all
 *
 
-# unignore all with extension
-!*.*
+# unignore .cpp, .hpp, and .txt 
+!*.cpp
+!*.hpp
+!*.txt
 
-# unignore all dirs
+# unignore dirs
 !*/
+
+# unignore .cpp, .hpp, and .txt inside dirs
+!*/*.cpp
+!*/*.hpp
+!*/*.txt

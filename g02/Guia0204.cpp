@@ -24,6 +24,10 @@ decorateWorld - Metodo para preparar o cenario
 */
 void decorateWorld(const char* fileName)
 {
+    // colocar paredes no mundo
+    world->set(4, 4, VWALL);
+    world->set(4, 4, HWALL);
+
     // colocar um marcador no mundo
     world->set(4, 4, BEEPER);
 
