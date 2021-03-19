@@ -1,21 +1,22 @@
 /*
- * Guia0205.cpp - v0.4 - 18/3/2021
+ * Guia0206.cpp - v0.4 - 18/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
  * No Linux  : g++ -o Guia02E2 ./Guia02E2cpp
- * No Windows: g++ -o Guia02E2.exe ./Guia0205.cpp
+ * No Windows: g++ -o Guia02E2.exe ./Guia0206.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0205
- * No Windows:   Guia0205
+ * No Linux  : ./Guia0206
+ * No Windows:   Guia0206
  * 
  */
 
 // lista de dependencias
 #include "karel.hpp"
+#include "io.hpp"    // para entradas e saidas
 
 // --------------------------- definicoes de metodos
 /*
@@ -155,7 +156,108 @@ public:
         // encerrar
         turnOff();
     }
+
+    /*
+    execute - Metodo para executar um comando
+    @param option - comando a ser executado
+    */
+    void execute(int option)
+    {
+        // executar a opcao de comando
+        switch(option)
+        {
+            case 0: // terminar
+                // nao fazer nada
+                break;
+            case 1: // virar para a esquerda
+                if (leftIsClear())
+                {
+                    turnLeft();
+                }
+                break;
+            case 2: // virar para o sul
+                while (! facingSouth())
+                {
+                    turnLeft();
+                }
+                break;
+            case 3: // virar para a direita
+                if (rightIsClear())
+                {
+                    turnRight();
+                }
+                break;
+            case 4: // virar para o oeste
+                while (! facingWest())
+                {
+                    turnLeft();
+                }
+                break;
+            case 5: // mover
+                if(frontIsClear())
+                {
+                    move();
+                }
+                break;
+            case 6: // virar para o leste
+                while (! facingEast())
+                {
+                    turnLeft();
+                }
+                break;
+            case 7: // pegar marcador
+                if (nextToABeeper())
+                {
+                    pickBeeper();
+                }
+                break;
+            case 8: // virar para o norte
+                while (! facingNorth())
+                {
+                    turnLeft();
+                }
+                break;
+            case 9: // colocar marcador
+                if (beepersInBag())
+                {
+                    putBeeper();
+                }
+                break;
+            default: // nenhuma das alternativas anteriores
+                // comando invalido
+                show_Error("ERROR: invalid command");
+        }
+    }
+
+    /*
+    moveI - Metodo para mover o robo interativamente
+    Lista de comandos disponiveis:
+    0 - turnOff
+    1 - turnLeft                2 - toSouth
+    3 - turnRight               4 - toWest
+    5 - move                    6 - toEast
+    7 - pickBeeper              8 - toNorth
+    9 - putBeeper
+    */
+    void moveI()
+    {
+        // definir dados
+        int action;
+
+        // repetir (com testes no fim)
+        // enquanto opcao diferente de zero
+        do
+        {
+            // ler opcao
+            action = IO_readint("Command? ");
+
+            // executar acao dependente da opcao
+            execute(action);
+        } while (action != 0);
+       
+    }
 };
+
 
 // --------------------------- acao principal
 /*
@@ -171,12 +273,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0205.txt");
+    decorateWorld("Guia0206.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0205.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0206.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(3);                 // definir velocidade padrao
@@ -190,7 +292,7 @@ int main()
     robot->create(1, 1, NORTH, 0, "Karel");
 
     // executar tarefa
-    robot->doSquare();
+    robot->moveI();
 
     // encerrar operacoes no ambiente
     world->close();
@@ -216,4 +318,5 @@ Versao    Teste
  0.3     01. (OK)    teste da repeticao para percorrer um quadrado
  0.4     01. (OK)    teste pegando marcadores
  0.5     01. (OK)    teste exibindo numero de marcadores capturados
+ 0.6     01. (OK)    teste controlando o robo com comandos interativos
 */
