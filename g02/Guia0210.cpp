@@ -273,8 +273,8 @@ public:
         std::ofstream archive(fileName);
         // ler acao
         action = IO_readint("Command? ");
-        // repetir enquanto acao maior ou igual a zero
-        while (action >= 0)
+        // repetir enquanto diferente de 0
+        while (action != 0)
         {
             // testar se opcao valida
             if (0 <= action && action <= 9)
@@ -411,7 +411,7 @@ public:
                 // executar comando
                 execute(action);
                 // guardar o comando em arquivo
-                archive << action;
+                archive << action << "\n";
             }
         } while (action != 0);
         // fechar o arquivo
@@ -496,5 +496,4 @@ Versao    Teste
  0.8     01. (OK)    teste gravando tarefa e reproduzindo-a a seguir
  0.9     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
  1.0     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
- 
 */
