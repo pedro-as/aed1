@@ -1,5 +1,5 @@
 /**
-  * Guia0211.cpp - v1.0 - 18/3/2021
+  * Guia0211.cpp - v1.1 - 18/3/2021
   * Author: Pedro H. Amorim Sa - 742626
   * 
   * Para compilar em um terminal:
@@ -25,27 +25,50 @@
  */
 void decorateWorld(const char* fileName)
 {
-    // colocar escada
-    world->set(2, 1, VWALL);
-    world->set(3, 2, VWALL);
-    world->set(4, 3, VWALL);
-    world->set(6, 3, VWALL);
-    world->set(7, 2, VWALL);
-    world->set(8, 1, VWALL);
-    world->set(3, 1, HWALL);
-    world->set(4, 2, HWALL);
-    world->set(5, 3, HWALL);
-    world->set(6, 3, HWALL);
-    world->set(7, 2, HWALL);
-    world->set(8, 1, HWALL);
+    // construir paredes verticais
+    for (int y = 2; y <= 8; y++)
+    {
+        if (y == 5)
+        {
+            world->set(4, y, VWALL);
+            world->set(5, y, VWALL);
+        }
+        else if (y == 4 || y == 6)
+        {
+            world->set(2, y, VWALL);
+            world->set(7, y, VWALL);
+        }
+        else
+        {
+            world->set(2, y, VWALL);
+            world->set(4, y, VWALL);
+            world->set(5, y, VWALL);
+            world->set(7, y, VWALL);
+        }
+    }
+
+    // construir paredes horizontais
+    for (int x = 3; x <= 7; x++)
+    {
+        if (x == 5)
+        {
+            world->set(x, 3, HWALL);
+            world->set(x, 6, HWALL);
+        }
+        else
+        {
+            world->set(x, 1, HWALL);
+            world->set(x, 4, HWALL);
+            world->set(x, 5, HWALL);
+            world->set(x, 8, HWALL);
+        }
+    }
 
     // colocar marcadores no mundo
-    world->set(7, 3, BEEPER);
-    world->set(8, 2, BEEPER);
-    world->set(8, 2, BEEPER);
-    world->set(9, 1, BEEPER);
-    world->set(9, 1, BEEPER);
-    world->set(9, 1, BEEPER);
+    world->set(4, 5, BEEPER);
+    world->set(5, 3, BEEPER);
+    world->set(5, 7, BEEPER);
+    world->set(6, 5, BEEPER);
 
     // salvar a configuracao atual do mundo
     world->save(fileName);
@@ -101,8 +124,11 @@ public:
     void doPartialTask()
     {
         // especificar acoes dessa parte da tarefa
-        moveN(3);
         turnLeft();
+        turnLeft();
+        moveN(2);
+        turnRight();
+        move();
     }
     /**
      * pickBeepers() - Metodo para coletar marcadores
@@ -160,39 +186,19 @@ public:
      */
     void doTask()
     {
-        move();
-        stepUpRight(3); // subir escada
-        move();
-        // descer e pegar marcador 1
-        stepDownRight(1);
-        pickBeepers();
-        // descer e pegar marcadores 2 e 3
-        stepDownRight(1);
-        pickBeepers();
-        // descer e pegar marcadores 4, 5 e 6
-        stepDownRight(1);
-        pickBeepers();
-        // virar-se para oeste
-        faceWest();
-        // subir escada
-        stepUpLeft(3);
-        move();
-        // descer e depositar marcadores
-        stepDownLeft(1);
-        putBeeper();
-        putBeeper();
-        putBeeper();
-        stepDownLeft(1);
-        putBeeper();
-        putBeeper();
-        stepDownLeft(1);
-        putBeeper();
-        // voltar 'a posicao inicial
-        move();
+        // iniciar movimentas e pegar primeiro marcador
+        moveN(2);
+        moveAndPickLeft(1);
+        // mover-se e pegar os marcadores seguintes
+        moveAndPickRight(3);
+        // voltar 'a posicao inicial com os marcadores
+        moveN(3);
+        turnRight();
+        moveN(7);
+        // virar-se para leste
         turnLeft();
         turnLeft();
-
-        // encerrar
+        // desligar
         turnOff();
     }
 
@@ -512,6 +518,79 @@ public:
             turnRight();
         }
     }
+    /**
+     * moveAndPickLeft - Metodo para procurar aberturas 'a esquerda
+     *                    em uma estrutura e pegar marcadores
+     * @param reps - numero de repeticoes
+     */
+    void moveAndPickLeft(int reps)
+    {
+        for (int rep = reps; rep > 0; rep--)
+        {
+            // acoes para executar enquanto
+            // a frente do robo estiver livre
+            while (frontIsClear())
+            {
+                if (leftIsClear())
+                {
+                    // virar 'a esquerda sempre que livre
+                    turnLeft();
+                    move();
+                }
+                else
+                {
+                    // mover-se enquanto a frente estiver livre
+                    // e pegar marcadores sempre que disponiveis
+                    move();
+                    if (nextToABeeper())
+                    {
+                        pickBeepers();
+                    }
+                }
+            }
+            // sair do nicho
+            doPartialTask();
+        }
+        // encerrar acao
+        return;
+    }
+
+    /**
+     * moveAndPickRight - Metodo para procurar aberturas 'a direita
+     *                    em uma estrutura e pegar marcadores
+     * @param reps - numero de repeticoes
+     */
+    void moveAndPickRight(int reps)
+    {
+        for (int rep = reps; rep > 0; rep--)
+        {
+            // acoes para executar enquanto
+            // a frente do robo estiver livre
+            while (frontIsClear())
+            {
+                if (rightIsClear())
+                {
+                    // virar 'a direita sempre que livre
+                    turnRight();
+                    move();
+                }
+                else
+                {
+                    // mover-se enquanto a frente estiver livre
+                    // e pegar marcadores sempre que disponiveis
+                    move();
+                    if (nextToABeeper())
+                    {
+                        pickBeepers();
+                    }
+                }
+            }
+            // sair do nicho
+            doPartialTask();
+        }
+        // encerrar acao
+        return;
+    }
 };
 
 
@@ -537,7 +616,7 @@ int main()
     world->read("Guia0211.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(3);                 // definir velocidade padrao
+    set_Speed(2);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();
@@ -578,5 +657,6 @@ Versao    Teste
  0.7     01. (OK)    teste controlando o robo e gravando acoes
  0.8     01. (OK)    teste gravando tarefa e reproduzindo-a a seguir
  0.9     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
- 1.0     01. (OK)    teste gravando, acrescentando e, a seguir, reproduzindo acoes
+ 1.0     01. (OK)    teste gravando, acrescentando e reproduzindo acoes
+ 1.1     01. (OK)    teste buscando marcadores automaticamente na estrutura
 */
