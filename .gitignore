@@ -1,15 +1,18 @@
-# ignore all
+# ignorar tudo
 *
 
-# unignore .cpp, .hpp, and .txt 
+# não ignorar extensões .cpp, .hpp e .txt 
 !*.cpp
 !*.hpp
 !*.txt
 
-# unignore dirs
+# não ignorar pastas
 !*/
 
-# unignore .cpp, .hpp, and .txt inside dirs
+# não ignorar extensões .cpp, .hpp, and .txt dentro das pastas
 !*/*.cpp
 !*/*.hpp
 !*/*.txt
+
+# ignorar a pasta com material de referência
+ref/

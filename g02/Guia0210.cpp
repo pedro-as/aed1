@@ -495,5 +495,5 @@ Versao    Teste
  0.7     01. (OK)    teste controlando o robo e gravando acoes
  0.8     01. (OK)    teste gravando tarefa e reproduzindo-a a seguir
  0.9     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
- 1.0     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
+ 1.0     01. (OK)    teste gravando, acrescentando e, a seguir, reproduzindo acoes
 */
