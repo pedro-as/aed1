@@ -1,16 +1,16 @@
 /**
-  * Guia0213.cpp - v1.1 - 18/3/2021
+  * Guia0214.cpp - v1.1 - 18/3/2021
   * Author: Pedro H. Amorim Sa - 742626
   * 
   * Para compilar em um terminal:
   * 
-  * No Linux  : g++ -o Guia02E2 ./Guia02E2cpp
-  * No Windows: g++ -o Guia02E2.exe ./Guia0213.cpp
+  * No Linux  : g++ -o Guia0214 ./Guia0214cpp
+  * No Windows: g++ -o Guia0214.exe ./Guia0214.cpp
   * 
   * Para executar em um terminal:
   * 
-  * No Linux  : ./Guia0213
-  * No Windows:   Guia0213
+  * No Linux  : ./Guia0214
+  * No Windows:   Guia0214
   * 
   */
 
@@ -678,15 +678,15 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0213.txt");
+    decorateWorld("Guia0214.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0213.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0214.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(1);                 // definir velocidade padrao
+    set_Speed(3);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();

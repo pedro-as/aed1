@@ -4,8 +4,8 @@
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia02E2 ./Guia02E2cpp
- * No Windows: g++ -o Guia02E2.exe ./Guia0207.cpp
+ * No Linux  : g++ -o Guia0207 ./Guia0207cpp
+ * No Windows: g++ -o Guia0207.exe ./Guia0207.cpp
  * 
  * Para executar em um terminal:
  * 

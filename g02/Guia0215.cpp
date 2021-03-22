@@ -1,16 +1,16 @@
 /**
-  * Guia0212.cpp - v1.1 - 18/3/2021
+  * Guia0215.cpp - v1.1 - 18/3/2021
   * Author: Pedro H. Amorim Sa - 742626
   * 
   * Para compilar em um terminal:
   * 
-  * No Linux  : g++ -o Guia0212 ./Guia0212cpp
-  * No Windows: g++ -o Guia0212.exe ./Guia0212.cpp
+  * No Linux  : g++ -o Guia0215 ./Guia0215cpp
+  * No Windows: g++ -o Guia0215.exe ./Guia0215.cpp
   * 
   * Para executar em um terminal:
   * 
-  * No Linux  : ./Guia0212
-  * No Windows:   Guia0212
+  * No Linux  : ./Guia0215
+  * No Windows:   Guia0215
   * 
   */
 
@@ -26,50 +26,44 @@
 void decorateWorld(const char* fileName)
 {
     // construir paredes verticais
-    for (int y = 2; y <= 8; y++)
+    for (int y = 3; y <= 8; y++)
     {
-        if (y == 5)
-        {
-            world->set(4, y, VWALL);
-            world->set(5, y, VWALL);
-        }
-        else if (y == 4 || y == 6)
+        if (y == 8)
         {
             world->set(2, y, VWALL);
-            world->set(7, y, VWALL);
+            world->set(5, y, VWALL);
         }
         else
         {
             world->set(2, y, VWALL);
+            world->set(3, y, VWALL);
             world->set(4, y, VWALL);
             world->set(5, y, VWALL);
-            world->set(7, y, VWALL);
         }
     }
 
     // construir paredes horizontais
-    for (int x = 3; x <= 7; x++)
-    {
-        if (x == 5)
-        {
-            world->set(x, 3, HWALL);
-            world->set(x, 6, HWALL);
-        }
-        else
-        {
-            world->set(x, 1, HWALL);
-            world->set(x, 4, HWALL);
-            world->set(x, 5, HWALL);
-            world->set(x, 8, HWALL);
-        }
-    }
+    world->set(3, 2, HWALL);
+    world->set(3, 8, HWALL);
+    world->set(4, 2, HWALL);
+    world->set(5, 2, HWALL);
+    world->set(5, 8, HWALL);
 
     // colocar marcadores no mundo
-    world->set(4, 5, BEEPER);
+    world->set(3, 3, BEEPER);
+    world->set(3, 3, BEEPER);
+    world->set(3, 3, BEEPER);
+    world->set(4, 3, BEEPER);
+    world->set(4, 3, BEEPER);
+    world->set(4, 3, BEEPER);
+    world->set(4, 4, BEEPER);
+    world->set(4, 4, BEEPER);
     world->set(5, 3, BEEPER);
-    world->set(5, 7, BEEPER);
-    world->set(6, 5, BEEPER);
-
+    world->set(5, 3, BEEPER);
+    world->set(5, 3, BEEPER);
+    world->set(5, 4, BEEPER);
+    world->set(5, 4, BEEPER);
+    world->set(5, 5, BEEPER);
     // salvar a configuracao atual do mundo
     world->save(fileName);
 }
@@ -124,11 +118,10 @@ public:
     void doPartialTask()
     {
         // especificar acoes dessa parte da tarefa
+        moveAndPick(5);
         turnLeft();
         turnLeft();
-        moveN(2);
-        turnRight();
-        move();
+        moveN(5);
     }
     /**
      * pickBeepers() - Metodo para coletar marcadores
@@ -146,6 +139,10 @@ public:
             pickBeeper();
             // contar mais um marcador coletado
             n++;
+            // registrar coordenada
+            int x = xAvenue();
+            int y = yStreet();
+            registerCoord(x, y);
         }
         // retornar a quantidade de marcadores coletados
         return(n);
@@ -186,16 +183,45 @@ public:
      */
     void doTask()
     {
-        // iniciar movimentas e pegar primeiro marcador
+        // mover-se ate a entrada
+        move();
+        turnLeft();
+        moveN(8);
+        turnRight();
         moveN(2);
-        moveAndPickLeft(1);
-        // mover-se e pegar os marcadores seguintes
-        moveAndPickRight(3);
-        // voltar 'a posicao inicial com os marcadores
+        // entrar na estrutura
+        turnRight();
+        move();
+        // ir ate o primeiro marcador
+        turnLeft();
+        move();
+        turnRight();
+        // pegar primeiros marcadores (terceira coluna)
+        doPartialTask();
+        turnLeft();
+        move();
+        turnLeft();
+        // pegar na segunda coluna
+        doPartialTask();
+        turnLeft();
+        move();
+        turnLeft();
+        // pegar na primeira coluna
+        doPartialTask();
+        turnRight();
+        // sair da estrutura
+        move();
+        turnLeft();
+        move();
+        turnRight();
         moveN(3);
         turnRight();
-        moveN(7);
-        // virar-se para leste
+        moveN(8);
+        // depositar os marcadores
+        putBeepers(7, 1);
+        // voltar 'a posicao inicial
+        turnRight();
+        moveN(6);
         turnLeft();
         turnLeft();
         // desligar
@@ -591,6 +617,50 @@ public:
         // encerrar acao
         return;
     }
+
+    /**
+     * putBeepers - Metodo para descarregar todos os marcadores portados
+     *              pelo robo em uma posicao determinada
+     * @param x - coordenada x da posicao para descarregar
+     * @param y - coordenada y da posicao para descarregar
+     */
+    void putBeepers(int x, int y)
+    {
+        // testar se a posicao atual corresponde
+        // 'a posicao pretendida
+        if (areYouHere(x, y))
+        {
+            while (beepersInBag())
+            {
+                putBeeper(); // descarregar marcador enquanto houver
+            }
+        }
+    }
+
+    /**
+     * moveAndPick - Metodo para pegar marcadores no caminho
+     * @param steps - total de passos a dar
+     */
+    void moveAndPick(int steps)
+    {
+        for (int step = steps; step > 0; step --)
+        {
+            move();
+            pickBeepers();
+        }
+    }
+
+    /**
+     * registerCoord - Metodo para registrar coordenada atual
+     */
+    void registerCoord(int x, int y)
+    {
+        const char *fileName = "Tarefa0214b.txt";
+        std::fstream archive(fileName, std::ios::app);
+        archive << x << std::endl;
+        archive << y << std::endl;
+        archive.close();
+    }
 };
 
 
@@ -608,15 +678,15 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0212.txt");
+    decorateWorld("Guia0215.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0212.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0215.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(2);                 // definir velocidade padrao
+    set_Speed(1);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();
@@ -661,4 +731,6 @@ Versao    Teste
  1.1     01. (OK)    teste subindo e descendo degraus, pegando e descarregando
                      os marcadores
  1.2     01. (OK)    teste buscando marcadores automaticamente na estrutura
+ 1.3     01. (OK)    teste buscando marcadores e descarregando em posicao (9, 1)
+ 1.4     01. (OK)    teste buscando marcadores e registrando coordenadas
 */
