@@ -658,5 +658,7 @@ Versao    Teste
  0.8     01. (OK)    teste gravando tarefa e reproduzindo-a a seguir
  0.9     01. (OK)    teste gravando tarefa e traduzindo-as a seguir
  1.0     01. (OK)    teste gravando, acrescentando e reproduzindo acoes
- 1.1     01. (OK)    teste buscando marcadores automaticamente na estrutura
+ 1.1     01. (OK)    teste subindo e descendo degraus, pegando e descarregando
+                     os marcadores
+ 1.2     01. (OK)    teste buscando marcadores automaticamente na estrutura
 */

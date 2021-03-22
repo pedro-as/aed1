@@ -51,11 +51,19 @@ void decorateWorld(const char* fileName)
 
     // colocar marcadores no mundo
     world->set(3, 3, BEEPER);
+    world->set(3, 3, BEEPER);
+    world->set(3, 3, BEEPER);
     world->set(4, 3, BEEPER);
     world->set(4, 3, BEEPER);
+    world->set(4, 3, BEEPER);
+    world->set(4, 4, BEEPER);
+    world->set(4, 4, BEEPER);
     world->set(5, 3, BEEPER);
     world->set(5, 3, BEEPER);
     world->set(5, 3, BEEPER);
+    world->set(5, 4, BEEPER);
+    world->set(5, 4, BEEPER);
+    world->set(5, 5, BEEPER);
     // salvar a configuracao atual do mundo
     world->save(fileName);
 }
@@ -110,14 +118,10 @@ public:
     void doPartialTask()
     {
         // especificar acoes dessa parte da tarefa
+        moveAndPick(5);
         turnLeft();
         turnLeft();
         moveN(5);
-        turnRight();
-        move();
-        turnRight();
-        moveN(5);
-        pickBeepers();
     }
     /**
      * pickBeepers() - Metodo para coletar marcadores
@@ -135,6 +139,10 @@ public:
             pickBeeper();
             // contar mais um marcador coletado
             n++;
+            // registrar coordenada
+            int x = xAvenue();
+            int y = yStreet();
+            registerCoord(x, y);
         }
         // retornar a quantidade de marcadores coletados
         return(n);
@@ -185,31 +193,35 @@ public:
         turnRight();
         move();
         // ir ate o primeiro marcador
+        turnLeft();
+        move();
         turnRight();
+        // pegar primeiros marcadores (terceira coluna)
+        doPartialTask();
+        turnLeft();
         move();
         turnLeft();
-        moveN(5);
-        pickBeepers(); // pegar o primeiro marcador
-        // ir ate os marcadores seguintes e pega-los
+        // pegar na segunda coluna
         doPartialTask();
+        turnLeft();
+        move();
+        turnLeft();
+        // pegar na primeira coluna
         doPartialTask();
+        turnRight();
         // sair da estrutura
-        turnLeft();
-        turnLeft();
-        moveN(5);
+        move();
         turnLeft();
         move();
         turnRight();
-        move();
-        turnRight();
-        moveN(5);
+        moveN(3);
         turnRight();
         moveN(8);
         // depositar os marcadores
-        putBeepers(9, 1);
+        putBeepers(7, 1);
         // voltar 'a posicao inicial
         turnRight();
-        moveN(8);
+        moveN(6);
         turnLeft();
         turnLeft();
         // desligar
@@ -624,6 +636,31 @@ public:
             }
         }
     }
+
+    /**
+     * moveAndPick - Metodo para pegar marcadores no caminho
+     * @param steps - total de passos a dar
+     */
+    void moveAndPick(int steps)
+    {
+        for (int step = steps; step > 0; step --)
+        {
+            move();
+            pickBeepers();
+        }
+    }
+
+    /**
+     * registerCoord - Metodo para registrar coordenada atual
+     */
+    void registerCoord(int x, int y)
+    {
+        const char *fileName = "Tarefa0214b.txt";
+        std::fstream archive(fileName, std::ios::app);
+        archive << x << std::endl;
+        archive << y << std::endl;
+        archive.close();
+    }
 };
 
 
@@ -649,7 +686,7 @@ int main()
     world->read("Guia0213.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(3);                 // definir velocidade padrao
+    set_Speed(1);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();
@@ -695,4 +732,5 @@ Versao    Teste
                      os marcadores
  1.2     01. (OK)    teste buscando marcadores automaticamente na estrutura
  1.3     01. (OK)    teste buscando marcadores e descarregando em posicao (9, 1)
+ 1.4     01. (OK)    teste buscando marcadores e registrando coordenadas
 */
