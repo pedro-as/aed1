@@ -1,5 +1,5 @@
 /**
-  * Guia0214.cpp - v1.1 - 18/3/2021
+  * Guia0214.cpp - v1.4 - 18/3/2021
   * Author: Pedro H. Amorim Sa - 742626
   * 
   * Para compilar em um terminal:
