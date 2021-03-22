@@ -51,19 +51,16 @@ void decorateWorld(const char* fileName)
 
     // colocar marcadores no mundo
     world->set(3, 3, BEEPER);
-    world->set(3, 3, BEEPER);
-    world->set(3, 3, BEEPER);
-    world->set(4, 3, BEEPER);
-    world->set(4, 3, BEEPER);
+    world->set(3, 4, BEEPER);
+    world->set(3, 4, BEEPER);
+    world->set(3, 5, BEEPER);
+    world->set(3, 5, BEEPER);
+    world->set(3, 5, BEEPER);
     world->set(4, 3, BEEPER);
     world->set(4, 4, BEEPER);
     world->set(4, 4, BEEPER);
     world->set(5, 3, BEEPER);
-    world->set(5, 3, BEEPER);
-    world->set(5, 3, BEEPER);
-    world->set(5, 4, BEEPER);
-    world->set(5, 4, BEEPER);
-    world->set(5, 5, BEEPER);
+
     // salvar a configuracao atual do mundo
     world->save(fileName);
 }
@@ -686,7 +683,7 @@ int main()
     world->read("Guia0215.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(1);                 // definir velocidade padrao
+    set_Speed(3);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();
@@ -696,8 +693,9 @@ int main()
     // com zero marcadores, nome escolhido)
     robot->create(1, 1, EAST, 0, "Karel");
 
-    // executar tarefa
-    robot->doTask();
+    // gravar acoes e reproduzir
+    robot->recordActions("Tarefa0215.txt");
+    robot->playActions("Tarefa0215.txt");
 
     // encerrar operacoes no ambiente
     world->close();
@@ -733,4 +731,6 @@ Versao    Teste
  1.2     01. (OK)    teste buscando marcadores automaticamente na estrutura
  1.3     01. (OK)    teste buscando marcadores e descarregando em posicao (9, 1)
  1.4     01. (OK)    teste buscando marcadores e registrando coordenadas
+ 1.5     01. (OK)    teste gravando acoes e reproduzindo
+         01. (OK)    teste reproduzindo do arquivo, com ambiente original
 */
