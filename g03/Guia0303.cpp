@@ -1,16 +1,16 @@
 /**
- * Guia0301.cpp - v0.1 - 18/3/2021
+ * Guia0303.cpp - v0.3 - 18/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0301 ./Guia0301.cpp
- * No Windows: g++ -o Guia0301.exe ./Guia0301.cpp
+ * No Linux  : g++ -o Guia0303 ./Guia0303.cpp
+ * No Windows: g++ -o Guia0303.exe ./Guia0303.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0301
- * No Windows:   Guia0301
+ * No Linux  : ./Guia0303
+ * No Windows:   Guia0303
  * 
  */
 
@@ -82,12 +82,12 @@ public:
 
     /**
      * countCommands - Metodo para contar comandos do arquivo
+     * @return quantidade de comandos
      * @param fileName - nome do arquivo
      */
-    void countCommands(const char *fileName)
+    int countCommands(const char *fileName)
     {
         // definir dados
-        char message[80];
         int x = 0;
         int length = 0;
         
@@ -106,10 +106,41 @@ public:
         // fechar o arquivo
         archive.close();
 
-        // informar a quantidade de comandos guardados
-        sprintf(message, "Commands = %d", length);
-        has_Text = true;
-        show_Text(message);
+        // retornar resultado
+        return (length);
+    }
+    /**
+     * readCommands - Metodo para contar comandos do arquivo
+     * @return grupo formado por todos os comandos
+     * @param fileName - nome do arquivo
+     */
+    int readCommands(int commands[], const char *fileName)
+    {
+        // definir dados
+        int x = 0;
+        int action = 0;
+        int length = 0;
+        std::ifstream archive(fileName);
+
+        // obter a quantidade de comandos
+        length = countCommands(fileName);
+
+        // criar um armazenador para os comandos
+        if (length < MAX_COMMANDS)
+        {
+            for (x; x < length; x++)
+            {
+                // tentar ler a proxima linha
+                archive >> action;
+                // guardar um comando
+                // na posicao (x) do armazenador
+                commands[x] = action;
+            }
+            // fechar o arquivo
+            archive.close();
+        }
+        // retornar quantidade de comandos lidos
+        return (length);
     }
 };
 
@@ -127,12 +158,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0301.txt");
+    decorateWorld("Guia0303.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0301.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0303.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(3);                 // definir velocidade padrao
@@ -145,8 +176,15 @@ int main()
     // com zero marcadores, nome escolhido)
     robot->create(1, 1, NORTH, 0, "Karel");
 
+    // definir armazenador para comandos
+    int comandos[MAX_COMMANDS];
+
     // executar tarefa
-    robot->countCommands("Tarefa0301.txt");
+    char message[80];
+    int quantidade = robot->readCommands(comandos, "Tarefa0301.txt");
+    message[0] = '\0'; // limpar mensagem
+    sprintf(message, "Commands = %d", quantidade);
+    show_Text(message);
 
     // encerrar operacoes no ambiente
     world->close();
@@ -166,4 +204,6 @@ Versao    Data    Modificacao
 ------------------------------------ testes
 Versao    Teste
  0.1     01. (OK)    identificacao de programa
+ 0.2     01. (OK)    teste com retorno na funcao countCommands()
+ 0.3     01. (OK)    teste com metodo readCommands()
 */
