@@ -1,16 +1,16 @@
 /**
- * Guia0305.cpp - v0.5 - 27/3/2021
+ * Guia0306.cpp - v0.6 - 27/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0305 ./Guia0305.cpp
- * No Windows: g++ -o Guia0305.exe ./Guia0305.cpp
+ * No Linux  : g++ -o Guia0306 ./Guia0306.cpp
+ * No Windows: g++ -o Guia0306.exe ./Guia0306.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0305
- * No Windows:   Guia0305
+ * No Linux  : ./Guia0306
+ * No Windows:   Guia0306
  * 
  */
 
@@ -254,6 +254,25 @@ public:
         // executar comandos
         doCommands(quantidade, comandos);
     }
+
+    /**
+     * mapWorld - Metodo para o robo explorar o mundo
+     */
+    void mapWorld()
+    {
+        // definir dados locais
+        char message[80];
+
+        // obter o tamanho do mundo, se existir
+        if (world != nullptr)
+        {
+            // informar o tamanho do mundo
+            message[0] = '\0'; // limpar a mensagem
+            sprintf(message, "World is %dx%d",
+                    world->avenues(), world->streets());
+            show_Text(message);
+        }
+    }
 };
 
 // --------------------------- acao principal
@@ -270,12 +289,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0305.txt");
+    decorateWorld("Guia0306.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0305.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0306.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(3);                 // definir velocidade padrao
@@ -289,7 +308,7 @@ int main()
     robot->create(1, 1, NORTH, 0, "Karel");
 
     // executar tarefa
-    robot->doTask("Tarefa0301.txt");
+    robot->mapWorld();
 
     // encerrar operacoes no ambiente
     world->close();
@@ -313,4 +332,5 @@ Versao    Teste
  0.3     01. (OK)    teste com metodo readCommands()
  0.4     01. (OK)    teste com metodo doCommands()
  0.5     01. (OK)    teste com metodo doTask()
+ 0.6     01. (OK)    teste com metodo mapWorld()
 */

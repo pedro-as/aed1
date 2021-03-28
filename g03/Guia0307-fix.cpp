@@ -1,16 +1,16 @@
 /**
- * Guia0305.cpp - v0.5 - 27/3/2021
+ * Guia0307-fix.cpp - v0.7.1 - 27/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0305 ./Guia0305.cpp
- * No Windows: g++ -o Guia0305.exe ./Guia0305.cpp
+ * No Linux  : g++ -o Guia0307-fix ./Guia0307-fix.cpp
+ * No Windows: g++ -o Guia0307-fix.exe ./Guia0307-fix.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0305
- * No Windows:   Guia0305
+ * No Linux  : ./Guia0307-fix
+ * No Windows:   Guia0307-fix
  * 
  */
 
@@ -26,8 +26,8 @@
 void decorateWorld(const char* fileName)
 {
     // colocar paredes no mundo
-    world->set(4, 4, VWALL);
-    world->set(4, 4, HWALL);
+    // world->set(4, 4, VWALL);
+    // world->set(4, 4, HWALL);
 
     // colocar um marcador no mundo
     world->set(4, 4, BEEPER);
@@ -254,6 +254,78 @@ public:
         // executar comandos
         doCommands(quantidade, comandos);
     }
+
+    /**
+     * mapWorld - Metodo para o robo explorar o mundo
+     */
+    void mapWorld()
+    {
+        // definir dados locais
+        int avenue = 0;
+        int street = 0;
+        int beepers = 0;
+        char message[80];
+        
+        // correcao para funcionamento esperado
+        /*
+        // obter o tamanho do mundo, se existir
+        if (world != nullptr)
+        {
+            // informar o tamanho do mundo
+            message[0] = '\0'; // limpar a mensagem
+            sprintf(message, "World is %dx%d",
+                    world->avenues(), world->streets());
+            show_Text(message);
+        }
+        */
+
+        // percorrer o mundo procurando marcadores
+        for (street = 1; street <= world->streets(); street++)
+        {
+            for (avenue = 1; avenue <= world->avenues(); avenue++)
+            {
+                // se proximo a um marcador
+                if (nextToABeeper())
+                {
+                    // informar marcador nessa posicao
+                    message[0] = '\0';
+                    sprintf(message, "Beeper at (%d,%d)", avenue, street);
+                    show_Text(message);
+                    // encontrado mais um marcador
+                    beepers++;
+                }
+                // mover para a proxima posicao
+                if (avenue < world->avenues())
+                {
+                    move();
+                }
+                else // correcao para funcionamento esperado
+                {
+                    turnLeft();
+                    turnLeft();
+                    moveN(world->avenues() - 1);
+                }
+                /*
+                turnLeft();
+                turnLeft();
+                moveN(world->avenues() - 1);
+                if (street < world->streets())
+                {
+                    turnRight();
+                    move();
+                    turnRight();
+                }
+                */
+            }
+            // correcao para funcionamento esperado
+            if (street < world->streets())
+                {
+                    turnRight();
+                    move();
+                    turnRight();
+                }
+        }
+    }
 };
 
 // --------------------------- acao principal
@@ -270,15 +342,15 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0305.txt");
+    decorateWorld("Guia0307-fix.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0305.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0307-fix.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
-    set_Speed(3);                 // definir velocidade padrao
+    set_Speed(1);                 // definir velocidade padrao
 
     // criar robo
     MyRobot *robot = new MyRobot();
@@ -286,10 +358,10 @@ int main()
     // posicionar robo no ambiente (situacao inicial):
     // posicao (x=1, y=1), voltado para direita,
     // com zero marcadores, nome escolhido)
-    robot->create(1, 1, NORTH, 0, "Karel");
+    robot->create(1, 1, EAST, 0, "Karel");
 
     // executar tarefa
-    robot->doTask("Tarefa0301.txt");
+    robot->mapWorld();
 
     // encerrar operacoes no ambiente
     world->close();
@@ -303,6 +375,10 @@ int main()
 /*
 ------------------------------------ documentacao complementar
 ------------------------------------ notas / observacoes / comentarios
+O teste 01 da v0.7 nao executou conforme esperado (NE = comportamento
+nao esperado). Correcoes foram efetuadas no metodo mapWorld() na v0.7.1
+e o comportamento esperado foi obtido.
+
 ------------------------------------ historico
 Versao    Data    Modificacao
  0.1     19/3/21    esboco
@@ -313,4 +389,7 @@ Versao    Teste
  0.3     01. (OK)    teste com metodo readCommands()
  0.4     01. (OK)    teste com metodo doCommands()
  0.5     01. (OK)    teste com metodo doTask()
+ 0.6     01. (OK)    teste com metodo mapWorld()
+ 0.7     01. (NE)    teste procurando marcadores com mapWorld()
+ 0.7.1   01. (OK)    teste procurando marcadores com mapWorld(), corrigido
 */
