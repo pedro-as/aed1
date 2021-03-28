@@ -1,16 +1,16 @@
 /**
- * Guia0307-fix.cpp - v0.7.1 - 27/3/2021
+ * Guia0308.cpp - v0.8 - 27/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0307-fix ./Guia0307-fix.cpp
- * No Windows: g++ -o Guia0307-fix.exe ./Guia0307-fix.cpp
+ * No Linux  : g++ -o Guia0308 ./Guia0308.cpp
+ * No Windows: g++ -o Guia0308.exe ./Guia0308.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0307-fix
- * No Windows:   Guia0307-fix
+ * No Linux  : ./Guia0308
+ * No Windows:   Guia0308
  * 
  */
 
@@ -257,15 +257,19 @@ public:
 
     /**
      * mapWorld - Metodo para o robo explorar o mundo
+     * @param map - arranjo bidimensional (matriz)
+     *              onde guardar o mapa
      */
-    void mapWorld()
+    void mapWorld(int map [][WIDTH])
     {
         // definir dados locais
         int avenue = 0;
         int street = 0;
         int beepers = 0;
         char message[80];
-
+        
+        // correcao para funcionamento esperado
+        /*
         // obter o tamanho do mundo, se existir
         if (world != nullptr)
         {
@@ -275,12 +279,15 @@ public:
                     world->avenues(), world->streets());
             show_Text(message);
         }
+        */
 
         // percorrer o mundo procurando marcadores
         for (street = 1; street <= world->streets(); street++)
         {
             for (avenue = 1; avenue <= world->avenues(); avenue++)
             {
+                // limpar posicao no mapa
+                map[street - 1][avenue - 1] = 0;
                 // se proximo a um marcador
                 if (nextToABeeper())
                 {
@@ -288,6 +295,8 @@ public:
                     message[0] = '\0';
                     sprintf(message, "Beeper at (%d,%d)", avenue, street);
                     show_Text(message);
+                    // marcar posicao no mapa
+                    map[street - 1][avenue - 1] = 1;
                     // encontrado mais um marcador
                     beepers++;
                 }
@@ -339,12 +348,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0307-fix.txt");
+    decorateWorld("Guia0308.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0307-fix.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0308.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(1);                 // definir velocidade padrao
@@ -357,8 +366,11 @@ int main()
     // com zero marcadores, nome escolhido)
     robot->create(1, 1, EAST, 0, "Karel");
 
+    // definir armazenador para o mapa
+    int map[HEIGHT][WIDTH]; // altura x largura
+
     // executar tarefa
-    robot->mapWorld();
+    robot->mapWorld(map);
 
     // encerrar operacoes no ambiente
     world->close();
@@ -372,10 +384,6 @@ int main()
 /*
 ------------------------------------ documentacao complementar
 ------------------------------------ notas / observacoes / comentarios
-O teste 01 da v0.7 nao executou conforme esperado (NE = comportamento
-nao esperado). Correcoes foram efetuadas no metodo mapWorld() na v0.7.1
-e o comportamento esperado foi obtido.
-
 ------------------------------------ historico
 Versao    Data    Modificacao
  0.1     19/3/21    esboco
@@ -389,4 +397,5 @@ Versao    Teste
  0.6     01. (OK)    teste com metodo mapWorld()
  0.7     01. (NE)    teste procurando marcadores com mapWorld()
  0.7.1   01. (OK)    teste procurando marcadores com mapWorld(), corrigido
+ 0.8     01. (OK)    teste com metodo mapWorld() incrementado
 */
