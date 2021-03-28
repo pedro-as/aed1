@@ -1,16 +1,16 @@
 /**
- * Guia0310.cpp - v1.0 - 27/3/2021
+ * Guia0311.cpp - v1.1 - 27/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0310 ./Guia0310.cpp
- * No Windows: g++ -o Guia0310.exe ./Guia0310.cpp
+ * No Linux  : g++ -o Guia0311 ./Guia0311.cpp
+ * No Windows: g++ -o Guia0311.exe ./Guia0311.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0310
- * No Windows:   Guia0310
+ * No Linux  : ./Guia0311
+ * No Windows:   Guia0311
  * 
  */
 
@@ -26,11 +26,44 @@
 void decorateWorld(const char* fileName)
 {
     // colocar paredes no mundo
-    // world->set(4, 4, VWALL);
-    // world->set(4, 4, HWALL);
+    world->set(2, 2, HWALL);
+    world->set(3, 2, HWALL);
+    world->set(4, 2, HWALL);
+    world->set(2, 7, HWALL);
+    world->set(3, 7, HWALL);
+    world->set(4, 7, HWALL);
+    world->set(6, 2, HWALL);
+    world->set(7, 2, HWALL);
+    world->set(8, 2, HWALL);
+    world->set(6, 7, HWALL);
+    world->set(7, 7, HWALL);
+    world->set(8, 7, HWALL);
 
-    // colocar um marcador no mundo
-    world->set(4, 4, BEEPER);
+    world->set(1, 3, VWALL);
+    world->set(1, 4, VWALL);
+    world->set(1, 5, VWALL);
+    world->set(1, 6, VWALL);
+    world->set(1, 7, VWALL);
+    world->set(4, 3, VWALL);
+    world->set(4, 4, VWALL);
+    world->set(4, 5, VWALL);
+    world->set(4, 6, VWALL);
+    world->set(4, 7, VWALL);
+    world->set(5, 3, VWALL);
+    world->set(5, 4, VWALL);
+    world->set(5, 5, VWALL);
+    world->set(5, 6, VWALL);
+    world->set(5, 7, VWALL);
+    world->set(8, 3, VWALL);
+    world->set(8, 4, VWALL);
+    world->set(8, 5, VWALL);
+    world->set(8, 6, VWALL);
+    world->set(8, 7, VWALL);
+
+    // colocar marcadores no mundo
+    world->set(3, 2, BEEPER);
+    world->set(1, 5, BEEPER);
+    world->set(3, 8, BEEPER);
 
     // salvar a configuracao atual do mundo
     world->save(fileName);
@@ -246,7 +279,7 @@ public:
         char message[80];
 
         // ler quantidade e comandos
-        quantidade = readCommands(comandos, "Tarefa0301.txt");
+        quantidade = readCommands(comandos, fileName);
         message[0] = '\0'; // limpar mensagem
         sprintf(message, "Commands = %d", quantidade);
         show_Text(message);
@@ -267,6 +300,8 @@ public:
         int street = 0;
         int beepers = 0;
         char message[80];
+        
+        // correcao para funcionamento esperado
 
         // obter o tamanho do mundo, se existir
         if (world != nullptr)
@@ -479,12 +514,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0310.txt");
+    decorateWorld("Guia0311.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0310.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0311.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(1);                 // definir velocidade padrao
@@ -498,12 +533,10 @@ int main()
     robot->create(1, 1, EAST, 0, "Karel");
 
     // definir armazenador para o mapa
-    int map[HEIGHT][WIDTH]; // altura x largura
+    //int map[HEIGHT][WIDTH]; // altura x largura
 
     // executar tarefas
-    robot->mapWorld(map);
-    robot->saveMap("Mapa0310.txt", map);
-    robot->readMap("Mapa0310.txt");
+    robot->doTask("Tarefa0311.txt");
 
     // encerrar operacoes no ambiente
     world->close();
@@ -533,4 +566,5 @@ Versao    Teste
  0.8     01. (OK)    teste com metodo mapWorld() incrementado
  0.9     01. (OK)    teste com metodo saveMap()
  1.0     01. (OK)    teste com metodo readMap()
+ 1.1     01. (OK)    teste com especificacao em arquivo
 */

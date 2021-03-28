@@ -267,9 +267,7 @@ public:
         int street = 0;
         int beepers = 0;
         char message[80];
-        
-        // correcao para funcionamento esperado
-        /*
+
         // obter o tamanho do mundo, se existir
         if (world != nullptr)
         {
@@ -279,7 +277,6 @@ public:
                     world->avenues(), world->streets());
             show_Text(message);
         }
-        */
 
         // percorrer o mundo procurando marcadores
         for (street = 1; street <= world->streets(); street++)
