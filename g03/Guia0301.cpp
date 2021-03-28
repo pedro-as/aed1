@@ -1,5 +1,5 @@
 /**
- * Guia0301.cpp - v0.1 - 18/3/2021
+ * Guia0301.cpp - v0.1 - 27/3/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
