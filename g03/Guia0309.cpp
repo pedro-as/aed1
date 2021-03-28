@@ -363,23 +363,7 @@ public:
                     {
                         archive << avenue << std::endl;
                         archive << street << std::endl;
-                        archive << map[street - 1][avenue
-    getchar();
-    return(0);
-}
-
-// --------------------------------- testes
-/*
------------------------------------- documentacao complementar
------------------------------------- notas / observacoes / comentarios
------------------------------------- historico
-Versao    Data    Modificacao
- 0.1     19/3/21    esboco
------------------------------------- testes
-Versao    Teste
- 0.1     01. (OK)    identificacao de programa
- 0.2     01. (OK)    teste com retorno na funcao countCommands()
- 0.3     01. (OK)    teste com metodo readCommands() - 1] << std::endl;
+                        archive << map[street - 1][avenue - 1] << std::endl;
                     }
                 }
             }
