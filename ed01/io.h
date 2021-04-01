@@ -99,7 +99,7 @@ void IO_flush ( )
 */
 void IO_clearinput ( )
 // Este metodo nao foi amplamente testado e seu
-// uso sera' por conta e risco do utilizador
+// uso e' por conta e risco do utilizador
 {
   int c;
   do 
