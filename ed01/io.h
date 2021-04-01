@@ -2,7 +2,7 @@
    IO_lib - v0.3.1 - __ / __ / _____
    Author: _______________________
 
-   Esta versao inclui o metodo IO_clearinput ( )
+   Esta versao inclui uma versao adaptada do metodo IO_flush ( )
  */
 // ---------------------- lista de dependencias
 
@@ -89,17 +89,17 @@ void IO_clrscr ( )
 /**
     Metodo para limpar a entrada de dados padrao.
  */
+
 void IO_flush ( )
 {
     fflush ( stdin ); // OBS; NAO RECOMENDADO !
 } // end IO_flush ( )
 
+
 /**
     Metodo para limpar a entrada de dados no Linux
 */
-void IO_clearinput ( )
-// Este metodo nao foi amplamente testado e seu
-// uso e' por conta e risco do utilizador
+void IO_flush_mod ( )
 {
   int c;
   do 
@@ -107,7 +107,7 @@ void IO_clearinput ( )
     c = getchar ( );
   }
   while ( c != '\n' && c != EOF );
-} // end IO_clearinput ( )
+} // end IO_flush ( )
 
 /**
     Funcao para informar a versao dessa biblioteca.
@@ -402,7 +402,7 @@ chars IO_readstring ( chars text1 )
 
   printf ( "%s", text1 );
   //fflush ( stdin ); // limpar a entrada de dados
-  IO_clearinput( );
+  IO_flush_mod ( );
   scanf  ( "%s", buffer );    // ler cadeia de caracteres
 
   return ( buffer );
@@ -417,6 +417,6 @@ chars IO_readln ( chars text1 )
 {
   printf ( "%s", text1 );
   //fflush ( stdin );
-  IO_clearinput( );
+  IO_flush_mod ( );
   return ( IO_freadln ( stdin ) );
 } // fim IO_readln ( )
