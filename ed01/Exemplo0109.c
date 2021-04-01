@@ -2,7 +2,7 @@
  * Exemplo0109 - v0.1 - 30/03/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
- * Linux: gcc -o Exemplo0109 Exemplo0109.c
+ * Linux: gcc -o Exemplo0109 Exemplo0109.c -lm
  * Windows: gcc -o Exemplo0109.exe Exemplo0109.c
  * Para executar em terminal (janela de comandos):
  * Linux: ./Exemplo0109

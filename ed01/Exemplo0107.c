@@ -2,7 +2,7 @@
  * Exemplo0107 - v0.1 - 30/03/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
- * Linux: gcc -o Exemplo0107 Exemplo0107.c
+ * Linux: gcc -o Exemplo0107 Exemplo0107.c -lm
  * Windows: gcc -o Exemplo0107.exe Exemplo0107.c
  * Para executar em terminal (janela de comandos):
  * Linux: ./Exemplo0107

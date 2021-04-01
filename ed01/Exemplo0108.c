@@ -2,7 +2,7 @@
  * Exemplo0108 - v0.1 - 30/03/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
- * Linux: gcc -o Exemplo0108 Exemplo0108.c
+ * Linux: gcc -o Exemplo0108 Exemplo0108.c -lm
  * Windows: gcc -o Exemplo0108.exe Exemplo0108.c
  * Para executar em terminal (janela de comandos):
  * Linux: ./Exemplo0108
