@@ -2,7 +2,9 @@
 *
 
 # não ignorar extensões .cpp, .hpp e .txt 
+!*.c
 !*.cpp
+!*.h
 !*.hpp
 !*.txt
 
@@ -10,7 +12,9 @@
 !*/
 
 # não ignorar extensões .cpp, .hpp, and .txt dentro das pastas
+!*/*.c
 !*/*.cpp
+!*/*.h
 !*/*.hpp
 !*/*.txt
 
