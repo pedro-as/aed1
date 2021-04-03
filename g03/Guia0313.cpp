@@ -1,5 +1,5 @@
 /**
- * Guia0313.cpp - v1.3 - 27/3/2021
+ * Guia0313.cpp - v0.2 - 04/02/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
@@ -240,10 +240,8 @@ public:
             case 7: // pegar marcador
                 if (nextToABeeper())
                 {
-                    pickBeeper();
-                    int x = xAvenue();
-                    int y = yStreet();
-                    registerCoord(x, y);
+                    int n = pickBeepers();
+                    recordBeepers(n);
                 }
                 break;
             case 8: // virar para o norte
@@ -547,14 +545,51 @@ public:
     }
 
     /**
-     * registerCoord - Metodo para registrar coordenada atual
+     * pickBeepers() - Metodo para coletar marcadores
      */
-    void registerCoord(int x, int y)
+    int pickBeepers()
     {
-        const char *fileName = "Coords0213.txt";
-        std::fstream archive(fileName, std::ios::app);
-        archive << x << std::endl;
-        archive << y << std::endl;
+        // definir dado local
+        int n = 0;
+
+        // repetir (com teste no inicio)
+        // enquanto houver marcador proximo
+        while (nextToABeeper())
+        {
+            // coletar um marcador
+            pickBeeper();
+            // contar mais um marcador coletado
+            n++;
+        }
+        // retornar a quantidade de marcadores coletados
+        return(n);
+    }
+
+    /**
+     * recordBeepers - Metodo para registrar marcadores coletados na posicao atual
+     * @param n - numero de marcadores
+     */
+    void recordBeepers(int n)
+    {
+        // obter posicao atual
+        int x = xAvenue();
+        int y = yStreet();
+
+        // gravar posicao em arquivo
+        std::fstream archive("Coords0213.txt", std::ios::app);
+        archive << n;
+        if (n == 1)
+        {
+            archive << " marcador em (";    
+        }
+        else
+        {
+            archive << " marcadores em (";
+        }
+        archive << x;
+        archive << ",";
+        archive << y;
+        archive << ")" << std::endl;
         archive.close();
     }
 };
@@ -611,21 +646,10 @@ int main()
 ------------------------------------ notas / observacoes / comentarios
 ------------------------------------ historico
 Versao    Data    Modificacao
- 0.1     19/3/21    esboco
+ 0.1    19/03/21    esboco
+ 0.1    02/04/21    gravar quantidade de marcadores
 ------------------------------------ testes
 Versao    Teste
- 0.1     01. (OK)    identificacao de programa
- 0.2     01. (OK)    teste com retorno na funcao countCommands()
- 0.3     01. (OK)    teste com metodo readCommands()
- 0.4     01. (OK)    teste com metodo doCommands()
- 0.5     01. (OK)    teste com metodo doTask()
- 0.6     01. (OK)    teste com metodo mapWorld()
- 0.7     01. (NE)    teste procurando marcadores com mapWorld()
- 0.7.1   01. (OK)    teste procurando marcadores com mapWorld(), corrigido
- 0.8     01. (OK)    teste com metodo mapWorld() incrementado
- 0.9     01. (OK)    teste com metodo saveMap()
- 1.0     01. (OK)    teste com metodo readMap()
- 1.1     01. (OK)    teste com especificacao em arquivo
- 1.2     01. (OK)    teste com labirinto
- 1.3     01. (OK)    teste com labirinto, gravando coordenadas
+ 0.1     01. (OK)    teste com labirinto, gravando coordenadas
+ 0.2     01. (OK)    teste com labirinto, gravando posicao e marcadores
 */
