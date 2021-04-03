@@ -1,7 +1,7 @@
 # ignorar tudo
 *
 
-# não ignorar extensões .cpp, .hpp e .txt 
+# não ignorar extensões .c, .cpp, .h, .hpp e .txt 
 !*.c
 !*.cpp
 !*.h
@@ -11,7 +11,7 @@
 # não ignorar pastas
 !*/
 
-# não ignorar extensões .cpp, .hpp, and .txt dentro das pastas
+# não ignorar extensões .c, .cpp, .h, .hpp, and .txt dentro das pastas
 !*/*.c
 !*/*.cpp
 !*/*.h
