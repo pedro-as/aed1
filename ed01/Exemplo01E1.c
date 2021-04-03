@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     double r = 0.0; // definir variavel com valor inicial para raio
 
     // identificar
-    IO_id("Exemplo0119 - Programa = v0.1");
+    IO_id("Exemplo01E1 - Programa = v0.1");
 
     area = IO_readdouble("Area da circunferencia = "); // ler area
     r = (sqrt(area * 2 / M_PI)); // calcular raio de area * 2

@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     double v = 0.0; // definir variavel com valor inicial para volume de uma esfera
 
     // identificar
-    IO_id("Exemplo0119 - Programa = v0.1");
+    IO_id("Exemplo0120 - Programa = v0.1");
 
     r = IO_readdouble("Raio da esfera = "); // ler raio
     r_ = (r * 3 / 8); // calcular 3/8 de r

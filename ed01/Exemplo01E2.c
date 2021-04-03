@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     double v_m = 0.0; // definir variavel com valor inicial para v/2
 
     // identificar
-    IO_id("Exemplo0119 - Programa = v0.1");
+    IO_id("Exemplo01E2 - Programa = v0.1");
 
     v = IO_readdouble("Volume da esfera = "); // ler volume
     v_m = (v / 2.0); // calcular metade do volume informado
