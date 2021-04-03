@@ -671,10 +671,8 @@ int main()
 ------------------------------------ notas / observacoes / comentarios
 ------------------------------------ historico
 Versao    Data    Modificacao
- 0.1    19/03/21    esboco
- 0.1    02/04/21    gravar quantidade de marcadores
+ 0.1    02/04/21    esboco
 ------------------------------------ testes
 Versao    Teste
  0.1     01. (OK)    teste com labirinto, gravando coordenadas
- 0.2     01. (OK)    teste com labirinto, gravando posicao e marcadores
 */
