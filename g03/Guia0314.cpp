@@ -1,16 +1,16 @@
 /**
- * Guia0313.cpp - v0.2 - 04/02/2021
+ * Guia0314.cpp - v0.1 - 04/02/2021
  * Author: Pedro H. Amorim Sa - 742626
  * 
  * Para compilar em um terminal:
  * 
- * No Linux  : g++ -o Guia0313 ./Guia0313.cpp
- * No Windows: g++ -o Guia0313.exe ./Guia0313.cpp
+ * No Linux  : g++ -o Guia0314 ./Guia0314.cpp
+ * No Windows: g++ -o Guia0314.exe ./Guia0314.cpp
  * 
  * Para executar em um terminal:
  * 
- * No Linux  : ./Guia0313
- * No Windows:   Guia0313
+ * No Linux  : ./Guia0314
+ * No Windows:   Guia0314
  * 
  */
 
@@ -28,12 +28,13 @@ void decorateWorld(const char* fileName)
     // colocar paredes no mundo
     world->set(2, 2, HWALL);
     world->set(3, 2, HWALL);
+    world->set(3, 3, HWALL);
     world->set(4, 2, HWALL);
     world->set(5, 2, HWALL);
     world->set(6, 2, HWALL);
     world->set(7, 2, HWALL);
     world->set(5, 4, HWALL);
-    world->set(6, 4, HWALL);    
+    world->set(5, 5, HWALL);
     world->set(4, 6, HWALL);    
     world->set(6, 6, HWALL);
     world->set(3, 7, HWALL);
@@ -60,7 +61,9 @@ void decorateWorld(const char* fileName)
     world->set(2, 7, VWALL);
     world->set(3, 5, VWALL);
     world->set(3, 6, VWALL);
+    world->set(4, 5, VWALL);
     world->set(4, 7, VWALL);
+    world->set(5, 5, VWALL);
     world->set(5, 7, VWALL);
     world->set(6, 5, VWALL);
     world->set(6, 6, VWALL);
@@ -229,6 +232,9 @@ public:
                 if(frontIsClear())
                 {
                     move();
+                    // registrar posicao apos
+                    // cada movimento
+                    recordPosition();
                 }
                 break;
             case 6: // virar para o leste
@@ -241,7 +247,6 @@ public:
                 if (nextToABeeper())
                 {
                     int n = pickBeepers();
-                    recordBeepers(n);
                 }
                 break;
             case 8: // virar para o norte
@@ -265,6 +270,7 @@ public:
             default: // nenhuma das alternativas anteriores
                 // comando invalido
                 show_Error("ERROR: invalid command");
+            
         }
     }
 
@@ -576,7 +582,7 @@ public:
         int y = yStreet();
 
         // gravar posicao em arquivo
-        std::fstream archive("Coords0313.txt", std::ios::app);
+        std::fstream archive("Coords0213.txt", std::ios::app);
         archive << n;
         if (n == 1)
         {
@@ -586,6 +592,25 @@ public:
         {
             archive << " marcadores em (";
         }
+        archive << x;
+        archive << ",";
+        archive << y;
+        archive << ")" << std::endl;
+        archive.close();
+    }
+
+    /**
+     * recordPosition - Metodo para gravar posicao atual
+     */
+    void recordPosition()
+    {
+        // obter posicao atual
+        int x = xAvenue();
+        int y = yStreet();
+
+        // gravar posicao em arquivo
+        std::fstream archive("Coords0314.txt", std::ios::app);
+        archive << "(";
         archive << x;
         archive << ",";
         archive << y;
@@ -608,12 +633,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create("");            // criar o mundo
-    decorateWorld("Guia0313.txt");
+    decorateWorld("Guia0314.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();               // limpar configuracoes
-    world->read("Guia0313.txt");  // ler configuracao atual para o ambiente
+    world->read("Guia0314.txt");  // ler configuracao atual para o ambiente
     world->show();                // mostrar a configuracao atual
 
     set_Speed(1);                 // definir velocidade padrao
@@ -630,7 +655,7 @@ int main()
     //int map[HEIGHT][WIDTH]; // altura x largura
 
     // executar tarefas
-    robot->doTask("Tarefa0313.txt");
+    robot->doTask("Tarefa0314.txt");
 
     // encerrar operacoes no ambiente
     world->close();
