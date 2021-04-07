@@ -443,12 +443,12 @@ void Exemplo02E1()
     else
     {
         IO_println("Condicoes nao satisfeitas.");
-    }    
+    }
 }
 
 /**
  * Exemplo02E2 - Procedimento para testar se o primeiro valor literal
- * esta' fora do intervale definido por outros dois
+ * esta' fora do intervalo definido por outros dois
  */
 void Exemplo02E2()
 {
@@ -470,7 +470,26 @@ void Exemplo02E2()
     c = IO_readchar("Entrar com VALOR_3 (literal): ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
-    
+    if (b == c)
+    {
+        IO_println("VALOR_2 e VALOR_3 nao podem ser iguais.");
+    }
+    else if ((b < c) && !(b < a && a < c))
+    {
+        IO_print(IO_concat(IO_toString_c(a), " nao esta' entre "));
+        IO_print(IO_toString_c(b));
+        IO_println(IO_concat(" e ", IO_toString_c(c)));
+    }
+    else if ((b > c) && !(b > a && a > c))
+    {
+        IO_print(IO_concat(IO_toString_c(a), "  nao esta' entre "));
+        IO_print(IO_toString_c(c));
+        IO_println(IO_concat(" e ", IO_toString_c(b)));
+    }
+    else
+    {
+        IO_println("Condicoes nao satisfeitas.");
+    }
 }
 
 /**
