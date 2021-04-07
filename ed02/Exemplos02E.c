@@ -1,12 +1,12 @@
 /**
- * Exemplos02 - v0.2 - 07/04/2021
+ * Exemplos02E - v0.3 - 07/04/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
- * Linux: gcc -o Exemplos02 Exemplos02.c
- * Windows: gcc -o Exemplos02.exe Exemplos02.c
+ * Linux: gcc -o Exemplos02E Exemplos02E.c
+ * Windows: gcc -o Exemplos02E.exe Exemplos02E.c
  * Para executar em terminal (janela de comandos):
- * Linux: ./Exemplos02
- * Windows: Exemplos02
+ * Linux: ./Exemplos02E
+ * Windows: Exemplos02E
  */
 
 // dependencias
@@ -395,6 +395,85 @@ void Exemplo0220()
 }
 
 /**
+ * Exemplo02E1 - Procedimento para testar se o primeiro valor literal
+ * esta' entre outros dois ou se e' igual a um deles
+ */
+void Exemplo02E1()
+{
+    // definir dados
+    char a;
+    char b;
+    char c;
+
+    // exibir identificacao
+    IO_clrscr();
+    IO_println("*****************");
+    IO_println("** Exemplo02E1 **");
+    IO_println("*****************");
+    IO_println("Teste: VALOR_1 entre VALOR_2 e VALOR_3 ou igual a um deles");
+    
+    // ler dados do usuario
+    a = IO_readchar("\nEntrar com VALOR_1 (literal): ");
+    b = IO_readchar("Entrar com VALOR_2 (literal): ");
+    c = IO_readchar("Entrar com VALOR_3 (literal): ");
+    IO_println(""); // inserir nova linha antes de exibir resultado
+
+    if (a == b)
+    {
+        IO_print(IO_concat(IO_toString_c(a), " e' igual a "));
+        IO_println(IO_toString_c(b));
+    }
+    else if (a == c)
+    {
+        IO_print(IO_concat(IO_toString_c(a), " e' igual a "));
+        IO_println(IO_toString_c(c));
+    }
+    else if ((b < c) && (b < a && a < c))
+    {
+        IO_print(IO_concat(IO_toString_c(a), "  esta' entre "));
+        IO_print(IO_toString_c(b));
+        IO_println(IO_concat(" e ", IO_toString_c(c)));
+    }
+    else if ((b > c) && (b > a && a > c))
+    {
+        IO_print(IO_concat(IO_toString_c(a), "  esta' entre "));
+        IO_print(IO_toString_c(c));
+        IO_println(IO_concat(" e ", IO_toString_c(b)));
+    }
+    else
+    {
+        IO_println("Condicoes nao satisfeitas.");
+    }    
+}
+
+/**
+ * Exemplo02E2 - Procedimento para testar se o primeiro valor literal
+ * esta' fora do intervale definido por outros dois
+ */
+void Exemplo02E2()
+{
+    // definir dados
+    char a;
+    char b;
+    char c;
+
+    // exibir identificacao
+    IO_clrscr();
+    IO_println("*****************");
+    IO_println("** Exemplo02E2 **");
+    IO_println("*****************");
+    IO_println("Teste: VALOR_1 fora do intervalo entre VALOR_2 e VALOR_3");
+    
+    // ler dados do usuario
+    a = IO_readchar("\nEntrar com VALOR_1 (literal): ");
+    b = IO_readchar("Entrar com VALOR_2 (literal): ");
+    c = IO_readchar("Entrar com VALOR_3 (literal): ");
+    IO_println(""); // inserir nova linha antes de exibir resultado
+
+    
+}
+
+/**
  * Funcao principal.
  * @return codigo de encerramento
  * @param argc - quantidade de parametros na linha de comandos
@@ -404,7 +483,7 @@ int main(int argc, char* argv[])
 {
     // identificar
     IO_clrscr();
-    IO_id("=        Exemplos02 - Programa = v0.2       =");
+    IO_id("=        Exemplos02E - Programa = v0.3       =");
     
 
     // definir dado
@@ -423,6 +502,8 @@ int main(int argc, char* argv[])
     IO_println("[8] Exemplo 0218");
     IO_println("[9] Exemplo 0219");
     IO_println("[10] Exemplo 0220");
+    IO_println("[11] Exemplo 02E1");
+    IO_println("[12] Exemplo 02E2");
 
     // ler opcao do teclado
     option = IO_readint("\n>> ");
@@ -464,6 +545,12 @@ int main(int argc, char* argv[])
     case 10:
         Exemplo0220();
         break;
+    case 11:
+        Exemplo02E1();
+        break;
+    case 12:
+        Exemplo02E2();
+        break;
     default:
         IO_clrscr();
         IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),
@@ -485,6 +572,7 @@ int main(int argc, char* argv[])
  * Versao      Data        Modificacao
  *  0.1      06/04/21        esboco
  *  0.2      07/04/21   aperfeicoar formatacao e procedimentos
+ *  0.3      07/04/21   incluir tarefas extras
  * ---------------------------------------------- testes
  * Versao      Teste
  *  0.1     01. (OK)       teste geral do menu e dos procedimentos
@@ -500,4 +588,6 @@ int main(int argc, char* argv[])
  *          10. (OK)       teste do procedimento Exemplo0220
  *          11. (OK)       teste de encerramento do programa
  *          12. (OK)       teste de opcao invalida
+ *  0.3     01. (OK)       teste do procedimento Exemplo02E1
+ *          02. (OK)       teste do procedimento Exemplo02E2
  */
