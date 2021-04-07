@@ -410,7 +410,7 @@ int main(int argc, char* argv[])
     // definir dado
     int option = 0; // inicializar variavel para selecionar opcao
 
-    // ler do teclado
+    // exibir opcoes
     IO_println("Escolha uma das acoes a seguir para executar:\n");
     IO_println("[0] Encerrar programa");
     IO_println("[1] Exemplo 0211");
@@ -424,6 +424,7 @@ int main(int argc, char* argv[])
     IO_println("[9] Exemplo 0219");
     IO_println("[10] Exemplo 0220");
 
+    // ler opcao do teclado
     option = IO_readint("\n>> ");
 
     // selecionar opcao
