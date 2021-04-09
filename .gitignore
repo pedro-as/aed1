@@ -8,15 +8,16 @@
 !*.hpp
 !*.txt
 
-# não ignorar pastas
+# não ignorar diretórios
 !*/
 
-# não ignorar extensões .c, .cpp, .h, .hpp, and .txt dentro das pastas
+# não ignorar extensões .c, .cpp, .h, .hpp, e .txt dentro dos diretórios
 !*/*.c
 !*/*.cpp
 !*/*.h
 !*/*.hpp
 !*/*.txt
 
-# ignorar a pasta com material de referência
+# ignorar diretórios de referências e exemplos
 ref/
+ex/
