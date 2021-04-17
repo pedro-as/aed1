@@ -102,7 +102,7 @@ void IO_flush ( )
 void IO_flush_mod ( )
 {
   int c;
-  do 
+  do
   {
     c = getchar ( );
   }

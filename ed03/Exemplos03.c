@@ -33,7 +33,7 @@ void Exemplo0311(char* methodId)
     IO_println("Teste: determinar se caractere e' letra minuscula");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = 0; i < strlen(word); i++)
@@ -79,7 +79,7 @@ void Exemplo0312(char* methodId)
     IO_println("Teste: contar e mostrar letras minusculas");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = 0; i < strlen(word); i++)
@@ -120,7 +120,7 @@ void Exemplo0313(char* methodId)
     IO_println("Teste: contar e mostrar letras minusculas em ordem inversa");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = strlen(word) - 1; i >= 0; i--)
@@ -162,7 +162,7 @@ void Exemplo0314(char* methodId)
     IO_println("Teste: contar e mostrar todas as letras");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = 0; i < strlen(word); i++)
@@ -205,7 +205,7 @@ void Exemplo0315(char* methodId)
     IO_println("Teste: contar e mostrar todas as letras em ordem inversa");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = strlen(word) - 1; i >= 0; i--)
@@ -248,7 +248,7 @@ void Exemplo0316(char* methodId)
     IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres: ");
+    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
     IO_println(""); // inserir nova linha antes de exibir resultado
 
     for (int i = 0; i < strlen(word); i++)
@@ -276,8 +276,8 @@ void Exemplo0316(char* methodId)
 }
 
 /**
- * Exemplo0317 - Procedimento para contar e mostrar tudo o que nao for
- * digito ou letra
+ * Exemplo0317 - Procedimento para testar valores que sejam multiplos de 7
+ * em um intervalo definido
  */
 void Exemplo0317(char* methodId)
 {
@@ -291,10 +291,10 @@ void Exemplo0317(char* methodId)
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
-    IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
+    IO_println("Teste: contar e mostrar multiplos de 7 em um intervalo");
 
     // ler do teclado
-    start = IO_readint("\nEntrar com o limite inferior: ");
+    start = IO_readint("\nEntrar com o limite inferior >> ");
 
     // repetir enquanto stop <= start
     do
@@ -307,7 +307,7 @@ void Exemplo0317(char* methodId)
     // repetir enquanto quant <= 0
     do
     {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar",
+        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
                                      "- restricao: (0, inf) >> "));
     }
     while (quant <= 0);
@@ -320,7 +320,7 @@ void Exemplo0317(char* methodId)
     for (int i = 1; i <= quant; i++)
     {
         IO_print("Entrar com VALOR_");
-        value = IO_readint(IO_concat(IO_toString_d(i), ": "));
+        value = IO_readint(IO_concat(IO_toString_d(i), " >> "));
 
         if (value != 0 && value % 7 == 0 &&
             value >= start && value <= stop)
@@ -346,8 +346,8 @@ void Exemplo0317(char* methodId)
 }
 
 /**
- * Exemplo0318 - Procedimento para contar e mostrar tudo o que nao for
- * digito ou letra
+ * Exemplo0318 - Procedimento para testar valores que sejam multiplos de 7
+ * e nao multiplos de 3 em um intervalo definido
  */
 void Exemplo0318(char* methodId)
 {
@@ -361,10 +361,11 @@ void Exemplo0318(char* methodId)
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
-    IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
+    IO_println(IO_concat("Teste: contar e mostrar multiplos de 7 e ",
+                         "nao multiplos de 3 em um intervalo"));
 
     // ler do teclado
-    start = IO_readint("\nEntrar com o limite inferior: ");
+    start = IO_readint("\nEntrar com o limite inferior >> ");
 
     // repetir enquanto stop <= start
     do
@@ -377,7 +378,7 @@ void Exemplo0318(char* methodId)
     // repetir enquanto quant <= 0
     do
     {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar",
+        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
                                      "- restricao: (0, inf) >> "));
     }
     while (quant <= 0);
@@ -388,7 +389,7 @@ void Exemplo0318(char* methodId)
     for (int i = 1; i <= quant; i++)
     {
         IO_print("Entrar com VALOR_");
-        value = IO_readint(IO_concat(IO_toString_d(i), ": "));
+        value = IO_readint(IO_concat(IO_toString_d(i), " >> "));
 
         if (value != 0 && value % 7 == 0 && value % 3 != 0 &&
             value >= start && value <= stop)
@@ -408,8 +409,8 @@ void Exemplo0318(char* methodId)
 }
 
 /**
- * Exemplo0319 - Procedimento para contar e mostrar tudo o que nao for
- * digito ou letra
+ * Exemplo0319 - Procedimento para testar valores reais pertencentes a um
+ * intervalo definido, com parte inteira impar
  */
 void Exemplo0319(char* methodId)
 {
@@ -424,10 +425,11 @@ void Exemplo0319(char* methodId)
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
-    IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
+    IO_println(IO_concat("Teste: contar e mostrar valores reais em intervalo ",
+                         "e com parte inteira impar"));
 
     // ler do teclado
-    start = IO_readdouble("\nEntrar com o limite inferior: ");
+    start = IO_readdouble("\nEntrar com o limite inferior >> ");
 
     // repetir enquanto stop <= start
     do
@@ -451,7 +453,7 @@ void Exemplo0319(char* methodId)
     for (int i = 1; i <= quant; i++)
     {
         IO_print("Entrar com VALOR_");
-        value = IO_readdouble(IO_concat(IO_toString_d(i), ": "));
+        value = IO_readdouble(IO_concat(IO_toString_d(i), " >> "));
         trunc = value;
         if (value >= start && value <= stop && trunc % 2 != 0)
         {
@@ -470,8 +472,8 @@ void Exemplo0319(char* methodId)
 }
 
 /**
- * Exemplo0320 - Procedimento para contar e mostrar tudo o que nao for
- * digito ou letra
+ * Exemplo0320 - Procedimento para testar valores reais com parte fracionaria
+ * pertencente a um intervalo definido
  */
 void Exemplo0320(char* methodId)
 {
@@ -487,7 +489,8 @@ void Exemplo0320(char* methodId)
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
-    IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
+    IO_println(IO_concat("Teste: contar e mostrar valores com parte ",
+                         "fracionaria pertencente ao intervalo"));
 
     // ler do teclado
     do
@@ -519,7 +522,7 @@ void Exemplo0320(char* methodId)
     for (int i = 1; i <= quant; i++)
     {
         IO_print("Entrar com VALOR_");
-        value = IO_readdouble(IO_concat(IO_toString_d(i), ": "));
+        value = IO_readdouble(IO_concat(IO_toString_d(i), " >> "));
         trunc = value;
         control = value - trunc;
         if (control >= start && control <= stop)
@@ -536,6 +539,83 @@ void Exemplo0320(char* methodId)
     }
     IO_println(IO_concat("\nValores validos: ", valid));
     IO_println(IO_concat("Total de valores: ", IO_toString_d(count)));
+}
+
+/**
+ * Exemplo03E1 - Procedimento para mostrar todos os simbolos nao alfanumericos
+ * de uma linha
+ */
+void Exemplo03E1(char* methodId)
+{
+    // definir dados
+    chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
+    chars testValue = IO_new_chars(STR_SIZE); // valor para teste
+    char currChar; // caractere a testar
+
+    // exibir identificacao
+    decorateMethod(PROGRAM_ID, methodId);
+    IO_println("Teste: mostrar simbolos nao alfanumericos");
+
+    // ler do teclado
+    value = IO_readln("\nEntrar com cadeia de caracteres >> ");
+    for (int i = 0; i < strlen(value); i++)
+    {
+        currChar = value[i];
+        if (!(currChar >= 'a' && currChar <= 'z') &&
+            !(currChar >= 'A' && currChar <= 'Z') &&
+            !(currChar >= '0' && currChar <= '9'))
+        {
+            strncat(testValue, &currChar, 1);
+        }
+    }
+
+    IO_println(IO_concat("\nOriginal: ", value));
+    if (strlen(testValue) > 0)
+    {
+        IO_println(IO_concat("Simbolos nao alfanumericos: ", testValue));
+    }
+    else
+    {
+        IO_println("Nenhum simbolo exceto digitos ou letras.");
+    }
+}
+
+/**
+ * Exemplo03E2 - Procedimento para determinar se cadeia de caracteres
+ * nao contem letras
+ */
+void Exemplo03E2(char* methodId)
+{
+    // definir dados
+    chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
+    char currChar; // caractere a testar
+    int control = 0;
+
+    // exibir identificacao
+    decorateMethod(PROGRAM_ID, methodId);
+    IO_println("Teste: determinar se sequencia nao contem letras");
+
+    // ler do teclado
+    value = IO_readln("\nEntrar com cadeia de caracteres >> ");
+    for (int i = 0; i < strlen(value); i++)
+    {
+        currChar = value[i];
+        if ((currChar >= 'a' && currChar <= 'z') ||
+            (currChar >= 'A' && currChar <= 'Z'))
+        {
+            control++;
+            break;
+        }
+    }
+
+    if (control > 0)
+    {
+        IO_println("\nA sequencia contem pelo menos uma letra.");
+    }
+    else
+    {
+        IO_println("\nA sequencia nao contem letras.");
+    }
 }
 
 /**
@@ -596,13 +676,13 @@ int main(int argc, char* argv[])
         break;
     case 10:
         Exemplo0320("20");
-        break;/*
+        break;
     case 11:
         Exemplo03E1("E1");
         break;
     case 12:
         Exemplo03E2("E2");
-        break;*/
+        break;
     default:
         IO_clrscr();
         IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),
