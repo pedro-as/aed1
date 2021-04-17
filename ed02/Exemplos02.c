@@ -165,7 +165,7 @@ void Exemplo0215()
     // 
     if (a >= 20 && a <= 75)
     {
-        if (a >= 33 & a <= 55)
+        if (a >= 33 && a <= 55)
         {
             IO_println(IO_concat(IO_toString_d(a),
                              " pertence a ambos os intervalos."));
