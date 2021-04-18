@@ -26,7 +26,7 @@ void Exemplo0311(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);  // cadeia de caracteres do usuario
     chars lower = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                        // caractere individual a testar
+    char testChar;                        // caractere individual a testar
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
@@ -40,13 +40,13 @@ void Exemplo0311(char* methodId)
     {
         // iterar por toda a cadeia de caracteres
         // definindo valor de acordo com a posicao atual
-        currChar = word[i];
+        testChar = word[i];
 
-        if (currChar >= 'a' && currChar <= 'z')
+        if (testChar >= 'a' && testChar <= 'z')
         {
             // concatenar caractere 'a variavel lower se
             // satisfeitas as condicoes
-            strncat(lower, &currChar, 1);
+            strncat(lower, &testChar, 1);
         }
     }
 
@@ -71,7 +71,7 @@ void Exemplo0312(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);  // cadeia de caracteres do usuario
     chars lower = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                        // caractere individual a testar
+    char testChar;                        // caractere individual a testar
     int count = 0;                        // contagem de valores validos
 
     // exibir identificacao
@@ -84,10 +84,10 @@ void Exemplo0312(char* methodId)
 
     for (int i = 0; i < strlen(word); i++)
     {
-        currChar = word[i];
-        if (currChar >= 'a' && currChar <= 'z')
+        testChar = word[i];
+        if (testChar >= 'a' && testChar <= 'z')
         {
-            strncat(lower, &currChar, 1);
+            strncat(lower, &testChar, 1);
             count++;
         }
     }
@@ -96,12 +96,12 @@ void Exemplo0312(char* methodId)
     if (strlen(lower) > 0)
     {
         IO_println(IO_concat("Minusculas: ", lower));
-        IO_println(IO_concat("Total: ", IO_toString_d(count)));
     }
     else
     {
         IO_println("Nenhuma minuscula.");
     }
+    IO_println(IO_concat("Total: ", IO_toString_d(count)));
 }
 
 /**
@@ -112,7 +112,7 @@ void Exemplo0313(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);  // cadeia de caracteres do usuario
     chars lower = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                        // caractere individual a testar
+    char testChar;                        // caractere individual a testar
     int count = 0;                        // contagem de valores validos
 
     // exibir identificacao
@@ -125,10 +125,10 @@ void Exemplo0313(char* methodId)
 
     for (int i = strlen(word) - 1; i >= 0; i--)
     {
-        currChar = word[i];
-        if (currChar >= 'a' && currChar <= 'z')
+        testChar = word[i];
+        if (testChar >= 'a' && testChar <= 'z')
         {
-            strncat(lower, &currChar, 1);
+            strncat(lower, &testChar, 1);
             count++;
         }
     }
@@ -137,12 +137,12 @@ void Exemplo0313(char* methodId)
     if (strlen(lower) > 0)
     {
         IO_println(IO_concat("Minusculas (inverso): ", lower));
-        IO_println(IO_concat("Total: ", IO_toString_d(count)));
     }
     else
     {
         IO_println("Nenhuma minuscula.");
     }
+    IO_println(IO_concat("Total: ", IO_toString_d(count)));
 }
 
 /**
@@ -154,7 +154,7 @@ void Exemplo0314(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
     chars letters = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                          // caractere individual a testar
+    char testChar;                          // caractere individual a testar
     int count = 0;                          // contagem de valores validos
 
     // exibir identificacao
@@ -167,11 +167,11 @@ void Exemplo0314(char* methodId)
 
     for (int i = 0; i < strlen(word); i++)
     {
-        currChar = word[i];
-        if ((currChar >= 'a' && currChar <= 'z') ||
-            (currChar >= 'A' && currChar <= 'Z'))
+        testChar = word[i];
+        if ((testChar >= 'a' && testChar <= 'z') ||
+            (testChar >= 'A' && testChar <= 'Z'))
         {
-            strncat(letters, &currChar, 1);
+            strncat(letters, &testChar, 1);
             count++;
         }
     }
@@ -179,13 +179,13 @@ void Exemplo0314(char* methodId)
     IO_println(IO_concat("Original: ", word));
     if (strlen(letters) > 0)
     {
-        IO_println(IO_concat("Letras (inverso): ", letters));
-        IO_println(IO_concat("Total: ", IO_toString_d(count)));
+        IO_println(IO_concat("Letras: ", letters));
     }
     else
     {
         IO_println("Nenhuma letra.");
     }
+    IO_println(IO_concat("Total: ", IO_toString_d(count)));
 }
 
 /**
@@ -197,7 +197,7 @@ void Exemplo0315(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
     chars letters = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                          // caractere individual a testar
+    char testChar;                          // caractere individual a testar
     int count = 0;                          // contagem de valores validos
 
     // exibir identificacao
@@ -210,11 +210,11 @@ void Exemplo0315(char* methodId)
 
     for (int i = strlen(word) - 1; i >= 0; i--)
     {
-        currChar = word[i];
-        if ((currChar >= 'a' && currChar <= 'z') ||
-            (currChar >= 'A' && currChar <= 'Z'))
+        testChar = word[i];
+        if ((testChar >= 'a' && testChar <= 'z') ||
+            (testChar >= 'A' && testChar <= 'Z'))
         {
-            strncat(letters, &currChar, 1);
+            strncat(letters, &testChar, 1);
             count++;
         }
     }
@@ -222,13 +222,13 @@ void Exemplo0315(char* methodId)
     IO_println(IO_concat("Original: ", word));
     if (strlen(letters) > 0)
     {
-        IO_println(IO_concat("Letras: ", letters));
-        IO_println(IO_concat("Total: ", IO_toString_d(count)));
+        IO_println(IO_concat("Letras (inverso): ", letters));
     }
     else
     {
         IO_println("Nenhuma letra.");
     }
+    IO_println(IO_concat("Total: ", IO_toString_d(count)));
 }
 
 /**
@@ -240,7 +240,7 @@ void Exemplo0316(char* methodId)
     // definir dados
     chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
     chars symbols = IO_new_chars(STR_SIZE); // valores validos do teste
-    char currChar;                          // caractere individual a testar
+    char testChar;                          // caractere individual a testar
     int count = 0;                          // contagem de valores validos
 
     // exibir identificacao
@@ -253,12 +253,12 @@ void Exemplo0316(char* methodId)
 
     for (int i = 0; i < strlen(word); i++)
     {
-        currChar = word[i];
-        if (!(currChar >= 'a' && currChar <= 'z') &&
-            !(currChar >= 'A' && currChar <= 'Z') &&
-            !(currChar >= '0' && currChar <= '9'))
+        testChar = word[i];
+        if (!(testChar >= 'a' && testChar <= 'z') &&
+            !(testChar >= 'A' && testChar <= 'Z') &&
+            !(testChar >= '0' && testChar <= '9'))
         {
-            strncat(symbols, &currChar, 1);
+            strncat(symbols, &testChar, 1);
             count++;
         }
     }
@@ -267,12 +267,13 @@ void Exemplo0316(char* methodId)
     if (strlen(symbols) > 0)
     {
         IO_println(IO_concat("Simbolos: ", symbols));
-        IO_println(IO_concat("Total: ", IO_toString_d(count)));
+
     }
     else
     {
         IO_println("Nenhum simbolo exceto digitos ou letras.");
     }
+    IO_println(IO_concat("Total: ", IO_toString_d(count)));
 }
 
 /**
@@ -504,9 +505,9 @@ void Exemplo0320(char* methodId)
     do
     {
         stop = IO_readdouble(IO_concat("Entrar com o limite superior ",
-                                       "- restricao: (start, 1] >> "));
+                                       "- restricao: (start, 1) >> "));
     }
-    while (stop <= start);
+    while (stop <= start || stop >= 1);
 
     // repetir enquanto quant <= 0
     do
@@ -523,8 +524,18 @@ void Exemplo0320(char* methodId)
     {
         IO_print("Entrar com VALOR_");
         value = IO_readdouble(IO_concat(IO_toString_d(i), " >> "));
-        trunc = value;
-        control = value - trunc;
+
+        if (value < 0.0)
+        {
+            trunc = value * (-1);
+            control = (value * (-1.0)) - trunc;
+        }
+        else
+        {
+            trunc = value;
+            control = value - trunc;
+        }
+
         if (control >= start && control <= stop)
         {
             valid = IO_concat(valid, IO_toString_f(value));
@@ -550,7 +561,7 @@ void Exemplo03E1(char* methodId)
     // definir dados
     chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
     chars testValue = IO_new_chars(STR_SIZE); // valor para teste
-    char currChar; // caractere a testar
+    char testChar; // caractere a testar
 
     // exibir identificacao
     decorateMethod(PROGRAM_ID, methodId);
@@ -560,12 +571,12 @@ void Exemplo03E1(char* methodId)
     value = IO_readln("\nEntrar com cadeia de caracteres >> ");
     for (int i = 0; i < strlen(value); i++)
     {
-        currChar = value[i];
-        if (!(currChar >= 'a' && currChar <= 'z') &&
-            !(currChar >= 'A' && currChar <= 'Z') &&
-            !(currChar >= '0' && currChar <= '9'))
+        testChar = value[i];
+        if (!(testChar >= 'a' && testChar <= 'z') &&
+            !(testChar >= 'A' && testChar <= 'Z') &&
+            !(testChar >= '0' && testChar <= '9'))
         {
-            strncat(testValue, &currChar, 1);
+            strncat(testValue, &testChar, 1);
         }
     }
 
@@ -588,7 +599,7 @@ void Exemplo03E2(char* methodId)
 {
     // definir dados
     chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
-    char currChar; // caractere a testar
+    char testChar; // caractere a testar
     int control = 0;
 
     // exibir identificacao
@@ -599,9 +610,9 @@ void Exemplo03E2(char* methodId)
     value = IO_readln("\nEntrar com cadeia de caracteres >> ");
     for (int i = 0; i < strlen(value); i++)
     {
-        currChar = value[i];
-        if ((currChar >= 'a' && currChar <= 'z') ||
-            (currChar >= 'A' && currChar <= 'Z'))
+        testChar = value[i];
+        if ((testChar >= 'a' && testChar <= 'z') ||
+            (testChar >= 'A' && testChar <= 'Z'))
         {
             control++;
             break;
@@ -700,10 +711,90 @@ int main(int argc, char* argv[])
  * ---------------------------------------------- documentacao complementar
  * ---------------------------------------------- notas / observacoes / comentarios
  * ---------------------------------------------- previsao de testes
+ * 00. programa encerrado
+ *
+ * 01. "ABCD" => "Nenhuma minuscula"
+ *     "ABCDefgh" => "efgh"
+ *     "1234ABc." => "c"
+ *
+ * 02. "ABCD" => "Nenhuma minuscula", "Total: 0"
+ *     "ABCDefgh" => "hgfe", "Total: 4"
+ *     "1234ABc." => "c", "Total: 1"
+ *
+ * 03. "ABCD" => "Nenhuma minuscula", "Total: 0"
+ *     "ABCDefgh" => "efgh", "Total: 4"
+ *     "a1234BCd." => "da", "Total: 2"
+ *
+ * 04. "1234/" => "Nenhuma letra", "Total: 0"
+ *     "123ABcd,." => "ABcd", "Total: 4"
+ *     "AaBbÇçDd" => "AaBbDd", "Total: 6"
+ *
+ * 05. "1234/" => "Nenhuma letra", "Total: 0"
+ *     "123ABcd,." => "dcBA", "Total: 4"
+ *     "AaBbÇçDd" => "dDbBaA", "Total: 6"
+ *
+ * 06. "ABcd019" => "Nenhum simbolo", "Total: 0"
+ *     "123ABcd,." => ",.", "Total: 2"
+ *     "0AaBbÇçDd9" => "Çç", "Total: 2" (O total retornado no teste foi 4.
+ *                                       Minha suposicao e' de que o programa
+ *                                       conta a letra mais o acento.)
+ * 07. ## INPUT ##
+ *     start: -7
+ *     stop: 21
+ *     quant: 6
+ *     valores: -21, -7, 0, 1, 14, 28
+ *     ## OUTPUT ##
+ *     validos: -7 14
+ *     total: 2
+ *
+ * 08. ## INPUT ##
+ *     start: -20
+ *     stop: 21
+ *     quant: 6
+ *     valores: -28, -7, 0, 3, 14, 21
+ *     ## OUTPUT ##
+ *     validos: -7 14
+ *     total: 2
+ *
+ * 09. ## INPUT ##
+ *     start: -5.01
+ *     stop: 4.99
+ *     quant: 6
+ *     valores: -5.02, -3.141592, 0, 1.0, 2.71828, 5.0
+ *     ## OUTPUT ##
+ *     validos: -3.141592 1.000000
+ *     total: 2
+ *
+ * 10. ## INPUT ##
+ *     start: 0.2
+ *     stop: 0.999999
+ *     quant: 6
+ *     valores: 0.199999, -5.2, 0.0, 2.71828, -299792458.5, 10.999999
+ *     ## OUTPUT ##
+ *     validos: -5.200000, 2.718280, -299792458.500000, 10.999999
+ *     total: 4
+ *     ## RESULTADO OBTIDO ##
+ *     validos: -5.200000, 2.718280, -299792458.500000
+ *     total: 3
+ *     (O valor 10.999999 nao foi considerado como dentro do intervalo.
+ *      Testes feitos com 10.999998 e 10.99999, no entanto, funcionaram.)
  * ---------------------------------------------- historico
  * Versao      Data        Modificacao
  *  0.1      16/04/21        esboco
  * ---------------------------------------------- testes
  * Versao      Teste
- *  0.1     01. (OK)       teste geral
+ *  0.1     00. (OK)       teste encerrando programa (opcao 0)
+ *          01. (OK)       teste Exemplo0311
+ *          02. (OK)       teste Exemplo0312
+ *          03. (OK)       teste Exemplo0313
+ *          04. (OK)       teste Exemplo0314
+ *          05. (OK)       teste Exemplo0315
+ *          06. (OK)       teste Exemplo0316
+ *          07. (OK)       teste Exemplo0317
+ *          08. (OK)       teste Exemplo0318
+ *          09. (OK)       teste Exemplo0319
+ *          10. (OK)       teste Exemplo0320
+ *          11. (OK)       teste Exemplo03E1
+ *          12. (OK)       teste Exemplo03E2
+ *          13. (OK)       teste opcao invalida
  */
