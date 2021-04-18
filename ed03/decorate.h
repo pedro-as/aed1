@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+/**
+ * decorateMethod - Procedimento para gerar e decorar os metodos e 
+ * procedimentos utilizados em guias e estudos dirigidos.
+ * @param programId Identificacao do programa
+ * @param methodId Identificacao do metodo ou procedimento
+ */
 void decorateMethod(const char* programId, char* methodId)
 {
     system("clear");
@@ -8,6 +14,13 @@ void decorateMethod(const char* programId, char* methodId)
     printf("******************\n");
 }
 
+/**
+ * decorateMenu - Procedimento para gerar e decorar o menu de opcoes 
+ * em guias e estudos dirigidos.
+ * @param tasks Numero de exercicios presentes
+ * @param extras Numero de tarefas extras presentes
+ * @param programId Identificacao do programa
+ */
 void decorateMenu(int tasks, int extras, const char* programId)
 {
     int methodId;
@@ -21,7 +34,7 @@ void decorateMenu(int tasks, int extras, const char* programId)
         methodId = 10 + i;
         printf("[%d] Exemplo %s%d\n", i, programId, methodId);
     }
-    if (extras > 0)
+    if (extras)
     {
         for (int i = 1; i <= extras; i++)
         {
