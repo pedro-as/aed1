@@ -129,6 +129,27 @@ bool isLowerCase(char x)
 }
 
 /**
+ * Funcao para determinar se caractere e' letra maiuscula
+ * @return true, se maiuscula; false, caso contrario
+ * @param x valor a ser testado
+ */
+bool isUpperCase(char x)
+{
+    /*
+    // definir dado local
+    bool result = false;
+
+    //testar a condicao
+    if ('a' <= x && x <= 'z')
+    {
+        result = true;
+    }
+    return (result);
+    */
+   return ('A' <= x && x <= 'Z');
+}
+
+/**
  * Funcao para determinar se caractere e' digito
  * @return true, se for digito; false, caso contrario
  * @param x valor a ser testado
@@ -224,39 +245,29 @@ void method01(int methodId)
 void method02(int methodId)
 {
     // definir dados
-    chars word = IO_new_chars(STR_SIZE);  // cadeia de caracteres do usuario
-    chars lower = IO_new_chars(STR_SIZE); // valores validos do teste
-    char testChar;                        // caractere individual a testar
-    int count = 0;                        // contagem de valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    char caractere = '\0';
+    int contador = 0;
+    int tamanho = 0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar letras minusculas");
+    IO_println("Teste: contar maiusculas menores que 'K'");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    tamanho = strlen(string);
     IO_println(""); // inserir nova linha antes de exibir resultado
 
-    for (int i = 0; i < strlen(word); i++)
+    for (int i = 0; i < tamanho; i++)
     {
-        testChar = word[i];
-        if (testChar >= 'a' && testChar <= 'z')
+        caractere = string[i];
+        if (isUpperCase(caractere) && caractere < 'K')
         {
-            strncat(lower, &testChar, 1);
-            count++;
-        }
+            contador++;
+        }        
     }
-
-    IO_println(IO_concat("Original: ", word));
-    if (strlen(lower) > 0)
-    {
-        IO_println(IO_concat("Minusculas: ", lower));
-    }
-    else
-    {
-        IO_println("Nenhuma minuscula.");
-    }
-    IO_println(IO_concat("Total: ", IO_toString_d(count)));
+    IO_printf("Total de maiusculas menores que 'K': %d", contador);
 }
 
 /**
