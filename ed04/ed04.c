@@ -219,7 +219,7 @@ void method01(int methodId)
 }
 
 /**
- * method02 - Procedimento para contar e mostrar minusculas
+ * method02 - Procedimento para contar e mostrar maiusculas menores que 'K'
  */
 void method02(int methodId)
 {
