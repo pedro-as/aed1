@@ -36,6 +36,7 @@ bool isPositive(int x)
     }
     return (result);
     */
+    // retorno simplificado
     return (x > 0);
     
 }
@@ -60,6 +61,7 @@ bool belongsToEx_d(int x, int inferior, int superior)
     }
     return (result);
     */
+    // retorno simplificado
     return (inferior < x && x < superior);
 }
 
@@ -83,6 +85,7 @@ bool belongsToIn_f(double x, double inferior, double superior)
     }
     return (result);
     */
+    // retorno simplificado
     return (inferior <= x && x <= superior);
 }
 
@@ -104,6 +107,7 @@ bool isEven(int x)
     }
     return (result);
     */
+    // retorno simplificado
     return (x % 2 == 0);
 }
 
@@ -125,7 +129,8 @@ bool isLowerCase(char x)
     }
     return (result);
     */
-   return ('a' <= x && x <= 'z');
+    // retorno simplificado
+    return ('a' <= x && x <= 'z');
 }
 
 /**
@@ -146,7 +151,8 @@ bool isUpperCase(char x)
     }
     return (result);
     */
-   return ('A' <= x && x <= 'Z');
+    // retorno simplificado
+    return ('A' <= x && x <= 'Z');
 }
 
 /**
@@ -167,7 +173,8 @@ bool isDigit(char x)
     }
     return (result);
     */
-   return ('0' <= x && x <= '9');
+    // retorno simplificado
+    return ('0' <= x && x <= '9');
 }
 
 /**
@@ -176,9 +183,121 @@ bool isDigit(char x)
  * @param string cadeia de caracteres
  * @param digit simbolo a ser acrescentado 'a cadeia de caracteres
  */
-bool concatDigit(chars string, char digit)
+chars concatDigit(chars string, char digit)
 {
    return (IO_concat(string, IO_toString_c(digit)));
+}
+
+/**
+ * Funcao para mostrar os caracteres maiusculos e menores que caractere-controle
+ * em uma cadeia de caracteres
+ * @return quantidade de caracteres que satisfazem as condicoes
+ * @param string cadeia de caracteres a testar
+ * @param control caractere do limite superior
+ */
+chars showUpperToChar(chars string, char control)
+{
+    // definir dados
+    int length = strlen(string);
+    char character = '\0';
+    chars valid = IO_new_chars(STR_SIZE);
+
+    strcpy(valid, STR_EMPTY);
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isUpperCase(character) && character < control)
+        {
+            valid = concatDigit(valid, character);
+        }
+    }
+    return (valid); 
+}
+
+/**
+ * Funcao para contar os caracteres (maiusculos e minusculos) e menores que caractere-controle
+ * em uma cadeia de caracteres
+ * @return quantidade de caracteres que satisfazem as condicoes
+ * @param string cadeia de caracteres a testar
+ * @param control caractere do limite superior
+ */
+int countUpperToChar(chars string, char control)
+{
+    // definir dados
+    int count = 0;
+    int length = strlen(string);
+    char character = '\0';
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isUpperCase(character) && character < control)
+        {
+            count++;
+        }
+    }
+    return (count); 
+}
+
+/**
+ * Funcao para contar os caracteres (minusculos e maiusculos) menores que o 
+ * caractere-controle (minusculo/maiusculo) em uma cadeia de caracteres
+ * @return quantidade de caracteres que satisfazem as condicoes
+ * @param string cadeia de caracteres a testar
+ * @param control caractere maiusculo do limite superior
+ */
+int countToChar(chars string, char control)
+{
+    // definir dados
+    int length = strlen(string);
+    int count = 0;
+    char character = '\0';
+    char controlLower = control + 32;
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if ((isUpperCase(character) && character < control) ||
+            (isLowerCase(character) && character < controlLower))
+        {
+            count++;
+        }
+    }
+    return (count); 
+}
+
+/**
+ * Funcao para mostrar os caracteres (minusculos e maiusculos) menores que o 
+ * caractere-controle (minusculo/maiusculo) em uma cadeia de caracteres
+ * @return quantidade de caracteres que satisfazem as condicoes
+ * @param string cadeia de caracteres a testar
+ * @param control caractere maiusculo do limite superior
+ */
+chars showToChar(chars string, char control)
+{
+    // definir dados
+    int length = strlen(string);
+    char character = '\0';
+    char controlLower = control + 32;
+    chars valid = IO_new_chars(STR_SIZE);
+
+    strcpy(valid, STR_EMPTY);
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if ((isUpperCase(character) && character < control) ||
+            (isLowerCase(character) && character < controlLower))
+        {
+            valid = concatDigit(valid, character);
+        }
+    }
+    return (valid); 
 }
 
 // para as entradas e saidas
@@ -250,6 +369,8 @@ void method02(int methodId)
     int contador = 0;
     int tamanho = 0;
 
+    strcpy(string, STR_EMPTY);
+
     // exibir identificacao
     decorateMethod(methodId);
     IO_println("Teste: contar maiusculas menores que 'K'");
@@ -271,175 +392,96 @@ void method02(int methodId)
 }
 
 /**
- * method03 - Procedimento para contar e mostrar minusculas em ordem inversa
+ * method03 - Procedimento para contar maiusculas menores que 'K' por meio
+ * de outra funcao 
  */
 void method03(int methodId)
 {
     // definir dados
-    chars word = IO_new_chars(STR_SIZE);  // cadeia de caracteres do usuario
-    chars lower = IO_new_chars(STR_SIZE); // valores validos do teste
-    char testChar;                        // caractere individual a testar
-    int count = 0;                        // contagem de valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    char controle = 'K';
+    int contador = 0;
+
+    strcpy(string, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar letras minusculas em ordem inversa");
+    IO_println("Teste: contar maiusculas menores que 'K'");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    IO_println(""); // inserir nova linha antes de exibir resultado
-
-    for (int i = strlen(word) - 1; i >= 0; i--)
-    {
-        testChar = word[i];
-        if (testChar >= 'a' && testChar <= 'z')
-        {
-            strncat(lower, &testChar, 1);
-            count++;
-        }
-    }
-
-    IO_println(IO_concat("Original: ", word));
-    if (strlen(lower) > 0)
-    {
-        IO_println(IO_concat("Minusculas (inverso): ", lower));
-    }
-    else
-    {
-        IO_println("Nenhuma minuscula.");
-    }
-    IO_println(IO_concat("Total: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    contador = countUpperToChar(string, controle);
+    IO_printf("Total de maiusculas menores que 'K': %d\n", contador);
 }
 
 /**
- * method04 - Procedimento para contar e mostrar todas as letras
- * (maiusculas e minusculas)
+ * method04 - Procedimento para mostrar maiusculas menores que 'K' por meio
+ * de outra funcao 
  */
 void method04(int methodId)
 {
     // definir dados
-    chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
-    chars letters = IO_new_chars(STR_SIZE); // valores validos do teste
-    char testChar;                          // caractere individual a testar
-    int count = 0;                          // contagem de valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    chars validas = IO_new_chars(STR_SIZE);
+    char controle = 'K';
+
+    strcpy(string, STR_EMPTY);
+    strcpy(validas, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar todas as letras");
+    IO_println("Teste: mostrar maiusculas menores que 'K'");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    IO_println(""); // inserir nova linha antes de exibir resultado
-
-    for (int i = 0; i < strlen(word); i++)
-    {
-        testChar = word[i];
-        if ((testChar >= 'a' && testChar <= 'z') ||
-            (testChar >= 'A' && testChar <= 'Z'))
-        {
-            strncat(letters, &testChar, 1);
-            count++;
-        }
-    }
-
-    IO_println(IO_concat("Original: ", word));
-    if (strlen(letters) > 0)
-    {
-        IO_println(IO_concat("Letras: ", letters));
-    }
-    else
-    {
-        IO_println("Nenhuma letra.");
-    }
-    IO_println(IO_concat("Total: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    validas = showUpperToChar(string, controle);
+    IO_printf("Maiusculas menores que 'K': %s\n", validas);
 }
 
 /**
- * method05 - Procedimento para contar e mostrar todas as letras
- * (maiusculas e minusculas) em ordem inversa
+ * method05 - Procedimento para contar caracteres menores que 'K' ou 'k' por
+ * meio de outra funcao 
  */
 void method05(int methodId)
 {
-    // definir dados
-    chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
-    chars letters = IO_new_chars(STR_SIZE); // valores validos do teste
-    char testChar;                          // caractere individual a testar
-    int count = 0;                          // contagem de valores validos
+   // definir dados
+    chars string = IO_new_chars(STR_SIZE);
+    char controle = 'K';
+    int contador = 0;
+
+    strcpy(string, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar todas as letras em ordem inversa");
+    IO_println("Teste: contar caracteres menores que 'K' ou 'k'");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    IO_println(""); // inserir nova linha antes de exibir resultado
-
-    for (int i = strlen(word) - 1; i >= 0; i--)
-    {
-        testChar = word[i];
-        if ((testChar >= 'a' && testChar <= 'z') ||
-            (testChar >= 'A' && testChar <= 'Z'))
-        {
-            strncat(letters, &testChar, 1);
-            count++;
-        }
-    }
-
-    IO_println(IO_concat("Original: ", word));
-    if (strlen(letters) > 0)
-    {
-        IO_println(IO_concat("Letras (inverso): ", letters));
-    }
-    else
-    {
-        IO_println("Nenhuma letra.");
-    }
-    IO_println(IO_concat("Total: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    contador = countToChar(string, controle);
+    IO_printf("Total de caracteres menores que 'K' ou 'k': %d\n", contador);
 }
 
 /**
- * method06 - Procedimento para contar e mostrar tudo o que nao for
- * digito ou letra
+ * method06 - Procedimento para mostrar caracteres menores que 'K' ou 'k' por
+ * meio de outra funcao 
  */
 void method06(int methodId)
 {
     // definir dados
-    chars word = IO_new_chars(STR_SIZE);    // cadeia de caracteres do usuario
-    chars symbols = IO_new_chars(STR_SIZE); // valores validos do teste
-    char testChar;                          // caractere individual a testar
-    int count = 0;                          // contagem de valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    chars validas = IO_new_chars(STR_SIZE);
+    char controle = 'K';
 
+    strcpy(string, STR_EMPTY);
+    strcpy(validas, STR_EMPTY);
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar tudo o que nao for digito ou letra");
+    IO_println("Teste: mostrar maiusculas menores que 'K' ou 'k'");
 
     // ler do teclado
-    word = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    IO_println(""); // inserir nova linha antes de exibir resultado
-
-    for (int i = 0; i < strlen(word); i++)
-    {
-        testChar = word[i];
-        if (!(testChar >= 'a' && testChar <= 'z') &&
-            !(testChar >= 'A' && testChar <= 'Z') &&
-            !(testChar >= '0' && testChar <= '9'))
-        {
-            strncat(symbols, &testChar, 1);
-            count++;
-        }
-    }
-
-    IO_println(IO_concat("Original: ", word));
-    if (strlen(symbols) > 0)
-    {
-        IO_println(IO_concat("Simbolos: ", symbols));
-
-    }
-    else
-    {
-        IO_println("Nenhum simbolo exceto digitos ou letras.");
-    }
-    IO_println(IO_concat("Total: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    validas = showToChar(string, controle);
+    IO_printf("Caracteres menores que 'K' ou 'k': %s\n", validas);
 }
 
 /**
@@ -798,10 +840,8 @@ void method12(int methodId)
 /**
  * Funcao principal.
  * @return codigo de encerramento
- * @param argc - quantidade de parametros na linha de comandos
- * @param argv - arranjo com o grupo de parametros na linha de comandos
  */
-int main(int argc, char* argv[])
+int main(void)
 {
     // identificar
     chars programId = IO_new_chars(STR_SIZE);
