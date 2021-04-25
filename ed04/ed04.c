@@ -694,7 +694,7 @@ void method09(int methodId)
 
 /**
  * method10 - Procedimento para mostrar e contar os simbolos alfanumericos em
- * multiplas linhas e calcular o total de todas as palavras
+ * multiplas cadeias de caractere e calcular o total de todas as palavras
  */
 void method10(int methodId)
 {
