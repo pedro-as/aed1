@@ -1,12 +1,12 @@
 /**
- * Exemplos03 - v0.1 - 16/04/2021
+ * ed04 - v0.1 - 24/04/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
- * Linux: gcc -o Exemplos03 Exemplos03.c
- * Windows: gcc -o Exemplos03.exe Exemplos03.c
+ * Linux: gcc -o ed04 ed04.c
+ * Windows: gcc -o ed04.exe ed04.c
  * Para executar em terminal (janela de comandos):
- * Linux: ./Exemplos03
- * Windows: Exemplos03
+ * Linux: ./ed04
+ * Windows: ed04
  */
 
 // dependencias
@@ -37,8 +37,7 @@ bool isPositive(int x)
     return (result);
     */
     // retorno simplificado
-    return (x > 0);
-    
+    return (x > 0);    
 }
 
 /**
@@ -176,6 +175,25 @@ bool isDigit(char x)
     // retorno simplificado
     return ('0' <= x && x <= '9');
 }
+/**
+ * Funcao para determinar se caractere e' alfanumerico
+ * @return true, se for alfanumerico; false, caso contrario
+ * @param x valor a ser testado
+ */
+bool isAlnum(char x)
+{
+    // definir dado local
+    bool result = false;
+
+    //testar a condicao
+    if ('0' <= x && x <= '9' ||
+        'A' <= x && x <= 'Z' ||
+        'a' <= x && x <= 'z')
+    {
+        result = true;
+    }
+    return (result);
+}
 
 /**
  * Funcao para concatenar 'a cadeia de caracteres mais um digito
@@ -191,7 +209,7 @@ chars concatDigit(chars string, char digit)
 /**
  * Funcao para mostrar os caracteres maiusculos e menores que caractere-controle
  * em uma cadeia de caracteres
- * @return quantidade de caracteres que satisfazem as condicoes
+ * @return caracteres que satisfazem as condicoes
  * @param string cadeia de caracteres a testar
  * @param control caractere do limite superior
  */
@@ -213,7 +231,7 @@ chars showUpperToChar(chars string, char control)
             valid = concatDigit(valid, character);
         }
     }
-    return (valid); 
+    return (valid);
 }
 
 /**
@@ -239,7 +257,7 @@ int countUpperToChar(chars string, char control)
             count++;
         }
     }
-    return (count); 
+    return (count);
 }
 
 /**
@@ -267,13 +285,13 @@ int countToChar(chars string, char control)
             count++;
         }
     }
-    return (count); 
+    return (count);
 }
 
 /**
  * Funcao para mostrar os caracteres (minusculos e maiusculos) menores que o 
  * caractere-controle (minusculo/maiusculo) em uma cadeia de caracteres
- * @return quantidade de caracteres que satisfazem as condicoes
+ * @return caracteres que satisfazem as condicoes
  * @param string cadeia de caracteres a testar
  * @param control caractere maiusculo do limite superior
  */
@@ -297,7 +315,129 @@ chars showToChar(chars string, char control)
             valid = concatDigit(valid, character);
         }
     }
-    return (valid); 
+    return (valid);
+}
+
+/**
+ * Funcao para contar os digitos impares em uma cadeia de caracteres
+ * @return quantidade de digitos impares
+ * @param string cadeia de caracteres a testar
+ */
+int countOddDigits(chars string)
+{
+    // definir dados
+    int length = strlen(string);
+    int count = 0;
+    char character = '\0';
+    int charDigit = 0;
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        charDigit = (int) character - 48;
+        if (isDigit(character) && ! isEven(character))
+        {
+            count++;
+        }
+    }
+    return (count);
+}
+
+/**
+ * Funcao para mostrar os simbolos nao alfanumericos uma cadeia de caracteres
+ * @return simbolos nao alfanumericos
+ * @param string cadeia de caracteres a testar
+ */
+chars showNonAlnum(chars string)
+{
+    // definir dados
+    int length = strlen(string);
+    char character = '\0';
+    chars valid = IO_new_chars(STR_SIZE);
+
+    strcpy(valid, STR_EMPTY);
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (! isAlnum(character))
+        {
+            valid = concatDigit(valid, character);
+        }
+    }
+    return (valid);
+}
+
+/**
+ * Funcao para mostrar os simbolos alfanumericos uma cadeia de caracteres
+ * @return simbolos alfanumericos
+ * @param string cadeia de caracteres a testar
+ */
+chars showAlnum(chars string)
+{
+    // definir dados
+    int length = strlen(string);
+    char character = '\0';
+    chars valid = IO_new_chars(STR_SIZE);
+
+    strcpy(valid, STR_EMPTY);
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isAlnum(character))
+        {
+            valid = concatDigit(valid, character);
+        }
+    }
+    return (valid);
+}
+
+/**
+ * Funcao para contar os simbolos alfanumericos uma cadeia de caracteres
+ * @return quantidade de simbolos alfanumericos
+ * @param string cadeia de caracteres a testar
+ */
+int countAlnum(chars string)
+{
+    // definir dados
+    int length = strlen(string);
+    int count = 0;
+    char character = '\0';
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isAlnum(character))
+        {
+            count++;
+        }
+    }
+    return (count);
+}
+
+/**
+ * Funcao para concatenar resultados de um ou mais testes com
+ * cadeia de caracteres
+ * @return resultado de teste concatenado
+ * @param string cadeia de caracteres
+ * @param symbols simbolos resultantes a acrescentar 'a cadeia de caracteres
+ * @param count quantidade resultante a acrescentar 'a cadeia de caracteres
+ */
+chars concatResult(chars string, chars symbols, int count)
+{
+    chars fullString = IO_new_chars(STR_SIZE);
+    fullString = IO_concat(
+                           IO_concat(
+                                     IO_concat(string, " => "),
+                                     IO_concat(symbols, " (")),
+                           IO_concat(IO_toString_d(count), ")\n"));
+
+    return(fullString);
 }
 
 // para as entradas e saidas
@@ -447,7 +587,7 @@ void method05(int methodId)
    // definir dados
     chars string = IO_new_chars(STR_SIZE);
     char controle = 'K';
-    int contador = 0;
+    int total = 0;
 
     strcpy(string, STR_EMPTY);
 
@@ -457,8 +597,8 @@ void method05(int methodId)
 
     // ler do teclado
     string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    contador = countToChar(string, controle);
-    IO_printf("Total de caracteres menores que 'K' ou 'k': %d\n", contador);
+    total = countToChar(string, controle);
+    IO_printf("Total de caracteres menores que 'K' ou 'k': %d\n", total);
 }
 
 /**
@@ -485,356 +625,128 @@ void method06(int methodId)
 }
 
 /**
- * method07 - Procedimento para testar valores que sejam multiplos de 7
- * em um intervalo definido
+ * method07 - Procedimento para mostrar total de digitos impares em uma cadeia
+ * de caracteres
  */
 void method07(int methodId)
 {
     // definir dados
-    int start = 0; // limite inferior
-    int stop = 0;  // limite superior
-    int quant = 0; // quantidade de valores
-    int value = 0; // valor para teste
-    int count = 0; // contagem de valores validos
-    chars valid = IO_new_chars(STR_SIZE); // valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    int total = 0;
+
+    strcpy(string, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar e mostrar multiplos de 7 em um intervalo");
+    IO_println("Teste: contar digitos impares na cadeia de caracteres");
 
     // ler do teclado
-    start = IO_readint("\nEntrar com o limite inferior >> ");
-
-    // repetir enquanto stop <= start
-    do
-    {
-        stop = IO_readint(IO_concat("Entrar com o limite superior ",
-                                    "- restricao: (start, inf) >> "));
-    }
-    while (stop <= start);
-
-    // repetir enquanto quant <= 0
-    do
-    {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
-                                     "- restricao: (0, inf) >> "));
-    }
-    while (quant <= 0);
-
-    //int valid[quant];
-
-    // inserir nova linha
-    IO_println("");
-
-    for (int i = 1; i <= quant; i++)
-    {
-        IO_print("Entrar com VALOR_");
-        value = IO_readint(IO_concat(IO_toString_d(i), " >> "));
-
-        if (value != 0 && value % 7 == 0 &&
-            value >= start && value <= stop)
-        {
-            valid = IO_concat(valid, IO_toString_d(value));
-            valid = IO_concat(valid, " ");
-            //valid[i] = value;
-            count++;
-        }
-    }
-
-    if (count == 0)
-    {
-        valid = "nenhum valor";
-    }
-    IO_println(IO_concat("\nValores validos: ", valid));
-    /*IO_print("\nValores validos: ");
-    for (int i = 0; i < count; i++)
-    {
-        IO_print(IO_concat(IO_toString_d(valid[i]), " "));
-    }*/
-    IO_println(IO_concat("Total de valores: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    total = countOddDigits(string);
+    IO_printf("Total de digitos impares: %d\n", total);
 }
 
 /**
- * method08 - Procedimento para testar valores que sejam multiplos de 7
- * e nao multiplos de 3 em um intervalo definido
+ * method08 - Procedimento para mostrar os simbolos nao alfanumericos em uma
+ * cadeia de caracteres
  */
 void method08(int methodId)
 {
     // definir dados
-    int start = 0; // limite inferior
-    int stop = 0;  // limite superior
-    int quant = 0; // quantidade de valores
-    int value = 0; // valor para teste
-    int count = 0; // contagem de valores validos
-    chars valid = IO_new_chars(STR_SIZE); // valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    chars validas = IO_new_chars(STR_SIZE);
+
+    strcpy(string, STR_EMPTY);
+    strcpy(validas, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println(IO_concat("Teste: contar e mostrar multiplos de 7 e ",
-                         "nao multiplos de 3 em um intervalo"));
+    IO_println("Teste: mostrar simbolos nao alfanumericos na cadeia de caracteres");
 
     // ler do teclado
-    start = IO_readint("\nEntrar com o limite inferior >> ");
-
-    // repetir enquanto stop <= start
-    do
-    {
-        stop = IO_readint(IO_concat("Entrar com o limite superior ",
-                                    "- restricao: (start, inf) >> "));
-    }
-    while (stop <= start);
-
-    // repetir enquanto quant <= 0
-    do
-    {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
-                                     "- restricao: (0, inf) >> "));
-    }
-    while (quant <= 0);
-
-    // inserir nova linha
-    IO_println("");
-
-    for (int i = 1; i <= quant; i++)
-    {
-        IO_print("Entrar com VALOR_");
-        value = IO_readint(IO_concat(IO_toString_d(i), " >> "));
-
-        if (value != 0 && value % 7 == 0 && value % 3 != 0 &&
-            value >= start && value <= stop)
-        {
-            valid = IO_concat(valid, IO_toString_d(value));
-            valid = IO_concat(valid, " ");
-            count++;
-        }
-    }
-
-    if (count == 0)
-    {
-        valid = "nenhum valor";
-    }
-    IO_println(IO_concat("\nValores validos: ", valid));
-    IO_println(IO_concat("Total de valores: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    validas = showNonAlnum(string);
+    IO_printf("Simbolos nao alfanumericos: %s\n", validas);
 }
 
 /**
- * method09 - Procedimento para testar valores reais pertencentes a um
- * intervalo definido, com parte inteira impar
+ * method09 - Procedimento para mostrar os simbolos alfanumericos em uma
+ * cadeia de caracteres
  */
 void method09(int methodId)
 {
     // definir dados
-    double start = 0.0; // limite inferior
-    double stop = 0.0;  // limite superior
-    double value = 0.0; // valor para teste
-    int quant = 0;      // quantidade de valores
-    int trunc = 0;      // valor truncado (inteiro)
-    int count = 0;      // contagem de valores validos
-    chars valid = IO_new_chars(STR_SIZE); // valores validos
+    chars string = IO_new_chars(STR_SIZE);
+    chars validas = IO_new_chars(STR_SIZE);
+
+    strcpy(string, STR_EMPTY);
+    strcpy(validas, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println(IO_concat("Teste: contar e mostrar valores reais em intervalo ",
-                         "e com parte inteira impar"));
+    IO_println("Teste: mostrar simbolos alfanumericos na cadeia de caracteres");
 
     // ler do teclado
-    start = IO_readdouble("\nEntrar com o limite inferior >> ");
-
-    // repetir enquanto stop <= start
-    do
-    {
-        stop = IO_readdouble(IO_concat("Entrar com o limite superior ",
-                                       "- restricao: (start, inf) >> "));
-    }
-    while (stop <= start);
-
-    // repetir enquanto quant <= 0
-    do
-    {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
-                                     "- restricao: (0, inf) >> "));
-    }
-    while (quant <= 0);
-
-    // inserir nova linha
-    IO_println("");
-
-    for (int i = 1; i <= quant; i++)
-    {
-        IO_print("Entrar com VALOR_");
-        value = IO_readdouble(IO_concat(IO_toString_d(i), " >> "));
-        trunc = value;
-        if (value >= start && value <= stop && trunc % 2 != 0)
-        {
-            valid = IO_concat(valid, IO_toString_f(value));
-            valid = IO_concat(valid, " ");
-            count++;
-        }
-    }
-
-    if (count == 0)
-    {
-        valid = "nenhum valor";
-    }
-    IO_println(IO_concat("\nValores validos: ", valid));
-    IO_println(IO_concat("Total de valores: ", IO_toString_d(count)));
+    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
+    validas = showAlnum(string);
+    IO_printf("Simbolos alfanumericos: %s\n", validas);
 }
 
 /**
- * method10 - Procedimento para testar valores reais com parte fracionaria
- * pertencente a um intervalo definido
+ * method10 - Procedimento para mostrar e contar os simbolos alfanumericos em
+ * multiplas cadeias de caracteres e calcular o total de todas as palavras
  */
 void method10(int methodId)
 {
     // definir dados
-    double start = 0.0;   // limite inferior
-    double stop = 0.0;    // limite superior
-    double value = 0.0;   // valor para teste
-    double control = 0.0; // valor de controle para parte fracionaria
-    int quant = 0;        // quantidade de valores
-    int trunc = 0;        // valor truncado (inteiro)
-    int count = 0;        // contagem de valores validos
-    chars valid = IO_new_chars(STR_SIZE); // valores validos
+    int reps = 0;
+    int subtotal = 0;
+    int total = 0;
+    chars string = IO_new_chars(STR_SIZE);
+    chars simbolos = IO_new_chars(STR_SIZE);
+    chars preConcat = IO_new_chars(STR_SIZE);
+    chars resultado = IO_new_chars(STR_SIZE);
+
+    strcpy(string, STR_EMPTY);
+    strcpy(simbolos, STR_EMPTY);
+    strcpy(preConcat, STR_EMPTY);
+    strcpy(resultado, STR_EMPTY);
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println(IO_concat("Teste: contar e mostrar valores com parte ",
-                         "fracionaria pertencente ao intervalo"));
+    IO_println("Teste multiplo: mostrar e contar simbolos alfanumericos");
 
     // ler do teclado
-    do
-    {
-    start = IO_readdouble(IO_concat("\nEntrar com o limite inferior ",
-                                    "- restricao: (0, 1) >> "));
-    }
-    while (start <= 0 || start >= 1);
+    reps = IO_readint("\nEntrar com o numero de repeticoes >> ");
 
-    // repetir enquanto stop <= start
-    do
+    for (int i = 0; i < reps; i++)
     {
-        stop = IO_readdouble(IO_concat("Entrar com o limite superior ",
-                                       "- restricao: (start, 1) >> "));
+        string = IO_readstring("Entrar com uma cadeia de caracteres >> ");
+        simbolos = showAlnum(string);
+        subtotal = countAlnum(string);
+        total = total + subtotal;
+        preConcat = concatResult(string, simbolos, subtotal);
+        strncat(resultado, preConcat, STR_SIZE);
     }
-    while (stop <= start || stop >= 1);
-
-    // repetir enquanto quant <= 0
-    do
-    {
-        quant = IO_readint(IO_concat("Entrar com quantidade a testar ",
-                                     "- restricao: (0, inf) >> "));
-    }
-    while (quant <= 0);
-
-    // inserir nova linha
     IO_println("");
-
-    for (int i = 1; i <= quant; i++)
-    {
-        IO_print("Entrar com VALOR_");
-        value = IO_readdouble(IO_concat(IO_toString_d(i), " >> "));
-
-        if (value < 0.0)
-        {
-            trunc = value * (-1);
-            control = (value * (-1.0)) - trunc;
-        }
-        else
-        {
-            trunc = value;
-            control = value - trunc;
-        }
-
-        if (control >= start && control <= stop)
-        {
-            valid = IO_concat(valid, IO_toString_f(value));
-            valid = IO_concat(valid, " ");
-            count++;
-        }
-    }
-
-    if (count == 0)
-    {
-        valid = "nenhum valor";
-    }
-    IO_println(IO_concat("\nValores validos: ", valid));
-    IO_println(IO_concat("Total de valores: ", IO_toString_d(count)));
+    IO_println(resultado);
+    IO_printf("Total de simbolos alfanum. encontrados no teste: %d\n", total);
 }
 
 /**
- * method11 - Procedimento para mostrar todos os simbolos nao alfanumericos
- * de uma linha
+ * method11 - Procedimento
  */
 void method11(int methodId)
 {
-    // definir dados
-    chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
-    chars testValue = IO_new_chars(STR_SIZE); // valor para teste
-    char testChar; // caractere a testar
-
-    // exibir identificacao
-    decorateMethod(methodId);
-    IO_println("Teste: mostrar simbolos nao alfanumericos");
-
-    // ler do teclado
-    value = IO_readln("\nEntrar com cadeia de caracteres >> ");
-    for (int i = 0; i < strlen(value); i++)
-    {
-        testChar = value[i];
-        if (!(testChar >= 'a' && testChar <= 'z') &&
-            !(testChar >= 'A' && testChar <= 'Z') &&
-            !(testChar >= '0' && testChar <= '9'))
-        {
-            strncat(testValue, &testChar, 1);
-        }
-    }
-
-    IO_println(IO_concat("\nOriginal: ", value));
-    if (strlen(testValue) > 0)
-    {
-        IO_println(IO_concat("Simbolos nao alfanumericos: ", testValue));
-    }
-    else
-    {
-        IO_println("Nenhum simbolo exceto digitos ou letras.");
-    }
+    return;
 }
 
 /**
- * method12 - Procedimento para determinar se cadeia de caracteres
- * nao contem letras
+ * method12 - Procedimento
  */
 void method12(int methodId)
 {
-    // definir dados
-    chars value = IO_new_chars(STR_SIZE); // cadeia de caracteres do usuario
-    char testChar; // caractere a testar
-    int control = 0;
-
-    // exibir identificacao
-    decorateMethod(methodId);
-    IO_println("Teste: determinar se sequencia nao contem letras");
-
-    // ler do teclado
-    value = IO_readln("\nEntrar com cadeia de caracteres >> ");
-    for (int i = 0; i < strlen(value); i++)
-    {
-        testChar = value[i];
-        if ((testChar >= 'a' && testChar <= 'z') ||
-            (testChar >= 'A' && testChar <= 'Z'))
-        {
-            control++;
-            break;
-        }
-    }
-
-    if (control > 0)
-    {
-        IO_println("\nA sequencia contem pelo menos uma letra.");
-    }
-    else
-    {
-        IO_println("\nA sequencia nao contem letras.");
-    }
+    return;
 }
 
 /**
@@ -920,76 +832,9 @@ int main(void)
  * ---------------------------------------------- documentacao complementar
  * ---------------------------------------------- notas / observacoes / comentarios
  * ---------------------------------------------- previsao de testes
- * 00. programa encerrado
- *
- * 01. "ABCD" => "Nenhuma minuscula"
- *     "ABCDefgh" => "efgh"
- *     "1234ABc." => "c"
- *
- * 02. "ABCD" => "Nenhuma minuscula", "Total: 0"
- *     "ABCDefgh" => "hgfe", "Total: 4"
- *     "1234ABc." => "c", "Total: 1"
- *
- * 03. "ABCD" => "Nenhuma minuscula", "Total: 0"
- *     "ABCDefgh" => "efgh", "Total: 4"
- *     "a1234BCd." => "da", "Total: 2"
- *
- * 04. "1234/" => "Nenhuma letra", "Total: 0"
- *     "123ABcd,." => "ABcd", "Total: 4"
- *     "AaBbÇçDd" => "AaBbDd", "Total: 6"
- *
- * 05. "1234/" => "Nenhuma letra", "Total: 0"
- *     "123ABcd,." => "dcBA", "Total: 4"
- *     "AaBbÇçDd" => "dDbBaA", "Total: 6"
- *
- * 06. "ABcd019" => "Nenhum simbolo", "Total: 0"
- *     "123ABcd,." => ",.", "Total: 2"
- *     "0AaBbÇçDd9" => "Çç", "Total: 2" (O total retornado no teste foi 4.
- *                                       Minha suposicao e' de que o programa
- *                                       conta a letra mais o acento.)
- * 07. ## INPUT ##
- *     start: -7
- *     stop: 21
- *     quant: 6
- *     valores: -21, -7, 0, 1, 14, 28
- *     ## OUTPUT ##
- *     validos: -7 14
- *     total: 2
- *
- * 08. ## INPUT ##
- *     start: -20
- *     stop: 21
- *     quant: 6
- *     valores: -28, -7, 0, 3, 14, 21
- *     ## OUTPUT ##
- *     validos: -7 14
- *     total: 2
- *
- * 09. ## INPUT ##
- *     start: -5.01
- *     stop: 4.99
- *     quant: 6
- *     valores: -5.02, -3.141592, 0, 1.0, 2.71828, 5.0
- *     ## OUTPUT ##
- *     validos: -3.141592 1.000000
- *     total: 2
- *
- * 10. ## INPUT ##
- *     start: 0.2
- *     stop: 0.999999
- *     quant: 6
- *     valores: 0.199999, -5.2, 0.0, 2.71828, -299792458.5, 10.999999
- *     ## OUTPUT ##
- *     validos: -5.200000, 2.718280, -299792458.500000, 10.999999
- *     total: 4
- *     ## RESULTADO OBTIDO ##
- *     validos: -5.200000, 2.718280, -299792458.500000
- *     total: 3
- *     (O valor 10.999999 nao foi considerado como dentro do intervalo.
- *      Testes feitos com 10.999998 e 10.99999, no entanto, funcionaram.)
  * ---------------------------------------------- historico
  * Versao      Data        Modificacao
- *  0.1      16/04/21        esboco
+ *  0.1      24/04/21        esboco
  * ---------------------------------------------- testes
  * Versao      Teste
  *  0.1     00. (OK)       teste encerrando programa (opcao 0)
@@ -1003,7 +848,4 @@ int main(void)
  *          08. (OK)       teste method08
  *          09. (OK)       teste method09
  *          10. (OK)       teste method10
- *          11. (OK)       teste method11
- *          12. (OK)       teste method12
- *          13. (OK)       teste opcao invalida
  */
