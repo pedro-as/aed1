@@ -694,7 +694,7 @@ void method09(int methodId)
 
 /**
  * method10 - Procedimento para mostrar e contar os simbolos alfanumericos em
- * multiplas cadeias de caracteres e calcular o total de todas as palavras
+ * multiplas linhas e calcular o total de todas as palavras
  */
 void method10(int methodId)
 {
@@ -734,22 +734,6 @@ void method10(int methodId)
 }
 
 /**
- * method11 - Procedimento
- */
-void method11(int methodId)
-{
-    return;
-}
-
-/**
- * method12 - Procedimento
- */
-void method12(int methodId)
-{
-    return;
-}
-
-/**
  * Funcao principal.
  * @return codigo de encerramento
  */
@@ -767,7 +751,7 @@ int main(void)
     int option = 0; // inicializar variavel para selecionar opcao
 
     // exibir opcoes
-    decorateMenu(12);
+    decorateMenu(10);
 
     // ler opcao do teclado
     option = IO_readint("\n>> ");
@@ -809,11 +793,6 @@ int main(void)
     case 10:
         method10(option);
         break;
-    case 11:
-        method11(option);
-        break;
-    case 12:
-        method12(option);
         break;
     default:
         IO_clrscr();
@@ -848,4 +827,5 @@ int main(void)
  *          08. (OK)       teste method08
  *          09. (OK)       teste method09
  *          10. (OK)       teste method10
+ *          11. (OK)       teste comando invalido
  */
