@@ -336,7 +336,7 @@ int countOddDigits(chars string)
     {
         character = string[i];
         charDigit = (int) character - 48;
-        if (isDigit(character) && ! isEven(character))
+        if (isDigit(character) && ! isEven(charDigit))
         {
             count++;
         }
