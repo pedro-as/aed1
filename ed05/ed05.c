@@ -15,7 +15,7 @@
 #include "myFunctions.h"
 
 // definir o numero de identificacao do programa
-char* PROGRAM_ID = "05";
+char PROGRAM_ID[2] = "05";
 
 // para as entradas e saidas
 
@@ -123,21 +123,27 @@ void method03(int methodId)
 void method04(int methodId)
 {
     // definir dados
-    chars string = IO_new_chars(STR_SIZE);
-    chars validas = IO_new_chars(STR_SIZE);
-    char controle = 'K';
-
-    strcpy(string, STR_EMPTY);
-    strcpy(validas, STR_EMPTY);
+    int base = 5;
+    int quantidade = 0;
+    int multiplo = 0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: mostrar maiusculas menores que 'K'");
+    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
 
-    // ler do teclado
-    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    validas = showUpperToChar(string, controle);
-    IO_printf("Maiusculas menores que 'K': %s\n", validas);
+    // ler quantidade do teclado
+    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // decorar cabecalho
+    IO_printf("\nValor\t:\tMultiplo (inv.)");
+    IO_printf("\n-------------------------------");
+
+    // mostrar resultados
+    for (int i = 1; i <= quantidade; i++)
+    {
+        multiplo = multipleValue(base, i);
+        IO_printf("\n%d\t:\t1/%d", i, multiplo);
+    }
 }
 
 /**
@@ -146,21 +152,36 @@ void method04(int methodId)
  */
 void method05(int methodId)
 {
-   // definir dados
-    chars string = IO_new_chars(STR_SIZE);
-    char controle = 'K';
-    int total = 0;
-
-    strcpy(string, STR_EMPTY);
+    // definir dados
+    double x = 0.0;
+    double px = 0.0;
+    int quantidade = 0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Teste: contar caracteres menores que 'K' ou 'k'");
+    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
 
-    // ler do teclado
-    string = IO_readstring("\nEntrar com uma cadeia de caracteres >> ");
-    total = countToChar(string, controle);
-    IO_printf("Total de caracteres menores que 'K' ou 'k': %d\n", total);
+    // ler quantidade do teclado
+    x = IO_readdouble("\nEntre com um valor (x) real >> ");
+    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // decorar cabecalho
+    IO_printf("\nn\t:\t x^(-n)");
+    IO_printf("\n--------------------------");
+
+    // mostrar resultados
+    for (int i = 1; i <= quantidade; i++)
+    {
+        if (i == 1)
+        {
+            IO_printf("\n%d\t:\t%lf", i, 1.0);
+        }
+        else
+        {
+            px = pow(x, i);
+            IO_printf("\n%d\t:\t1/%lf", i, px);
+        }
+    }
 }
 
 /**
@@ -321,46 +342,46 @@ int main(void)
     // selecionar opcao
     switch (option)
     {
-    case 0:
-        IO_clrscr();
-        IO_println("\nEncerrando programa...");
-        break;
-    case 1:
-        method01(option);
-        break;
-    case 2:
-        method02(option);
-        break;
-    case 3:
-        method03(option);
-        break;
-    case 4:
-        method04(option);
-        break;
-    case 5:
-        method05(option);
-        break;
-    case 6:
-        method06(option);
-        break;
-    case 7:
-        method07(option);
-        break;
-    case 8:
-        method08(option);
-        break;
-    case 9:
-        method09(option);
-        break;
-    case 10:
-        method10(option);
-        break;
-        break;
-    default:
-        IO_clrscr();
-        IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),
-                             "' nao encontrado. Encerrando...")));
-        break;
+        case 0:
+            IO_clrscr();
+            IO_println("\nEncerrando programa...");
+            break;
+        case 1:
+            method01(option);
+            break;
+        case 2:
+            method02(option);
+            break;
+        case 3:
+            method03(option);
+            break;
+        case 4:
+            method04(option);
+            break;
+        case 5:
+            method05(option);
+            break;
+        case 6:
+            method06(option);
+            break;
+        case 7:
+            method07(option);
+            break;
+        case 8:
+            method08(option);
+            break;
+        case 9:
+            method09(option);
+            break;
+        case 10:
+            method10(option);
+            break;
+            break;
+        default:
+            IO_clrscr();
+            IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),
+                                "' nao encontrado. Encerrando...")));
+            break;
     }
 
     // encerrar
