@@ -15,6 +15,17 @@ int multipleValue(int x, int n)
 }
 
 /**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param n valor a testar
+ * @param x valor de referencia
+ */
+bool isMultiple(int n, int x)
+{
+    return (n % x == 0);
+}
+
+/**
  * Funcao para determinar se valor inteiro pertence a intervalo aberto
  * @return true, se pertencer; false, caso contrario
  * @param x valor a ser testado
@@ -412,4 +423,97 @@ chars concatResult(chars string, chars symbols, int count)
                            IO_concat(IO_toString_d(count), ")\n"));
 
     return(fullString);
+}
+
+/**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param quant valor a testar
+ * @param initValue valor de referencia
+ */
+int conditionalSum(int quant, int value)
+{
+    int sum = 0;
+    while (quant > 0)
+    {
+        if (! isEven(value) && ! isMultiple(value, 3))
+        {
+            sum = sum + value;
+            quant--;
+        }
+        value++;
+    }
+    return sum;
+}
+
+/**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param quant valor a testar
+ * @param initValue valor de referencia
+ */
+double invConditionalSum(int quant, int value)
+{
+    double sum = 0.0;
+    while (quant > 0)
+    {
+        if (! isEven(value) && ! isMultiple(value, 3))
+        {
+            sum = sum + (1.0 / (double) value);
+            quant--;
+        }
+        value++;
+    }
+    return sum;
+}
+
+/**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param quant valor a testar
+ */
+int sumIntegers(int quant)
+{
+    if (quant == 1)
+    {
+        return (1);
+    }
+    return (quant + sumIntegers(quant - 1));
+}
+
+/**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param quant valor a testar
+ */
+double sumSquares(double quant)
+{
+    if (quant == 1.0)
+    {
+        return(1.0);
+    }
+    return (pow(quant, 2.0) + sumSquares(quant - 1.0));
+}
+
+/**
+ * Funcao para retornar se um valor e' multiplo de outro
+ * @return true, se n for multiplo de x; false, caso contrario
+ * @param quant valor a testar
+ */
+double invSum(double quant)
+{
+    if (quant == 1.0)
+    {
+        return(1.0);
+    }
+    return ((1.0 / quant) + invSum(quant - 1.0));
+}
+
+unsigned long long factorial(int n)
+{
+    if (n == 1)
+    {
+        return (1);
+    }
+    return (n * factorial(n - 1));
 }
