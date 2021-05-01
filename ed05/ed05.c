@@ -1,5 +1,5 @@
 /**
- * ed05 - v0.1 - 24/04/2021
+ * ed05 - v0.1 - 29/04/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
  * Linux: gcc -o ed05 ed05.c
@@ -20,8 +20,8 @@ char PROGRAM_ID[2] = "05";
 // para as entradas e saidas
 
 /**
- * method01 - Procedimento para testar e contar valores pertencentes e
- * nao pertencentes a um intervalo real
+ * method01 - Procedimento para mostrar os valores multiplos de 5 em
+ * ordem crescente
  */
 void method01(int methodId)
 {
@@ -32,7 +32,7 @@ void method01(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos de 5 em ordem crescente");
+    IO_println("Multiplos de 5 em ordem crescente");
 
     // ler quantidade do teclado
     quantidade = IO_readint("\nEntre com quantidade inteira >> ");
@@ -50,7 +50,8 @@ void method01(int methodId)
 }
 
 /**
- * method02 - Procedimento para contar e mostrar maiusculas menores que 'K'
+ * method02 - Procedimento para mostrar os valores multiplos de 5 pares em
+ * ordem crescente
  */
 void method02(int methodId)
 {
@@ -61,7 +62,7 @@ void method02(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos pares de 5 em ordem crescente");
+    IO_println("Multiplos pares de 5 em ordem crescente");
 
     // ler quantidade do teclado
     quantidade = IO_readint("\nEntre com quantidade inteira >> ");
@@ -83,8 +84,8 @@ void method02(int methodId)
 }
 
 /**
- * method03 - Procedimento para contar maiusculas menores que 'K' por meio
- * de outra funcao
+ * method03 - Procedimento para mostrar os valores multiplos de 5 impares em
+ * ordem crescente
  */
 void method03(int methodId)
 {
@@ -95,7 +96,7 @@ void method03(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Multiplos impares de 5 em ordem decrescente");
 
     // ler quantidade do teclado
     quantidade = IO_readint("\nEntre com quantidade inteira >> ");
@@ -117,8 +118,8 @@ void method03(int methodId)
 }
 
 /**
- * method04 - Procedimento para mostrar maiusculas menores que 'K' por meio
- * de outra funcao
+ * method04 - Procedimento para mostrar a sequencia dos multiplos de 5 inversos
+ * em ordem crescente
  */
 void method04(int methodId)
 {
@@ -129,7 +130,7 @@ void method04(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Sequencia de multiplos de 5 inversos em ordem crescente");
 
     // ler quantidade do teclado
     quantidade = IO_readint("\nEntre com quantidade inteira >> ");
@@ -147,8 +148,8 @@ void method04(int methodId)
 }
 
 /**
- * method05 - Procedimento para contar caracteres menores que 'K' ou 'k' por
- * meio de outra funcao
+ * method05 - Procedimento para mostrar valor real elevado a uma sequencia de
+ * expoentes negativos
  */
 void method05(int methodId)
 {
@@ -159,11 +160,11 @@ void method05(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Valor elevado a sequencia de expoentes negativos");
 
     // ler quantidade do teclado
     x = IO_readdouble("\nEntre com um valor (x) real >> ");
-    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+    quantidade = IO_readint("\nEntre com quantidade real >> ");
 
     // decorar cabecalho
     IO_printf("\nn\t:\t x^(-n)");
@@ -185,135 +186,135 @@ void method05(int methodId)
 }
 
 /**
- * method06 - Procedimento para mostrar caracteres menores que 'K' ou 'k' por
- * meio de outra funcao
+ * method06 - Procedimento para mostrar a soma dos primeiros valores impares e
+ * nao multiplos de 3, comecando em 5
  */
 void method06(int methodId)
 {
     // definir dados
     int soma = 0;
-    int quantidade = 0;
+    int n = 0;
     int valor = 5;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Soma dos primeiros valores impares, nao multiplos de 3");
 
     // ler quantidade do teclado
-    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+    n = IO_readint("\nEntre com valor inteiro (n) >> ");
 
     // chamar funcao para obter resultado
-    soma = conditionalSum(quantidade, valor);
+    soma = conditionalSum(n, valor);
 
     // mostrar resultado
-    IO_printf("\nSoma dos (%d) primeiros valores, ", quantidade);
+    IO_printf("\nSoma dos (%d) primeiros valores, ", n);
     IO_printf("\nimpares >= 5 e nao multiplos de 3 => %d\n", soma);
 }
 
 /**
- * method07 - Procedimento para mostrar total de digitos impares em uma cadeia
- * de caracteres
+ * method07 - Procedimento para mostrar a soma dos inversos dos primeiros
+ * valores impares e nao multiplos de 3, comecando em 5
  */
 void method07(int methodId)
 {
     // definir dados
-    int quantidade = 0;
+    int n = 0;
     int valor = 5;
     double soma = 0.0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_printf("Soma dos inversos dos primeiros valores impares, ");
+    IO_println("nao multiplos de 3");
 
     // ler quantidade do teclado
-    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+    n = IO_readint("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
-    soma = invConditionalSum(quantidade, valor);
+    soma = invConditionalSum(n, valor);
 
     // mostrar resultado
-    IO_printf("\nSoma dos inversos dos (%d) primeiros valores ", quantidade);
+    IO_printf("\nSoma dos inversos dos (%d) primeiros valores ", n);
     IO_printf("\nimpares >= 5 e nao multiplos de 3 => %lf\n", soma);
 }
 
 /**
- * method08 - Procedimento para mostrar os simbolos nao alfanumericos em uma
- * cadeia de caracteres
+ * method08 - Procedimento para mostrar a soma dos (n) primeiros numeros
+ * naturais positivos
  */
 void method08(int methodId)
 {
     // definir dados
-    int quantidade = 0;
+    int n = 0;
     int soma = 0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Soma dos primeiros numeros naturais positivos");
 
     // ler quantidade do teclado
-    quantidade = IO_readint("\nEntre com quantidade inteira >> ");
+    n = IO_readint("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
-    soma = sumIntegers(quantidade);
+    soma = sumIntegers(n);
 
     // mostrar resultado
-    IO_printf("\nSoma dos (%d) primeiros numeros naturais => ", quantidade);
+    IO_printf("\nSoma dos (%d) primeiros numeros naturais => ", n);
     IO_printf("%d\n", soma);
 }
 
 /**
- * method09 - Procedimento para mostrar os simbolos alfanumericos em uma
- * cadeia de caracteres
+ * method09 - Procedimento para mostrar a soma dos quadrados dos (n) primeiros
+ * numeros naturais positivos
  */
 void method09(int methodId)
 {
     // definir dados
-    double quantidade = 0.0;
+    double n = 0.0;
     double soma = 0.0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Soma dos quadrados dos primeiros naturais positivos");
 
     // ler quantidade do teclado
-    quantidade = IO_readdouble("\nEntre com quantidade inteira >> ");
+    n = IO_readdouble("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
-    soma = sumSquares(quantidade);
+    soma = sumSquares(n);
 
     // mostrar resultado
-    IO_printf("\nSoma dos quadrados dos (%d) ", (int) quantidade);
+    IO_printf("\nSoma dos quadrados dos (%d) ", (int) n);
     IO_printf("primeiros numeros naturais => %.0lf\n", soma);
 }
 
 /**
- * method10 - Procedimento para mostrar e contar os simbolos alfanumericos em
- * multiplas cadeias de caractere e calcular o total de todas as palavras
+ * method10 - Procedimento para mostrar a soma dos inversos dos (n) primeiros
+ * numeros naturais positivos
  */
 void method10(int methodId)
 {
     // definir dados
-    double quantidade = 0.0;
+    double n = 0.0;
     double soma = 0.0;
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Soma dos inversos dos primeiros naturais positivos");
 
     // ler quantidade do teclado
-    quantidade = IO_readdouble("\nEntre com quantidade inteira >> ");
+    n = IO_readdouble("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
-    soma = invSum(quantidade);
+    soma = invSum(n);
 
     // mostrar resultado
-    IO_printf("\nSoma dos inversos dos (%.0lf) ", quantidade);
+    IO_printf("\nSoma dos inversos dos (%.0lf) ", n);
     IO_printf("primeiros numeros naturais => %lf\n", soma);
 }
 
 /**
- * method11 - Procedimento para mostrar e contar os simbolos alfanumericos em
- * multiplas cadeias de caractere e calcular o total de todas as palavras
+ * method11 - Procedimento para mostrar o fatorial de um valor (n!)
  */
 void method11(int methodId)
 {
@@ -323,10 +324,10 @@ void method11(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Calculo de fatorial (n!)");
 
     // ler quantidade do teclado
-    n = IO_readint("\nEntre com valor inteiro >> ");
+    n = IO_readint("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
     fatorial = factorial(n);
@@ -336,8 +337,7 @@ void method11(int methodId)
 }
 
 /**
- * method12 - Procedimento para mostrar e contar os simbolos alfanumericos em
- * multiplas cadeias de caractere e calcular o total de todas as palavras
+ * method12 - Procedimento para mostrar o fatorial de um numero natural (n)
  */
 void method12(int methodId)
 {
@@ -347,10 +347,10 @@ void method12(int methodId)
 
     // exibir identificacao
     decorateMethod(methodId);
-    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+    IO_println("Calculo de f(n) = (1+2/3!) * (1+3/4!) * (1+4/5!) ...");
 
     // ler quantidade do teclado
-    n = IO_readint("\nEntre com valor inteiro >> ");
+    n = IO_readint("\nEntre com valor inteiro (n) >> ");
 
      // chamar funcao para obter resultado
     resultado = superFactorial(n);
@@ -444,7 +444,7 @@ int main(void)
  * ---------------------------------------------- previsao de testes
  * ---------------------------------------------- historico
  * Versao      Data        Modificacao
- *  0.1      24/04/21        esboco
+ *  0.1      29/04/21        esboco
  * ---------------------------------------------- testes
  * Versao      Teste
  *  0.1     00. (OK)       teste encerrando programa (opcao 0)
@@ -458,5 +458,7 @@ int main(void)
  *          08. (OK)       teste method08
  *          09. (OK)       teste method09
  *          10. (OK)       teste method10
- *          11. (OK)       teste comando invalido
+ *          11. (OK)       teste method11
+ *          12. (OK)       teste method12
+ *          13. (OK)       teste comando invalido
  */

@@ -426,20 +426,21 @@ chars concatResult(chars string, chars symbols, int count)
 }
 
 /**
- * Funcao para retornar se um valor e' multiplo de outro
- * @return true, se n for multiplo de x; false, caso contrario
- * @param quant valor a testar
- * @param initValue valor de referencia
+ * Funcao para retornar a soma dos (n) primeiros valores impares e nao multiplos
+ * de 3, a partir de um valor inicial
+ * @return soma dos valores
+ * @param n quantidade de valores a somar
+ * @param value valor inicial
  */
-int conditionalSum(int quant, int value)
+int conditionalSum(int n, int value)
 {
     int sum = 0;
-    while (quant > 0)
+    while (n > 0)
     {
         if (! isEven(value) && ! isMultiple(value, 3))
         {
             sum = sum + value;
-            quant--;
+            n--;
         }
         value++;
     }
@@ -447,20 +448,21 @@ int conditionalSum(int quant, int value)
 }
 
 /**
- * Funcao para retornar se um valor e' multiplo de outro
- * @return true, se n for multiplo de x; false, caso contrario
- * @param quant valor a testar
- * @param initValue valor de referencia
+ * Funcao para retornar a soma dos inversos dos (n) primeiros valores impares e
+ * nao multiplos de 3, a partir de um valor inicial
+ * @return soma dos valores
+ * @param n quantidade de valores a somar
+ * @param value valor inicial
  */
-double invConditionalSum(int quant, int value)
+double invConditionalSum(int n, int value)
 {
     double sum = 0.0;
-    while (quant > 0)
+    while (n > 0)
     {
         if (! isEven(value) && ! isMultiple(value, 3))
         {
             sum = sum + (1.0 / (double) value);
-            quant--;
+            n--;
         }
         value++;
     }
@@ -468,47 +470,54 @@ double invConditionalSum(int quant, int value)
 }
 
 /**
- * Funcao para retornar se um valor e' multiplo de outro
- * @return true, se n for multiplo de x; false, caso contrario
- * @param quant valor a testar
+ * Funcao para retornar a soma dos (n) primeiros numeros naturais, a partir de 1
+ * @return soma dos valores
+ * @param n quantidade de valores a somar
  */
-int sumIntegers(int quant)
+int sumIntegers(int n)
 {
-    if (quant == 1)
+    if (n == 1)
     {
         return (1);
     }
-    return (quant + sumIntegers(quant - 1));
+    return (n + sumIntegers(n - 1));
 }
 
 /**
- * Funcao para retornar se um valor e' multiplo de outro
- * @return true, se n for multiplo de x; false, caso contrario
- * @param quant valor a testar
+ * Funcao para retornar a soma dos quadrados dos (n) primeiros numeros naturais,
+ * a partir de 1
+ * @return soma dos quadrados dos valores
+ * @param n quantidade de valores a somar
  */
-double sumSquares(double quant)
+double sumSquares(double n)
 {
-    if (quant == 1.0)
+    if (n == 1.0)
     {
         return(1.0);
     }
-    return (pow(quant, 2.0) + sumSquares(quant - 1.0));
+    return (pow(n, 2.0) + sumSquares(n - 1.0));
 }
 
 /**
- * Funcao para retornar se um valor e' multiplo de outro
- * @return true, se n for multiplo de x; false, caso contrario
- * @param quant valor a testar
+ * Funcao para retornar a soma dos inversos dos (n) primeiros numeros naturais,
+ * a partir de 1
+ * @return soma dos valores inversos
+ * @param n quantidade de valores a somar
  */
-double invSum(double quant)
+double invSum(double n)
 {
-    if (quant == 1.0)
+    if (n == 1.0)
     {
         return(1.0);
     }
-    return ((1.0 / quant) + invSum(quant - 1.0));
+    return ((1.0 / n) + invSum(n - 1.0));
 }
 
+/**
+ * Funcao para calcular e retornar o fatorial de um numero natural (n)
+ * @return soma dos valores
+ * @param n numero inteiro positivo
+ */
 long double factorial(int n)
 {
     n = (long double) n;
@@ -520,6 +529,11 @@ long double factorial(int n)
     return (n * factorial(n - 1.0));
 }
 
+/**
+ * Funcao equivalente a f(n) = (1+2/3!) * (1+3/4!) * (1+4/5!) ...
+ * @return soma dos valores
+ * @param n numero inteiro positivo
+ */
 long double superFactorial(int n)
 {
     long double result = 1.0;
