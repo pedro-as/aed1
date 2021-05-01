@@ -319,20 +319,44 @@ void method11(int methodId)
 {
     // definir dados
     int n = 0;
-    unsigned long long fatorial = 0;
+    long double fatorial = 0.0;
 
     // exibir identificacao
     decorateMethod(methodId);
     IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
 
     // ler quantidade do teclado
-    n = IO_readint("\nEntre com valor (limite = 20) >> ");
+    n = IO_readint("\nEntre com valor inteiro >> ");
 
      // chamar funcao para obter resultado
     fatorial = factorial(n);
 
     // mostrar resultado
-    IO_printf("\n%d! = %llu\n", n, fatorial);
+    IO_printf("\n%d! = %.0Lf\n", n, fatorial);
+}
+
+/**
+ * method12 - Procedimento para mostrar e contar os simbolos alfanumericos em
+ * multiplas cadeias de caractere e calcular o total de todas as palavras
+ */
+void method12(int methodId)
+{
+    // definir dados
+    int n = 0;
+    long double resultado = 0.0;
+
+    // exibir identificacao
+    decorateMethod(methodId);
+    IO_println("Mostrar os multiplos impares de 5 em ordem decrescente");
+
+    // ler quantidade do teclado
+    n = IO_readint("\nEntre com valor inteiro >> ");
+
+     // chamar funcao para obter resultado
+    resultado = superFactorial(n);
+
+    // mostrar resultado
+    IO_printf("\n%d! = %Lf\n", n, resultado);
 }
 
 /**
@@ -353,7 +377,7 @@ int main(void)
     int option = 0; // inicializar variavel para selecionar opcao
 
     // exibir opcoes
-    decorateMenu(11);
+    decorateMenu(12);
 
     // ler opcao do teclado
     option = IO_readint("\n>> ");
@@ -397,7 +421,10 @@ int main(void)
             break;
         case 11:
             method11(option);
-            break;            
+            break;
+        case 12:
+            method12(option);
+            break; 
         default:
             IO_clrscr();
             IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),

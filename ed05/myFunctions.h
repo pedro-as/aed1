@@ -509,11 +509,28 @@ double invSum(double quant)
     return ((1.0 / quant) + invSum(quant - 1.0));
 }
 
-unsigned long long factorial(int n)
+long double factorial(int n)
 {
-    if (n == 1)
+    n = (long double) n;
+
+    if (n == 1.0)
     {
-        return (1);
+        return (1.0);
     }
-    return (n * factorial(n - 1));
+    return (n * factorial(n - 1.0));
+}
+
+long double superFactorial(int n)
+{
+    long double result = 1.0;
+    double p = 0.0;
+    double q = 0.0;
+
+    for (int i = 1; i <= n; i++)
+    {
+        p = (double) i + 1.0;
+        q = (double) i + 2.0;
+        result = result * (1.0 + p / factorial(q));
+    }
+    return (result);
 }
