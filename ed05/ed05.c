@@ -356,7 +356,7 @@ void method12(int methodId)
     resultado = superFactorial(n);
 
     // mostrar resultado
-    IO_printf("\n%d! = %Lf\n", n, resultado);
+    IO_printf("\nResultado => %Lf\n", resultado);
 }
 
 /**
