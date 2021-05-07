@@ -1,17 +1,10 @@
 # ignorar tudo
 *
 
-# não ignorar extensões .c, .cpp, .h, .hpp e .txt 
-!*.c
-!*.cpp
-!*.h
-!*.hpp
-!*.txt
-
 # não ignorar diretórios
 !*/
 
-# não ignorar extensões .c, .cpp, .h, .hpp, e .txt dentro dos diretórios
+# não ignorar extensões .c, .cpp, .h, .hpp, e .txt, desde que dentro dos diretórios
 !*/*.c
 !*/*.cpp
 !*/*.h

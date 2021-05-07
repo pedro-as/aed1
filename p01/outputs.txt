@@ -1,0 +1,81 @@
+A01 - 742626 - Pedro Henrique Amorim Sa
+
+Option?
+option = 1
+Questao_01
+
+x = 0.850000
+0.850000 -> Corvinal
+
+Option?
+option = 1
+Questao_01
+
+x = 0.630000
+0.630000 -> Grifinoria
+
+Option?
+option = 1
+Questao_01
+
+x = 0.390000
+0.390000 -> Lufa-Lufa
+
+Option?
+option = 1
+Questao_01
+
+x = 0.180000
+0.180000 -> Sonserina
+
+Option?
+option = 2
+Questao_02
+
+n = 30125
+n = 30325
+n = 30725
+n = 30925
+n = 98101
+n = 98501
+n = 98701
+Total de valores -> 7
+
+Option?
+option = 3
+Questao_03
+
+sx = abacate
+sy = abacaxi
+ 
+
+Option?
+option = 3
+Questao_03
+
+sx = melao
+sy = melancia
+melancia
+
+Option?
+option = 3
+Questao_03
+
+sx = banana
+sy = caju
+banana
+
+Option?
+option = 4
+Questao_04
+
+10 -> 0.500000 = 1
+
+Option?
+option = 4
+Questao_04
+
+10 -> 0.100000 = 0
+
+Option?
+option = 0
