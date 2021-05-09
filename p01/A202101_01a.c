@@ -139,8 +139,8 @@
     for (int i = 0; i < lenCadeia; i++)
     {
       symbol = cadeia[i];
-      if ((cadeia[i] == 'a') || (cadeia[i] == 'e') || (cadeia[i] == 'i') || 
-          (cadeia[i] == 'o') || (cadeia[i] == 'u'))
+      if ((symbol == 'a') || (symbol == 'e') || (symbol == 'i') || 
+          (symbol == 'o') || (symbol == 'u'))
       {
           vogaisMin = vogaisMin + 1;
       }
