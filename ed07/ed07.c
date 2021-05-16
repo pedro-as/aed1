@@ -417,5 +417,6 @@ int main(void)
  * ---------------------------------------------- testes
  * Os valores e quantidades utilizados nos testes estao documentados nos arqui-
  * vos TXT que acompanham este programa.
- * Versao      Teste
+ * 
+ * O method12 retornou o valor 5 para o arquivo DADOS12.TXT, conforme esperado.
  */
