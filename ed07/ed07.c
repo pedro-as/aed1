@@ -12,41 +12,91 @@
 // dependencias
 #include "io.h" // para definicoes proprias
 #include "decorate.h" // procedimentos proprios de decoracao
+#include "myMethods.h" // biblioteca de metodos
 
 // definir o numero de identificacao do programa
 char PROGRAM_ID[2] = "07";
 
 // para as entradas e saidas
 
-void copyText(chars fileOut, chars fileIn)
-{
-    FILE* saida = fopen(fileOut, "wt");
-    FILE* entrada = fopen(fileIn, "rt");
-    chars linha = IO_new_chars(STR_SIZE);
-    int contador = 0;
-
-    strcpy(linha,IO_freadln(entrada));
-    
-    while(! feof(entrada))
-    {
-        contador++;
-        
-        if (strcmp("PARAR", linha) != 0)
-        {
-            IO_fprintln(saida, linha);
-        }
-
-        strcpy(linha, IO_freadln(entrada));
-    }
-    IO_printf("Lines read = %d\n", contador);
-    fclose(saida);
-    fclose(entrada);
-}
-
 void method01(int methodId)
 {
+    int quant = 0;
+
+    // decorar o metodo
     decorateMethod(methodId);
-    copyText("out.txt", "test.txt");
+    IO_println("Multiplos pares de 3, em ordem crescente\n");
+    
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    writeEvenM3("DADOS01.TXT", quant);
+}
+
+void method02(int methodId)
+{
+    int quant = 0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Multiplos impares de 3, em ordem decrescente\n");
+    
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    writeOddM3("DADOS02.TXT", quant);
+}
+
+void method03(int methodId)
+{
+    int base = 5;
+    int quant = 0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Funcao exponencial f(x) = 5^(x) para x inteiro >= 0\n");
+    
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    writeExp("DADOS03.TXT", base, quant);
+}
+
+void method04(int methodId)
+{
+    int base = 4;
+    int quant = 0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Funcao exponencial f(x) = 4^(x) para x inteiro < 0\n");
+    
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    writeNegExp("DADOS04.TXT", base, quant);
+}
+
+void method05(int methodId)
+{
+    int quant = 0;
+    double base = 0.0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_printf("Funcao exponencial f(x) = 1/(b^x) para x inteiro no intervalo ");
+    IO_println("[0,1] U [inteiros pares)\n");
+    
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+    base = IO_readdouble("\nEntre com quantidade real >> ");
+
+    // executar metodo e gravar em arquivo
+    writeNegEvenExp("DADOS05.TXT", base, quant);
 }
 
 /**
@@ -67,12 +117,18 @@ int main(void)
     int option = 0; // inicializar variavel para selecionar opcao
 
     // exibir opcoes
-    decorateMenu(1);
+    //decorateMenu(10);
+    //IO_println("\n");
 
     do
     {
+        IO_clrscr();
+        // exibir opcoes
+        decorateMenu(10);
+        IO_println("\n");
+
         // ler opcao do teclado
-        option = IO_readint("\n\nOpcao [1:12] >> ");
+        option = IO_readint("Opcao [1:10] >> ");
 
         // selecionar opcao
         switch (option)
@@ -83,7 +139,7 @@ int main(void)
                 break;
             case 1:
                 method01(option);
-                break;/*
+                break;
             case 2:
                 method02(option);
                 break;
@@ -95,7 +151,7 @@ int main(void)
                 break;
             case 5:
                 method05(option);
-                break;
+                break;/*
             case 6:
                 method06(option);
                 break;
@@ -115,17 +171,14 @@ int main(void)
                 method11(option);
                 break;*/
             default:
-                IO_clrscr();
-                IO_println(IO_concat("\nComando '", IO_concat(IO_toString_d(option),
-                                    "' nao encontrado.")));
+                IO_printf("Opcao nao reconhecida: '%d'\n", option);
                 break;
         }
     }
     while (option != 0);
 
     // encerrar
-    IO_pause("\nApertar ENTER para terminar.");
-    IO_clrscr(); // limpar tela ao sair
+    IO_clrscr();
     return (0);
 } // fim main( )
 
