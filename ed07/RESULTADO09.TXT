@@ -1,0 +1,7 @@
+Cadeia => N. maiusculas
+-------------------------------
+"Abacaxi" => 1
+"LaRaNjA" => 4
+"BANANA" => 6
+"melancia" => 0
+"CajU" => 2

@@ -1,0 +1,12 @@
+Abacaxi
+Banana
+Caju
+Melancia
+Abacate
+abacate
+melancia
+caju
+banana
+abacaxi
+12345
+algoritmos

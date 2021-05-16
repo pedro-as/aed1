@@ -1,0 +1,5 @@
+semdigitos
+1digito
+digitos12
+digitos3456
+abc!=+058

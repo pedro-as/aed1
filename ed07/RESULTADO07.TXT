@@ -1,2 +1,8 @@
-REF: DADOS04.TXT
-Soma dos 15 primeiros valores = 0.001302083332
+Arquivo de entrada: DADOS04.TXT
+
+Quantidade		Soma
+-------------------------------
+	5		0.000000001241
+	10		0.000001271565
+	15		0.001302083332
+	20		1.333333333332

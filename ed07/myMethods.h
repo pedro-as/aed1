@@ -114,3 +114,114 @@ double sumValues(chars fileName, int n)
     return (sum);
 }
 
+
+int fibonacci(int n)
+{
+    int x = 0;
+    if (n == 1 || n == 2)
+    {
+        x = 1;
+    }
+    else
+    {
+        if (n > 1)
+        {
+            x = fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+    return (x);
+}
+
+bool isUpperCase(char x)
+{
+    return ('A' <= x && x <= 'Z');
+}
+
+int countUpper(chars string)
+{
+    // definir dados
+    int count = 0;
+    int length = strlen(string);
+    char character = '\0';
+
+    //testar a condicao
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isUpperCase(character))
+        {
+            count++;
+        }
+    }
+    return (count);
+}
+
+void writeUpper(chars fileIn, chars fileOut)
+{
+    FILE *input = fopen(fileIn, "rt");
+    FILE *output = fopen(fileOut, "wt");
+    chars string = IO_new_chars(STR_SIZE);
+    int count = 0;
+
+    strcpy(string, IO_fread(input));
+    IO_fprintf(output, "Cadeia => N. maiusculas\n");
+    IO_fprintf(output, "-------------------------------\n");
+
+    while (! feof(input))
+    {
+        count = countUpper(string);
+        IO_fprintf(output, "\"%s\" => %d\n", string, count);
+        strcpy(string, IO_fread(input));
+    }
+    fclose(output);
+    fclose(input);    
+}
+
+bool isDigit(char x)
+{
+    return ('0' <= x && x <= '9');
+}
+
+int countDigits_LE5(chars string)
+{
+    int count = 0;
+    int length = strlen(string);
+    int digit = 0;
+    char character = '\0';
+
+    for (int i = 0; i < length; i++)
+    {
+        character = string[i];
+        if (isDigit(character))
+        {
+            digit = (int) character - 48;
+            
+            if (digit <= 5)
+            {
+                count++;
+            }
+        }
+    }
+    return (count);
+}
+
+void writeDigits_LE5(chars fileIn, chars fileOut)
+{
+    FILE *input = fopen(fileIn, "rt");
+    FILE *output = fopen(fileOut, "wt");
+    chars string = IO_new_chars(STR_SIZE);
+    int count = 0;
+
+    strcpy(string, IO_fread(input));
+    IO_fprintf(output, "Cadeia => N. digitos <= 5\n");
+    IO_fprintf(output, "-------------------------------\n");
+
+    while (! feof(input))
+    {
+        count = countDigits_LE5(string);
+        IO_fprintf(output, "\"%s\" => %d\n", string, count);
+        strcpy(string, IO_fread(input));
+    }
+    fclose(output);
+    fclose(input);    
+}

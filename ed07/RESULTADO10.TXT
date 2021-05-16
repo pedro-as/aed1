@@ -1,0 +1,7 @@
+Cadeia => N. digitos <= 5
+-------------------------------
+"semdigitos" => 0
+"1digito" => 1
+"digitos12" => 2
+"digitos3456" => 3
+"abc!=+058" => 2
