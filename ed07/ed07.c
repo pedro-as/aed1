@@ -99,6 +99,44 @@ void method05(int methodId)
     writeNegEvenExp("DADOS05.TXT", base, quant);
 }
 
+void method06(int methodId)
+{
+    FILE *saida = fopen("RESULTADO06.TXT", "wt");
+    int quant = 0;
+    double soma = 0.0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Soma dos (n) primeiros valores gravados no Metodo 05\n");
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    soma = sumValues("DADOS05.TXT", quant);
+    fprintf(saida, "REF: DADOS05.TXT\n");
+    fprintf(saida, "Soma dos %d primeiros valores = %.12lf\n", quant, soma);
+    fclose(saida);
+}
+
+void method07(int methodId)
+{
+    FILE *saida = fopen("RESULTADO07.TXT", "wt");
+    int quant = 0;
+    double soma = 0.0;
+
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Soma dos (n) primeiros valores gravados no Metodo 04\n");
+    // ler quantidade do teclado
+    quant = IO_readint("\nEntre com quantidade inteira >> ");
+
+    // executar metodo e gravar em arquivo
+    soma = sumValues("DADOS04.TXT", quant);
+    fprintf(saida, "REF: DADOS04.TXT\n");
+    fprintf(saida, "Soma dos %d primeiros valores = %.12lf\n", quant, soma);
+    fclose(saida);
+}
+
 /**
  * Funcao principal.
  * @return codigo de encerramento
@@ -151,13 +189,13 @@ int main(void)
                 break;
             case 5:
                 method05(option);
-                break;/*
+                break;
             case 6:
                 method06(option);
                 break;
             case 7:
                 method07(option);
-                break;
+                break;/*
             case 8:
                 method08(option);
                 break;

@@ -1,0 +1,2 @@
+REF: DADOS05.TXT
+Soma dos 15 primeiros valores = 1.333333332091

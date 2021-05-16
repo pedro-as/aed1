@@ -1,0 +1,2 @@
+REF: DADOS04.TXT
+Soma dos 15 primeiros valores = 0.001302083332
