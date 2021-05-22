@@ -29,7 +29,7 @@ void readIntArray (int n, int array[])
     chars text = IO_new_chars (STR_SIZE);
 
     // ler e guardar valores em arranjo
-    for (x = 1; x <= n; x++)
+    for (x = 0; x < n; x++)
     {
         // ler valor
         strcpy (text, STR_EMPTY);
@@ -122,7 +122,7 @@ bool isAllEvenPositive(int n, int array[])
     return (result);
 }
 
-void fprintIntArray_evenPos(chars fileName, int n, int array[])
+void fprintIntArray_evenPositive(chars fileName, int n, int array[])
 {
     // definir dados locais
     FILE *file = fopen(fileName, "wt");
@@ -152,7 +152,7 @@ int getRandomInt(int start, int stop)
     return (start + rand() % (stop - start + 1));
 }
 
-int minArray(int n, int array[])
+int minIntArray(int n, int array[])
 {
     int min = array[0];
 
@@ -167,7 +167,7 @@ int minArray(int n, int array[])
     return (min);
 }
 
-int maxArray(int n, int array[])
+int maxIntArray(int n, int array[])
 {
     int max = array[0];
 
@@ -180,4 +180,95 @@ int maxArray(int n, int array[])
     }
 
     return (max);
+}
+
+int sumIntArray(int n, int array[])
+{
+    int sum = 0;
+    
+    for (int i = 0; i < n; i++)
+    {
+        sum = sum + array[i];
+    }
+
+    return(sum);
+}
+
+double meanIntArray(int n, int array[])
+{
+    // evitar divisao por 0
+    if (n > 0)
+    {
+        int sum = sumIntArray(n, array);
+        return ((double) sum / (double) n);
+    }
+    else
+    {
+        // retornar 0 se tamanho do arranjo for invalido
+        return (0.0);
+    }
+}
+
+bool isOrderedIntArray_asc(int n, int array[])
+{
+    bool result = true;
+    int x = 1;
+
+    while (x < n && result)
+    {
+        result = result && (array[x] > array[x - 1]);
+        x++;
+    }
+
+    return (result);
+}
+
+bool searchIntArray_pos(int value, int pos, int n, int array[])
+{
+    bool result = false;
+    int x = pos;
+
+    while (x < n && ! result)
+    {
+        result = (value == array[x]);
+        x++;
+    }
+
+    return (result);
+}
+
+int indexIntArray_pos(int value, int pos, int n, int array[])
+{
+    bool result = false;
+    int x = pos;
+
+    while (x < n && ! result)
+    {
+        result = (value == array[x]);
+        x++;
+    }
+
+    if (result)
+    {
+        return (x - 1);
+    }
+    else
+    {
+        return(-1);
+    }
+}
+
+int searchIntArray_quant(int value, int pos, int n, int array[])
+{
+    int quant = 0;
+
+    for (int i = pos; i < n; i++)
+    {
+        if (array[i] == value)
+        {
+            quant++;
+        }
+    }
+
+    return (quant);
 }

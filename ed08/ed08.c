@@ -59,7 +59,8 @@ void method02(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Copiar valores pares positivos entre arquivos");
+    IO_println("(primeira linha da saida = tamanho da entrada)\n");
 
     // definir dados
     int n = 0;
@@ -82,7 +83,7 @@ void method02(int methodId)
         freadIntArray(fileIn, n, array);
 
         // guardar em arquivo o tamanho e os elementos validos
-        fprintIntArray_evenPos(fileOut, n, array);
+        fprintIntArray_evenPositive(fileOut, n, array);
     }
 
     // finalizar metodo
@@ -94,7 +95,7 @@ void method03(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Gravar valores aleatorios em arquivo\n");
 
     // definir dados
     int n = 0;
@@ -125,7 +126,7 @@ void method03(int methodId)
         array[i] = x;
     }
 
-    fprintIntArray("DADOS03.TXT", n, array);
+    fprintIntArray("DADOS.TXT", n, array);
 
     // deixar os resultados na tela
     IO_printf("\nGravacao finalizada");
@@ -136,12 +137,12 @@ void method04(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Procurar menor valor em arranjo\n");
 
     // definir dados
     int n = 0;
     int menor = 0;
-    chars fileIn = "ARRAY04.TXT";
+    chars fileIn = "DADOS.TXT";
 
     // verificar tamanho do arranjo
     n = freadArraySize(fileIn);
@@ -159,7 +160,7 @@ void method04(int methodId)
         freadIntArray(fileIn, n, array);
 
         // encontrar menor valor
-        menor = minArray(n, array);
+        menor = minIntArray(n, array);
 
         // mostrar menor valor
         IO_printf("\nMenor valor no arranjo: %d", menor);
@@ -173,12 +174,12 @@ void method05(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Procurar maior valor em arranjo\n");
 
     // definir dados
     int n = 0;
     int maior = 0;
-    chars fileIn = "ARRAY05.TXT";
+    chars fileIn = "DADOS.TXT";
 
     // verificar tamanho do arranjo
     n = freadArraySize(fileIn);
@@ -196,7 +197,7 @@ void method05(int methodId)
         freadIntArray(fileIn, n, array);
 
         // encontrar maior valor
-        maior = maxArray(n, array);
+        maior = maxIntArray(n, array);
 
         // mostrar maior valor
         IO_printf("\nMaior valor no arranjo: %d", maior);
@@ -210,10 +211,34 @@ void method06(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Calcular media de valores em arranjo\n");
 
     // definir dados
+    int n = 0;
+    double media = 0.0;
+    chars fileIn = "DADOS.TXT";
 
+    // verificar tamanho do arranjo
+    n = freadArraySize(fileIn);
+
+    if (n <= 0)
+    {
+        IO_printf("\nERRO: arranjo de tamanho invalido");
+    }
+    else
+    {
+        // definir armazenador
+        int array[n];
+
+        // ler do arquivo
+        freadIntArray(fileIn, n, array);
+
+        // encontrar valor medio
+        media = meanIntArray(n, array);
+
+        // mostrar valor medio
+        IO_printf("\nValor medio do arranjo: %lf", media);
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -223,10 +248,32 @@ void method07(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Verificar se arranjo esta' em ordem crescente\n");
 
     // definir dados
+    int n = 0;
 
+    // ler dados
+    while (n <= 0) // tamanho do arranjo deve ser positivo
+    {
+        n = IO_readint("Entre com o tamanho do arranjo >> ");
+    }
+
+    // definir armazenador
+    int array[n];
+
+    // ler elementos do arranjo
+    readIntArray(n, array);
+
+    // verificar se o arranjo esta' em ordem crescente
+    if (isOrderedIntArray_asc(n, array))
+    {
+        IO_printf("\nO arranjo esta' em ordem crescente");
+    }
+    else
+    {
+        IO_printf("\nO arranjo esta' desordenado");
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -236,10 +283,42 @@ void method08(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Procurar valor em arranjo a partir de posicao inicial\n");
 
     // definir dados
+    int n = 0;
+    int procurado = 0;
+    int posicao = 5;
+    chars fileIn = "DADOS.TXT";
 
+    // verificar tamanho do arranjo
+    n = freadArraySize(fileIn);
+
+    if (n <= 0)
+    {
+        IO_printf("\nERRO: arranjo de tamanho invalido");
+    }
+    else
+    {
+        // ler valor a ser procurado
+        procurado = IO_readint("Entre com o valor inteiro a procurar >> ");
+
+        // definir armazenador
+        int array[n];
+
+        // ler do arquivo
+        freadIntArray(fileIn, n, array);
+
+        // verificar se o valor esta' no arranjo a partir da posicao indicada
+        if (searchIntArray_pos(procurado, posicao, n, array))
+        {
+            IO_printf("\nVal: %d; pos: %d => encontrado", procurado, posicao);
+        }
+        else
+        {
+            IO_printf("\nVal: %d; pos: %d => nao encontrado", procurado, posicao);
+        }
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -249,10 +328,45 @@ void method09(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Procurar indice de valor em arranjo\n");
 
     // definir dados
+    int n = 0;
+    int procurado = 0;
+    int posicao = 5;
+    int indice = 0;
+    chars fileIn = "DADOS.TXT";
 
+    // verificar tamanho do arranjo
+    n = freadArraySize(fileIn);
+
+    if (n <= 0)
+    {
+        IO_printf("\nERRO: arranjo de tamanho invalido");
+    }
+    else
+    {
+        // ler valor a ser procurado
+        procurado = IO_readint("Entre com o valor inteiro a procurar >> ");
+
+        // definir armazenador
+        int array[n];
+
+        // ler do arquivo
+        freadIntArray(fileIn, n, array);
+
+        // verificar se o valor esta' no arranjo a partir da posicao indicada
+        if (searchIntArray_pos(procurado, posicao, n, array))
+        {
+            // procurar o indice
+            indice = indexIntArray_pos(procurado, posicao, n, array);
+            IO_printf("\nValor: %d => indice: %d", procurado, indice);
+        }
+        else
+        {
+            IO_printf("\nValor (%d) nao encontrado", procurado);
+        }
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -262,36 +376,37 @@ void method10(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Calcular quantidade de valor em arranjo\n");
 
     // definir dados
+    int n = 0;
+    int procurado = 0;
+    int posicao = 5;
+    int quant = 0;
+    chars fileIn = "DADOS.TXT";
 
+    // verificar tamanho do arranjo
+    n = freadArraySize(fileIn);
 
-    // deixar os resultados na tela
-    IO_pause("\n\n<Enter> para voltar ao menu");
-}
+    if (n <= 0)
+    {
+        IO_printf("\nERRO: arranjo de tamanho invalido");
+    }
+    else
+    {
+        // ler valor a ser procurado
+        procurado = IO_readint("Entre com o valor inteiro a procurar >> ");
 
-void method11(int methodId)
-{
-    // decorar o metodo
-    decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+        // definir armazenador
+        int array[n];
 
-    // definir dados
+        // ler do arquivo
+        freadIntArray(fileIn, n, array);
 
-
-    // deixar os resultados na tela
-    IO_pause("\n\n<Enter> para voltar ao menu");
-}
-
-void method12(int methodId)
-{
-    // decorar o metodo
-    decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
-
-    // definir dados
-
+        // procurar quantidade do valor no arranjo
+        quant = searchIntArray_quant(procurado, posicao, n, array);
+        IO_printf("\nValor: %d => quantidade: %d", procurado, quant);
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -316,11 +431,11 @@ int main(void)
         IO_clrscr();
         IO_id(programId);
         // exibir opcoes
-        decorateMenu(12);
+        decorateMenu(10);
         IO_println("\n");
 
         // ler opcao do teclado
-        option = IO_readint("Opcao [1:12] >> ");
+        option = IO_readint("Opcao [1:10] >> ");
 
         // selecionar opcao
         switch (option)
@@ -358,12 +473,6 @@ int main(void)
                 break;
             case 10:
                 method10(option);
-                break;
-            case 11:
-                method11(option);
-                break;
-            case 12:
-                method12(option);
                 break;
             default:
                 IO_printf("Opcao nao reconhecida: '%d'\n", option);
