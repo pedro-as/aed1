@@ -1,3 +1,12 @@
+/**
+ * Array Library - v0.1 - 29/05/2021
+ * Author: Pedro H. Amorim Sa - 742626
+ * Multipurpose library for manipulation of one dimensional arrays (vectors)
+ */
+
+// include IO_lib if not included in main program
+// #include "io.h"
+
 bool isPositive(int x)
 {
     return (x > 0);
@@ -271,4 +280,51 @@ int searchIntArray_quant(int value, int pos, int n, int array[])
     }
 
     return (quant);
+}
+
+int *factorsArray(int n)
+{
+    int index = 0;
+    int *array = malloc(n);
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+            array[index] = i;
+            index++;
+        }
+    }
+
+    return (array);
+}
+
+void printIntArray_factors(int n, int array[])
+{
+    int x = 0;
+
+    while(array[x] != n)
+    {
+        IO_printf ("%d: %d\n", x, array[x]);
+        x++;
+    }
+    IO_printf ("%d: %d\n", x, array[x]);    
+}
+
+void fprintIntArray_factors(chars fileName, int n, int array[])
+{
+    // definir dados locais
+    FILE *file = fopen(fileName, "wt");
+    int x = 0;
+
+    // gravar valores no arranjo
+    while(array[x] != n)
+    {
+        // gravar valor
+        IO_fprintf(file, "%d\n", array[x]);
+        x++;
+    }
+
+    IO_fprintf(file, "%d\n", array[x]);
+    fclose(file);
 }

@@ -1,5 +1,5 @@
 /**
- * ed08 - v0.1 - dd/MM/2021
+ * ed08 - v0.2 - 23/05/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
  * Linux: gcc -o ed08 ed08.c
@@ -12,7 +12,7 @@
 // dependencias
 #include "io.h" // para definicoes proprias
 #include "decorate.h" // procedimentos proprios de decoracao
-#include "myMethods.h" // biblioteca de metodos
+#include "arraylib.h" // biblioteca de metodos para arranjos
 
 // definir o numero de identificacao do programa
 char PROGRAM_ID[4] = "ED08";
@@ -412,6 +412,35 @@ void method10(int methodId)
     IO_pause("\n\n<Enter> para voltar ao menu");
 }
 
+void method11(int methodId)
+{
+    // decorar o metodo
+    decorateMethod(methodId);
+    IO_println("Calcular, mostrar e gravar divisores\n");
+
+    // definir dados
+    int n = 0;
+    chars fileOut = "DIVISORES.TXT";
+
+    // ler dados
+    while (n <= 0) // tamanho do arranjo deve ser positivo
+    {
+        n = IO_readint("Entre com valor inteiro >> ");
+    }
+
+    // definir armazenador
+    int *array = factorsArray(n);;
+
+    // mostrar arranjo
+    printIntArray_factors(n, array);
+
+    // gravar arranjo
+    fprintIntArray_factors(fileOut, n, array);
+
+    // deixar os resultados na tela
+    IO_pause("\n\n<Enter> para voltar ao menu");
+}
+
 /**
  * Funcao principal. 
  * @return codigo de encerramento
@@ -421,7 +450,7 @@ int main(void)
     // identificar
     chars programId = IO_new_chars(STR_SIZE);
     strcpy(programId, IO_concat(IO_concat("=          ", PROGRAM_ID),
-                                          " - Programa = v0.1          ="));
+                                          " - Programa = v0.2          ="));
 
     // inicializar variavel para selecionar opcao
     int option = 0;
@@ -431,11 +460,11 @@ int main(void)
         IO_clrscr();
         IO_id(programId);
         // exibir opcoes
-        decorateMenu(10);
+        decorateMenu(11);
         IO_println("\n");
 
         // ler opcao do teclado
-        option = IO_readint("Opcao [1:10] >> ");
+        option = IO_readint("Opcao [1:11] >> ");
 
         // selecionar opcao
         switch (option)
@@ -474,6 +503,9 @@ int main(void)
             case 10:
                 method10(option);
                 break;
+            case 11:
+                method11(option);
+                break;
             default:
                 IO_printf("Opcao nao reconhecida: '%d'\n", option);
                 break;
@@ -492,6 +524,7 @@ int main(void)
  * ---------------------------------------------- previsao de testes
  * ---------------------------------------------- historico
  * Versao      Data        Modificacao
- *  0.1      dd/MM/21        esboco
+ *  0.1      20/05/21   inclusao dos exercicios
+ *  0.2      23/05/21     tarefas extras
  * ---------------------------------------------- testes
  */
