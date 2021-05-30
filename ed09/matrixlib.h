@@ -114,34 +114,34 @@ int freadMatrixColumns(chars fileName)
 void freadIntMatrix(chars fileName, int rows, int columns, int matrix[][columns])
 {
     // define local variables
-    int r = 0;
-    int c = 0;
+    int i = 0;
+    int j = 0;
     int value = 0;
     FILE *file = fopen(fileName, "rt");
 
     // read number of data
-    IO_fscanf(file, "%d", &r);
-    IO_fscanf(file, "%d", &c);
+    IO_fscanf(file, "%d", &i);
+    IO_fscanf(file, "%d", &j);
 
-    if (rows <= 0 || rows > r ||
-        columns <= 0 || columns > c)
+    if (rows <= 0 || rows > i ||
+        columns <= 0 || columns > j)
     {
         IO_println("ERROR: invalid size");
     }
     else
     {
         // read values and store in array
-        r = 0;
-        while (! feof(file) && r < rows)
+        i = 0;
+        while (! feof(file) && i < rows)
         {
-            c = 0;
-            while (! feof(file) && c < columns)
+            j = 0;
+            while (! feof(file) && j < columns)
             {
                 IO_fscanf(file, "%d", &value);
-                matrix[r][c] = value;
-                c++;
+                matrix[i][j] = value;
+                j++;
             }
-            r++;
+            i++;
         }
     }
 }

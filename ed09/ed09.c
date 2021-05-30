@@ -25,15 +25,51 @@ void method01(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
+    // definir dados
     int rows = 0;
     int cols = 0;
-    int matrix[3][2];
-    readIntMatrix(3, 2, matrix);
+    int value = 0;
+    chars text = IO_new_chars(STR_SIZE);
 
-    fprintIntMatrix("matrix.txt", 3, 2, matrix);
-    rows = freadMatrixRows("matrix.txt");
-    cols = freadMatrixColumns("matrix.txt");
-    IO_printf("\n%d, %d", rows, cols);
+    // ler dimensoes do teclado
+    // verificando se sao nulas ou negativas
+    while (rows <= 0)
+    {
+        rows = IO_readint("\nLinhas: ");
+    }
+
+    while (cols <= 0)
+    {
+        cols = IO_readint("Colunas: ");
+    }
+
+    // declarar matriz com dimensoes informadas
+    int matrix[rows][cols];
+    IO_printf("\n");
+
+    // ler valores do teclado
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            // verificar se valor e' positivo
+            while (value <= 0)
+            {
+                strcpy(text, STR_EMPTY);
+                value = IO_readint(IO_concat(
+                            IO_concat(IO_concat(text, IO_toString_d(i)), ","),
+                            IO_concat(IO_concat(text, IO_toString_d(j)), ": ")));
+            }
+
+            // guardar valor e reinicia-lo
+            matrix[i][j] = value;
+            value = 0;
+        }
+    }
+
+    // mostrar matriz
+    IO_printf("\n\n");
+    printIntMatrix(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
