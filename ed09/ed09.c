@@ -1,5 +1,5 @@
 /**
- * ed09 - v0.1 - 27/05/2021
+ * ed09 - v0.2 - 29/05/2021
  * Author: Pedro H. Amorim Sa - 742626
  * Para compilar em terminal (janela de comandos):
  * Linux: gcc -o ed09 ed09.c
@@ -23,53 +23,24 @@ void method01(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Ler e mostrar matriz natural\n");
 
     // definir dados
     int rows = 0;
     int cols = 0;
-    int value = 0;
-    chars text = IO_new_chars(STR_SIZE);
 
     // ler dimensoes do teclado
-    // verificando se sao nulas ou negativas
-    while (rows <= 0)
-    {
-        rows = IO_readint("\nLinhas: ");
-    }
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
 
-    while (cols <= 0)
-    {
-        cols = IO_readint("Colunas: ");
-    }
-
-    // declarar matriz com dimensoes informadas
-    int matrix[rows][cols];
-    IO_printf("\n");
-
-    // ler valores do teclado
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            // verificar se valor e' positivo
-            while (value <= 0)
-            {
-                strcpy(text, STR_EMPTY);
-                value = IO_readint(IO_concat(
-                            IO_concat(IO_concat(text, IO_toString_d(i)), ","),
-                            IO_concat(IO_concat(text, IO_toString_d(j)), ": ")));
-            }
-
-            // guardar valor e reinicia-lo
-            matrix[i][j] = value;
-            value = 0;
-        }
-    }
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    readFloatMatrix(rows, cols, matrix);
 
     // mostrar matriz
-    IO_printf("\n\n");
-    printIntMatrix(rows, cols, matrix);
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printFloatMatrix(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -79,7 +50,29 @@ void method02(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Ler matriz natural, gravar em arquivo e mostrar\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    readFloatMatrix(rows, cols, matrix);
+
+    // gravar em arquivo
+    fprintFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    freadFloatMatrix(fileName, rows, cols, matrix);
+    printFloatMatrix(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -89,7 +82,25 @@ void method03(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar diagonal principal de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printMainDiagonal_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -99,7 +110,25 @@ void method04(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar diagonal secundaria de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printAntidiagonal_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -109,7 +138,25 @@ void method05(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar triangulo inferior de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printLowerTriangular_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -119,7 +166,25 @@ void method06(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar triangulo superior de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printUpperTriangular_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -129,7 +194,25 @@ void method07(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar triangulo inferior secundario de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printSecLowerTriangular_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -139,7 +222,25 @@ void method08(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Mostrar triangulo superior secundario de matriz quadrada real\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz real com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar matriz
+    IO_printf("\n***************\n");
+    IO_printf("Saida de dados:\n\n");
+    printSecUpperTriangular_f(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -149,7 +250,40 @@ void method09(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Testar se ha' somente zeros em triangulo inferior\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = IO_new_chars(STR_SIZE);
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+    
+    // ler nome do arquivo do teclado
+    fileName = IO_readstring("Nome do arquivo: ");
+
+    // definir matrizes reais com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar resultados para matriz
+    IO_printf("\n***************\n");
+    IO_printf("Resultados:\n\n");
+    IO_printf("[Arquivo: '%s']\n", fileName);
+    
+    // mostrar matriz
+    printFloatMatrix(rows, cols, matrix);
+
+    if (! allZeroLowerTriangular_f(rows, cols, matrix))
+    {
+        IO_printf("\nHa' pelo menos um valor nao zero no triangulo inferior");
+    }
+    else
+    {
+        IO_printf("\nTodos os valores sao zero");
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -159,7 +293,40 @@ void method10(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Testar se ha' somente zeros em triangulo superior\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = IO_new_chars(STR_SIZE);
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+    
+    // ler nome do arquivo do teclado
+    fileName = IO_readstring("Nome do arquivo: ");
+
+    // definir matrizes reais com dimensoes informadas
+    double matrix[rows][cols];
+    freadFloatMatrix(fileName, rows, cols, matrix);
+
+    // mostrar resultados para matriz
+    IO_printf("\n***************\n");
+    IO_printf("Resultados:\n\n");
+    IO_printf("[Arquivo: '%s']\n", fileName);
+    
+    // mostrar matriz
+    printFloatMatrix(rows, cols, matrix);
+
+    if (allZeroUpperTriangular_f(rows, cols, matrix))
+    {
+        IO_printf("Todos os valores sao zeros no triangulo superior");
+    }
+    else
+    {
+        IO_printf("\nHa' pelo menos um valor diferente de zero ");
+    }
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -169,7 +336,28 @@ void method11(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Gerar matriz descrescente e gravar em arquivo\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix_desc.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz com dimensoes informadas
+    int matrix[rows][cols];
+
+    // gerar matriz decrescente
+    genDescMatrix(rows, cols, matrix);
+
+    // gravar em arquivo e mostrar
+    fprintIntMatrix(fileName, rows, cols, matrix);
+    IO_printf("\n[Matriz gravada em '%s']\n", fileName);
+    printIntMatrix(rows, cols, matrix);
+
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -179,7 +367,27 @@ void method12(int methodId)
 {
     // decorar o metodo
     decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    IO_println("Gerar matriz descrescente transposta e gravar em arquivo\n");
+
+    // definir dados
+    int rows = 0;
+    int cols = 0;
+    chars fileName = "matrix_transp.txt";
+
+    // ler dimensoes do teclado
+    rows = IO_readint("\nLinhas: ");
+    cols = IO_readint("Colunas: ");
+
+    // definir matriz com dimensoes informadas
+    int matrix[rows][cols];
+
+    // gerar matriz decrescente
+    genDescMatrix_transp(rows, cols, matrix);
+
+    // gravar em arquivo e mostrar
+    fprintIntMatrix(fileName, rows, cols, matrix);
+    IO_printf("\n[Matriz gravada em '%s']\n", fileName);
+    printIntMatrix(rows, cols, matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -271,6 +479,7 @@ int main(void)
  * ---------------------------------------------- previsao de testes
  * ---------------------------------------------- historico
  * Versao      Data        Modificacao
- *  0.1      dd/MM/21        esboco
+ *  0.1      27/05/21        esboco
+ *  0.2      29/05/21        finalizacao dos exercicios
  * ---------------------------------------------- testes
  */
