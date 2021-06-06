@@ -63,6 +63,14 @@ void printIntArray(int_Array array)
     }
 }
 
+void printIntArray_ref(ref_int_Array array)
+{
+    for (array->ix = 0; array->ix < array->length; array->ix++)
+    {
+        IO_printf("%2d: %d\n", array->ix, array->data[array->ix]);
+    }
+}
+
 int_Array IO_readintArray()
 {
     chars text = IO_new_chars(STR_SIZE);
@@ -160,5 +168,57 @@ bool searchIntArray(int value, ref_int_Array array)
         result = array->data[array->ix] == value;
         array->ix++;
     }
+    return (result);
+}
+
+int freadArraySize(chars fileName)
+{
+    int n = 0;
+    FILE *file = fopen(fileName, "rt");
+
+    fscanf(file, "%d", &n);
+    return (n);
+}
+
+bool isEqual_array(ref_int_Array array1, ref_int_Array array2)
+{
+    bool result = true;
+    array1->ix = 0;
+
+    while (array1->ix < array1->length && result)
+    {
+        result = result && (array1->data[array1->ix] == 
+                            array2->data[array1->ix]);
+        
+        array1->ix++;
+    }
+    array1->ix = 0;
+    return (result);
+}
+
+int sumIntArrays(ref_int_Array array1, ref_int_Array array2, int k)
+{
+    int sum = 0;
+
+    for (array1->ix = 0; array1->ix < array1->length; array1->ix++)
+    {
+        sum += array1->data[array1->ix] + array2->data[array1->ix] * k;
+    }
+
+    return (sum);
+}
+
+bool isAscOrdered(ref_int_Array array)
+{
+    bool result = true;
+    array->ix = 1;
+    
+    while (array->ix < array->length && result)
+    {
+        result = result && (array->data[array->ix] > array->data[array->ix - 1]);
+        array->ix++;
+    }
+
+    array->ix = 0;
     return (result);
 }

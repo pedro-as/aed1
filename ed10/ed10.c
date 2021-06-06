@@ -62,7 +62,7 @@ void method01(int methodId)
     }
 
     // gravar em arquivo
-    fprintIntArray("DADOS.TXT", array);
+    fprintIntArray("dados.txt", array);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -79,7 +79,7 @@ void method02(int methodId)
     int result =  0;
 
     // ler arranjo do arquivo
-    ref_int_Array array = freadintArray("DADOS.TXT");
+    ref_int_Array array = freadintArray("dados.txt");
 
     // ler valor a procurar
     value = IO_readint("\nEntre com valor inteiro >> ");
@@ -109,6 +109,33 @@ void method03(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
+    // definir dados
+    bool result = false;
+    ref_int_Array array1 = freadintArray("dados1.txt");
+    ref_int_Array array2 = freadintArray("dados2.txt");
+    
+    if (array1->length != array2->length)
+    {
+        IO_printf("\nERRO: arranjos possuem tamanhos diferentes");
+    }
+    else
+    {
+        result = isEqual_array(array1, array2);
+
+        if (result)
+        {
+            IO_printf("\nOs arranjos sao iguais");
+        }
+        else
+        {
+            IO_printf("\nOs arranjos sao diferentes");
+        }
+    }
+
+    // liberar espaco
+    free_int_Array(array1);
+    free_int_Array(array2);
+
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
 }
@@ -119,6 +146,25 @@ void method04(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
+    // definir dados
+    int sum = 0;
+    ref_int_Array array1 = freadintArray("dados1.txt");
+    ref_int_Array array2 = freadintArray("dados2.txt");
+    
+    if (array1->length != array2->length)
+    {
+        IO_printf("\nERRO: arranjos possuem tamanhos diferentes");
+    }
+    else
+    {
+        sum = sumIntArrays(array1, array2, 5);
+        IO_printf("\nSoma = %d", sum);
+    }
+
+    // liberar espaco
+    free_int_Array(array1);
+    free_int_Array(array2);
+
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
 }
@@ -128,6 +174,22 @@ void method05(int methodId)
     // decorar o metodo
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
+
+    // definir dados
+    ref_int_Array array = freadintArray("dados_ord.txt");
+    bool result = isAscOrdered(array);
+    
+    if (result)
+    {
+        IO_printf("\nArranjo esta' em ordem crescente");
+    }
+    else
+    {
+        IO_printf("\nArranjo NAO esta' em ordem crescente");
+    }
+
+    // liberar espaco
+    free_int_Array(array);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
