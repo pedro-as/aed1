@@ -12,7 +12,7 @@
 // dependencias
 #include "io.h" // para definicoes proprias
 #include "decorate.h" // procedimentos proprios de decoracao
-#include "arraylib_io.h" // biblioteca de metodos
+#include "structlib.h" // biblioteca de metodos
 
 // definir o numero de identificacao do programa
 char PROGRAM_ID[4] = "ED10";
@@ -201,6 +201,17 @@ void method06(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
+    // definir dados
+    ref_int_Matrix matrix1 = freadintMatrix("matrix.txt");
+    ref_int_Matrix matrix2 = transposeIntMatrix(matrix1);
+
+    // mostrar matriz transposta
+    printIntMatrix(matrix2);
+
+    // liberar espaco
+    free_int_Matrix(matrix1);
+    free_int_Matrix(matrix2);
+
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
 }
@@ -210,6 +221,25 @@ void method07(int methodId)
     // decorar o metodo
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
+
+    // definir dados
+    bool result = false;
+    ref_int_Matrix matrix = freadintMatrix("matrix_zero.txt");
+
+    // verificar se contem apenas zero
+    result = isAllZero_matrix(matrix);
+
+    if (result)
+    {
+        IO_printf("\nMatriz contem apenas zeros");
+    }
+    else
+    {
+        IO_printf("\nMatriz contem pelo menos um valor diferente de zero");
+    }
+
+    // liberar espaco
+    free_int_Matrix(matrix);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -221,6 +251,27 @@ void method08(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
+    // definir dados
+    ref_int_Matrix matrix1 = freadintMatrix("matrix.txt");
+    ref_int_Matrix matrix2 = freadintMatrix("matrix2.txt");
+    bool result = false;
+
+    // verificar se matrizes sao iguais
+    result = isEqual_matrix(matrix1, matrix2);
+
+    if (result)
+    {
+        IO_printf("\nMatrizes sao iguais");
+    }
+    else
+    {
+        IO_printf("\nMatrizes NAO sao iguais");
+    }
+
+    // liberar espaco
+    free_int_Matrix(matrix1);
+    free_int_Matrix(matrix2);
+
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
 }
@@ -230,6 +281,25 @@ void method09(int methodId)
     // decorar o metodo
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
+
+    // definir dados
+    ref_int_Matrix matrix1 = freadintMatrix("matrix1.txt");
+    ref_int_Matrix matrix2 = freadintMatrix("matrix2.txt");
+    ref_int_Matrix matrix3 = addIntMatrix(matrix1, matrix2, 2);
+
+    if (matrix3 == NULL)
+    {
+        IO_printf("\nERRO: tamanhos incompativeis");
+    }
+    else
+    {
+        printIntMatrix(matrix3);
+    }
+
+    // liberar espaco
+    free_int_Matrix(matrix1);
+    free_int_Matrix(matrix2);
+    free_int_Matrix(matrix3);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -241,25 +311,24 @@ void method10(int methodId)
     decorateMethod(methodId);
     IO_println("Descricao do metodo\n");
 
-    // deixar os resultados na tela
-    IO_pause("\n\n<Enter> para voltar ao menu");
-}
+    // definir dados
+    ref_int_Matrix matrix1 = freadintMatrix("matrix1.txt");
+    ref_int_Matrix matrix2 = freadintMatrix("matrix2.txt");
+    ref_int_Matrix matrix3 = multIntMatrix(matrix1, matrix2);
 
-void method11(int methodId)
-{
-    // decorar o metodo
-    decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    if (matrix3 == NULL)
+    {
+        IO_printf("\nERRO: tamanhos incompativeis");
+    }
+    else
+    {
+        printIntMatrix(matrix3);
+    }
 
-    // deixar os resultados na tela
-    IO_pause("\n\n<Enter> para voltar ao menu");
-}
-
-void method12(int methodId)
-{
-    // decorar o metodo
-    decorateMethod(methodId);
-    IO_println("Descricao do metodo\n");
+    // liberar espaco
+    free_int_Matrix(matrix1);
+    free_int_Matrix(matrix2);
+    free_int_Matrix(matrix3);
 
     // deixar os resultados na tela
     IO_pause("\n\n<Enter> para voltar ao menu");
@@ -284,11 +353,11 @@ int main(void)
         IO_clrscr();
         IO_id(programId);
         // exibir opcoes
-        decorateMenu(12);
+        decorateMenu(10);
         IO_println("\n");
 
         // ler opcao do teclado
-        option = IO_readint("Opcao [1:12] >> ");
+        option = IO_readint("Opcao [1:10] >> ");
 
         // selecionar opcao
         switch (option)
@@ -326,12 +395,6 @@ int main(void)
                 break;
             case 10:
                 method10(option);
-                break;
-            case 11:
-                method11(option);
-                break;
-            case 12:
-                method12(option);
                 break;
             default:
                 IO_printf("Opcao nao reconhecida: '%d'\n", option);
