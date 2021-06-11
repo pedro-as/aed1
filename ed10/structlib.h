@@ -470,17 +470,17 @@ ref_int_Matrix multIntMatrix(ref_int_Matrix matrix1, ref_int_Matrix matrix2)
     {
         matrix3 = new_int_Matrix(matrix1->lines, matrix1->columns);
 
-        for (matrix1->ix = 0; matrix1->ix < matrix1->lines; matrix1->ix++)
+        for (int i = 0; i < matrix3->lines; i++)
         {
-            for (matrix1->iy = 0; matrix1->iy < matrix1->columns; matrix1->iy++)
+            for (int j = 0; j < matrix3->columns; j++)
             {
                 sum = 0;
-                for (matrix2->iy = 0; matrix2->iy < matrix2->columns; matrix2->iy++)
+                for (int h = 0; h < matrix1->columns; h++)
                 {
-                    sum += matrix1->data[matrix2->ix][matrix1->iy] *
-                           matrix2->data[matrix1->iy][matrix2->iy];
+                    sum += (matrix1->data[i][h] *
+                           matrix2->data[h][j]);
                 }
-                matrix3->data[matrix1->ix][matrix1->iy] = sum;
+                matrix3->data[i][j] = sum;
             }
         }
     }
