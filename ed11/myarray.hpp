@@ -202,7 +202,7 @@ class Array
         return (min);
     }
 
-    int getLength()
+    const int getLength()
     {
         return (length);
     }
@@ -266,6 +266,7 @@ class Array
         return (result);
     }
 
+    /* Metodo de ordenamento decrescente utilizando o algoritmo quicksort */
     void quickSort_desc(int low, int high)
     {
         int i = low;
@@ -321,6 +322,47 @@ class Array
             {
                 result = (data[i] != other.data[i]);
                 i++;
+            }
+        }
+
+        return (result);
+    }
+
+    /* Operacoes entre arranjos */
+
+    Array& operator=(const Array <T> other)
+    {
+        if (other.length == 0)
+        {
+            cout << "\nERROR: Missing data\n" << endl;
+        }
+        else
+        {
+            this->length = other.length;
+            this->data = new T[other.length];
+
+            for (int i = 0; i < this->length; i++)
+            {
+                data[i] = other.data[i];
+            }
+        }
+
+        return (*this);
+    }    
+
+    Array& operator-(const Array <T> other)
+    {
+        static Array <T> result(other);
+
+        if (other.length == 0)
+        {
+            cout << "\nERROR: Missing data\n" << endl;
+        }
+        else
+        {
+            for (int i = 0; i < this->length; i++)
+            {
+                result.data[i] -= this->data[i];
             }
         }
 

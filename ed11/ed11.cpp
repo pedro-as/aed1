@@ -359,10 +359,10 @@ void method11()
     int_array2.fread("dados_alt.txt");
 
     // mostrar dados
-    cout << setw(6) << "\nArray 1";
+    cout << "\nArray 1";
     int_array1.print();
 
-    cout << setw(6) << "\nArray 2";
+    cout << "\nArray 2";
     int_array2.print();
 
     // mostrar comparacao
@@ -390,6 +390,27 @@ void method12()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo12" << endl;
+
+    // iniciar arranjos
+    Array <int> int_array1(1);
+    Array <int> int_array2(1);
+    Array <int> int_array3(1);
+
+    // ler dados de arquivo
+    int_array1.fread("dados.txt");
+    int_array2.fread("dados_alt.txt");
+
+    // subtrair dados
+    int_array3 = int_array2 - int_array1;
+
+    // mostrar subtracao
+    cout << "\nSubtracao";
+    int_array3.print();
+
+    // liberar espaco
+    int_array1.free();
+    int_array2.free();
+    int_array3.free();
 
     // encerrar
     pause("<Enter> para continuar");
