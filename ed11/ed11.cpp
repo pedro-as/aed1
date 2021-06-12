@@ -39,6 +39,31 @@ void method01()
     system("clear");
     cout << endl << "ED11 - Metodo01" << endl;
 
+    // definir dados
+    int n = 0;
+    int value = 0;
+
+    // ler quantidade do teclado
+    cout << "\nEntre com quantidade inteira: ";
+    cin >> n;
+    cout << endl;
+
+    // criar arranjo
+    Array <int> int_array(n);
+
+    // inserir valores aleatorios
+    for (int i = 0; i < n; i++)
+    {
+        value = int_array.randInt(0, 31);
+        int_array.set(i, value);
+    }
+
+    // gravar em arquivo
+    int_array.fprint("dados.txt");
+
+    // liberar espaco
+    int_array.free();
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -48,6 +73,22 @@ void method02()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo02" << endl;
+
+    // definir dados
+    int max = 0;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // procurar valor maximo
+    max = int_array.getMax();
+
+    // mostrar
+    cout << "max = " << max << endl;
+
+    // liberar espaco
+    int_array.free();
 
     // encerrar
     pause("<Enter> para continuar");
@@ -59,6 +100,22 @@ void method03()
     system("clear");
     cout << endl << "ED11 - Metodo03" << endl;
 
+    // definir dados
+    int min = 0;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // procurar valor minimo
+    min = int_array.getMin();
+
+    // mostrar
+    cout << "min = " << min << endl;
+
+    // liberar espaco
+    int_array.free();
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -68,6 +125,22 @@ void method04()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo04" << endl;
+
+    // definir dados
+    int soma = 0;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // obter soma do arranjo
+    soma = int_array.sum();
+
+    // mostrar
+    cout << "soma = " << soma << endl;
+
+    // liberar espaco
+    int_array.free();
 
     // encerrar
     pause("<Enter> para continuar");
@@ -79,6 +152,23 @@ void method05()
     system("clear");
     cout << endl << "ED11 - Metodo05" << endl;
 
+    // definir dados
+    double media = 0.0;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // obter media do arranjo
+    media = int_array.avg();
+
+    // mostrar
+    cout << "media = " << media << endl;
+
+    // liberar espaco
+    int_array.free();
+
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -88,6 +178,29 @@ void method06()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo06" << endl;
+
+    // definir dados
+    bool zeros = false;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // obter media do arranjo
+    zeros = int_array.allZero();
+
+    // mostrar resultado
+    if (zeros)
+    {
+        cout << "\nTodos os valores são iguais a zero" << endl;
+    }
+    else
+    {
+        cout << "\nPelo menos um valor e' diferente de zero" << endl;
+    }
+
+    // liberar espaco
+    int_array.free();
 
     // encerrar
     pause("<Enter> para continuar");
@@ -99,6 +212,29 @@ void method07()
     system("clear");
     cout << endl << "ED11 - Metodo07" << endl;
 
+    // definir dados
+    bool ordenado = false;
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // obter media do arranjo
+    ordenado = int_array.isSorted_desc();
+
+    // mostrar resultado
+    if (ordenado)
+    {
+        cout << "\nArranjo esta' em ordem decrescente" << endl;
+    }
+    else
+    {
+        cout << "\nArranjo NAO esta' em ordem decrescente" << endl;
+    }
+
+    // liberar espaco
+    int_array.free();
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -108,6 +244,48 @@ void method08()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo08" << endl;
+
+    // identificar metodo
+    system("clear");
+    cout << endl << "ED11 - Metodo07" << endl;
+
+    // definir dados
+    bool encontrado = false;
+    int valor = 0;
+    int inicio = 0;
+    int fim = 0;
+
+    // ler valor e intervalo do teclado
+    cout << "Entre com valor procurado: ";
+    cin >> valor;
+    cout << "Entre com limite INFERIOR do intervalo: ";
+    cin >> inicio;
+    
+    while (fim <= inicio)
+    {
+        cout << "Entre com limite SUPERIOR do intervalo: ";
+        cin >> fim;
+    }
+
+    // iniciar arranjo e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // obter media do arranjo
+    encontrado = int_array.findInRange(valor, inicio, fim);
+
+    // mostrar resultado
+    if (encontrado)
+    {
+        cout << "\nValor encontrado no intervalo" << endl;
+    }
+    else
+    {
+        cout << "\nValor NAO encontrado no intervalo" << endl;
+    }
+
+    // liberar espaco
+    int_array.free();
 
     // encerrar
     pause("<Enter> para continuar");
@@ -119,6 +297,27 @@ void method09()
     system("clear");
     cout << endl << "ED11 - Metodo09" << endl;
 
+    // definir dados
+    int k = 0;
+
+    // ler constante do teclado
+    cout << "Entre com constante: ";
+    cin >> k;
+
+    // iniciar arranjo original e ler do arquivo
+    Array <int> int_array1(1);
+    int_array1.fread("dados.txt");
+
+    // gerar segundo arranjo
+    Array <int> int_array2(int_array1, k);
+
+    // mostrar resultado
+    int_array2.print();
+
+    // liberar espaco
+    int_array1.free();
+    int_array2.free();
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -129,6 +328,20 @@ void method10()
     system("clear");
     cout << endl << "ED11 - Metodo10" << endl;
 
+    // iniciar arranjo original e ler do arquivo
+    Array <int> int_array(1);
+    int_array.fread("dados.txt");
+
+    // ordenar de forma decrescente
+    int_array.quickSort_desc(0, int_array.getLength());
+
+    // mostrar arranjo ordenado
+    cout << "\nArranjo decrescente:" << endl;
+    int_array.print();
+
+    // liberar espaco
+    int_array.free();
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -138,6 +351,35 @@ void method11()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo11" << endl;
+
+    // iniciar arranjos e ler dos arquivos
+    Array <int> int_array1(1);
+    Array <int> int_array2(1);
+    int_array1.fread("dados.txt");
+    int_array2.fread("dados_alt.txt");
+
+    // mostrar dados
+    cout << setw(6) << "\nArray 1";
+    int_array1.print();
+
+    cout << setw(6) << "\nArray 2";
+    int_array2.print();
+
+    // mostrar comparacao
+    cout << endl;
+
+    if (int_array1!=int_array2)
+    {
+        cout << "Resultado = DIFERENTES" << endl;
+    }
+    else
+    {
+        cout << "Resultado = IGUAIS" << endl;
+    }
+
+    // liberar espaco
+    int_array1.free();
+    int_array2.free();
 
     // encerrar
     pause("<Enter> para continuar");
@@ -161,35 +403,37 @@ int main(int argc, char **argv)
     // repetir ate receber comando de parada
     do
     {
+        // limpar tela
+        system("clear");
+
         // identificar
-        cout << PROG_ID << " - Programa - v0.1\n" << endl;
+        cout << PROG_ID << " - Programa - v0.1" << endl;
+        cout << "Autor: Pedro Henrique Amorim Sa - 742626\n" << endl;
 
         // mostrar opcoes
-        cout << "Opcoes" << endl;
-        cout << "0 - Parar" << endl;
-        cout << "1 - Metodo 1" << endl;
-        cout << "2 - Metodo 2" << endl;
-        cout << "3 - Metodo 3" << endl;
-        cout << "4 - Metodo 4" << endl;
-        cout << "5 - Metodo 5" << endl;
-        cout << "6 - Metodo 6" << endl;
-        cout << "7 - Metodo 7" << endl;
-        cout << "8 - Metodo 8" << endl;
-        cout << "9 - Metodo 9" << endl;
-        cout << "10 - Metodo 10" << endl;
-        cout << "11 - Metodo 11" << endl;
-        cout << "12 - Metodo 12" << endl;
+        cout << "Opcoes:\n" << endl;
+        cout << "0  -> Parar" << endl;
+        cout << "1  -> Metodo 1" << endl;
+        cout << "2  -> Metodo 2" << endl;
+        cout << "3  -> Metodo 3" << endl;
+        cout << "4  -> Metodo 4" << endl;
+        cout << "5  -> Metodo 5" << endl;
+        cout << "6  -> Metodo 6" << endl;
+        cout << "7  -> Metodo 7" << endl;
+        cout << "8  -> Metodo 8" << endl;
+        cout << "9  -> Metodo 9" << endl;
+        cout << "10 -> Metodo 10" << endl;
+        cout << "11 -> Metodo 11" << endl;
+        cout << "12 -> Metodo 12" << endl;
 
         // ler do teclado
-        cout << endl <<  "Entrar com uma opcao";
+        cout << endl <<  "Entrar com uma opcao: ";
         cin >> option;
 
         // escolher acao
         switch (option)
         {
           case 0:
-            system("clear");
-            cout << endl << "Encerrando" << endl;
             break;
           case 1:
             method01();
@@ -234,7 +478,10 @@ int main(int argc, char **argv)
     } while (option != 0);
 
     // encerrar
-    pause("<Enter> para terminar");
+    system("clear");
+    cout << endl << "Encerrando programa..." << endl;
+    pause("<Enter> para sair");
+    system("clear");
     return (0);
 }
 

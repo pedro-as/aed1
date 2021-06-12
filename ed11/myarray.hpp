@@ -37,6 +37,24 @@ class Array
         }
     }
 
+    Array(const Array &source, int k)
+    {
+        if (source.length == 0)
+        {
+            cout << "\nERROR: Missing data\n" << endl;
+        }
+        else
+        {
+            length = source.length;
+            data = new T[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                data[i] = source.data[i] * k;
+            }
+        }
+    }
+
     void free()
     {
         if (data != NULL)
@@ -66,6 +84,25 @@ class Array
         return (value);
     }
 
+    int index(int value)
+    {
+        int index = -1;
+        int n = 0;
+        bool found = false;
+
+        while (n < length && !found)
+        {
+            found = data[n] == value;
+        }
+
+        if (found)
+        {
+            index = n;
+        }
+
+        return (index);
+    }
+
     void print()
     {
         cout << endl;
@@ -74,6 +111,220 @@ class Array
         {
             cout << setw(3) << i << ":" << setw(9) << data[i] << endl;
         }
+    }
+
+    void read()
+    {
+        cout << endl;
+
+        for (int i = 0; i < length; i++)
+        {
+            cout << setw(3) << i << ":";
+            cin >> data[i];
+        }
+        cout << endl;
+    }
+
+    void fprint(string fileName)
+    {
+        ofstream afile;
+        afile.open(fileName);
+        afile << length << endl;
+
+        for (int i = 0; i < length; i++)
+        {
+            afile << data[i] << endl;
+        }
+
+        afile.close();
+    }
+
+    void fread(string fileName)
+    {
+        ifstream afile;
+        int n = 0;
+        afile.open(fileName);
+        afile >> n;
+
+        if (n <= 0)
+        {
+            cout << "\nERROR: invalid length\n" << endl;
+        }
+        else
+        {
+            length = n;
+            data = new T[n];
+
+            for (int i = 0; i < length; i++)
+            {
+                afile >> data[i];
+            }
+        }
+        afile.close();
+    }
+
+    int randInt(int start, int stop)
+    {
+        return (start + rand() % (stop - start + 1));
+    }
+
+    int getMax()
+    {
+        int value = 0;
+        int max = this->get(0);
+        
+        for (int i = 1; i < length; i++)
+        {
+            value = this->get(i);
+            if (value > max)
+            {
+                max = value;
+            }
+        }
+
+        return (max);
+    }
+
+    int getMin()
+    {
+        int value = 0;
+        int min = this->get(0);
+        
+        for (int i = 1; i < length; i++)
+        {
+            value = this->get(i);
+            if (value < min)
+            {
+                min = value;
+            }
+        }
+
+        return (min);
+    }
+
+    int getLength()
+    {
+        return (length);
+    }
+
+    int sum()
+    {
+        int sum = 0;
+        
+        for (int i = 0; i < length; i++)
+        {
+            sum += this->get(i);
+        }
+
+        return (sum);
+    }
+
+    double avg()
+    {
+         return ((double) this->sum() / (double) length);
+    }
+
+    bool allZero()
+    {
+        bool result = true;
+        int n = 0;
+        
+        while (n < length && result)
+        {
+            result = result && (data[n] == 0);
+            n++;
+        }
+
+        return (result);
+    }
+
+    bool isSorted_desc()
+    {
+        bool result = true;
+        int n = 1;
+        
+        while (n < length && result)
+        {
+            result = result && (data[n] < data [n - 1]);
+            n++;
+        }
+
+        return (result);
+    }
+
+    bool findInRange(int value, int start, int stop)
+    {
+        bool result = false;
+        int n = start;
+
+        while (n < stop && !result)
+        {
+            result = (data[n] == value);
+            n++;
+        }
+
+        return (result);
+    }
+
+    void quickSort_desc(int low, int high)
+    {
+        int i = low;
+        int j = high;
+        int pivot = data[(i + j) / 2];
+        int temp;
+
+        while (i <= j)
+        {
+            while (data[i] > pivot)
+            {
+                i++;
+            }
+
+            while (data[j] < pivot)
+            {
+                j--;
+            }
+
+            if (i <= j)
+            {
+                temp = data[i];
+                this->set(i, data[j]);
+                this->set(j, temp);
+                i++;
+                j--;
+            }
+        }
+
+        if (j > low)
+        {
+            quickSort_desc(low, j);
+        }
+
+        if (i < high)
+        {
+            quickSort_desc(i, high);
+        }
+    }
+
+    bool operator!=(const Array <T> other)
+    {
+        bool result = false;
+        int i = 0;
+
+        if (other.length == 0 || length != other.length)
+        {
+            cout << "\nERROR: Missing data\n" << endl;
+        }
+        else
+        {
+            while (i < this->length && !result)
+            {
+                result = (data[i] != other.data[i]);
+                i++;
+            }
+        }
+
+        return (result);
     }
 };
 
