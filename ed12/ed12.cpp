@@ -284,6 +284,24 @@ void method10()
     system("clear");
     cout << endl << "ED12 - Metodo10" << endl;
 
+    // definir dados
+    int m = 0;
+    int n = 0;
+
+    // inicializar matriz
+    Matrix <int> matrix1(1, 1, 0);
+    matrix1.fread("seq.txt");
+    m = matrix1.getColumns();
+    n = matrix1.getRows();
+
+    // inicializar segunda matriz e transpor
+    Matrix <int> matrix2(m, n, 0);
+    matrix2.transpose(matrix1);
+
+    // mostrar
+    matrix1.print();
+    matrix2.print();
+
     // encerrar
     pause("<Enter> para continuar");
 }

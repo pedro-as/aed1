@@ -78,7 +78,6 @@ int freadMatrixRows(chars fileName)
 
     if (n <= 0)
     {
-        IO_println("\nERROR: invalid dimensions");
         n = 0;
     }
 

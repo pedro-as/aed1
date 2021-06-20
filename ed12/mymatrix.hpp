@@ -211,7 +211,7 @@ class Matrix
         return (columns);
     }
 
-    Matrix& operator= (const Matrix <T> other)
+    Matrix& operator= (const Matrix& other)
     {
         if (other.rows == 0 || other. columns == 0)
         {
@@ -294,7 +294,7 @@ class Matrix
         return (result);
     }
 
-    bool operator== (const Matrix <T> other)
+    bool operator== (const Matrix& other)
     {
         bool result = true;
         int i = 0;
@@ -322,7 +322,7 @@ class Matrix
         return (result);
     }
 
-    Matrix& operator+ (const Matrix <T> other)
+    Matrix& operator+ (const Matrix& other)
     {
         static Matrix <T> result(1, 1, 0);
         result = other;
@@ -412,6 +412,26 @@ class Matrix
         {
             cout << "\nERROR: 'dim' parameter must be either 0 or 1\n";
             return (-2);
+        }
+    }
+
+    void transpose(const Matrix& other)
+    {
+        //rows = other.columns;
+        //columns = other.rows;
+        //data = new T* [rows];
+
+        /*for (int x = 0; x < rows; x++)
+        {
+            data[x] = new T [columns];
+        }*/
+
+        for (int i = 0; i < other.rows; i++)
+        {
+            for (int j = 0; j < other.columns; j++)
+            {
+                data[j][i] = other.data[i][j];
+            }
         }
     }
 

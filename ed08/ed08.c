@@ -429,7 +429,7 @@ void method11(int methodId)
     }
 
     // definir armazenador
-    int *array = factorsArray(n);;
+    int *array = factorsArray(n);
 
     // mostrar arranjo
     printIntArray_factors(n, array);
