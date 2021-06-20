@@ -417,15 +417,6 @@ class Matrix
 
     void transpose(const Matrix& other)
     {
-        //rows = other.columns;
-        //columns = other.rows;
-        //data = new T* [rows];
-
-        /*for (int x = 0; x < rows; x++)
-        {
-            data[x] = new T [columns];
-        }*/
-
         for (int i = 0; i < other.rows; i++)
         {
             for (int j = 0; j < other.columns; j++)
