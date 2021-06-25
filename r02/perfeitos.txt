@@ -1,0 +1,4 @@
+Numeros perfeitos [1000:9999]:
+8128
+**********
+Total: 1

@@ -1,0 +1,2 @@
+Maior: 768
+Menor: 157
