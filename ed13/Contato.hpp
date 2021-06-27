@@ -100,7 +100,6 @@ public:
         setErro(0);
         setNome(another.nome);
         setFone(another.fone);
-        setFone(another.fone2, 2);
     }
 
     // metodos para acesso
@@ -112,24 +111,13 @@ public:
             this->nome = nome;
     }
 
-    void setFone(std::string fone, int opt=1)
+    void setFone(std::string fone)
     {
         if (fone.empty() || !this->validFone(fone))
             setErro(2);
         else
         {
-            switch (opt)
-            {
-            case 1:
-                this->fone = fone;
-                break;
-            case 2:
-                this->fone2 = fone;
-                break;
-            default:
-                setErro(6);
-                break;
-            }
+            this->fone = fone;
         }
     }
 
@@ -138,25 +126,19 @@ public:
         return (this->nome);
     }
 
-    std::string getFone(int opt=1)
+    std::string getFone()
     {
-        switch (opt)
-        {
-        case 1:
-            return this->fone;
-            break;
-        case 2:
-            return this->fone2;
-            break;
-        default:
-            return "";
-            break;
-        }
+        return this->fone;
+    }
+
+    std::string getFone2()
+    {
+        return this->fone2;
     }
 
     std::string toString()
     {
-        return ("{" + getNome() + ", " + getFone() + "}");
+        return ("{" + getNome() + ", " + getFone() + ", " + getFone2() + "}");
     }
 
     bool hasErro()
@@ -177,7 +159,7 @@ public:
             this->nome = nome;
     }
 
-    void readFone(std::string text, int opt=1)
+    void readFone(std::string text)
     {
         std::string fone = "";
 
@@ -188,19 +170,7 @@ public:
             setErro(4);
         else
         {
-            switch (opt)
-            {
-            case 1:
-                this->fone = fone;
-                break;
-            case 2:
-                this->fone2 = fone;
-                break;
-                break;
-            default:
-                setErro(6);
-                break;
-            }
+            this->fone = fone;
         }
     }
 
@@ -237,6 +207,59 @@ public:
         afile << this->fone << endl;
 
         afile.close();
+    }
+
+    int telefones()
+    {
+        int total = 0;
+
+        if (!fone.empty())
+            total++;
+        if (!fone2.empty())
+            total++;
+        
+        return total;
+    }
+
+    void setFone2a(std::string fone)
+    {
+        char option = '\0';
+
+        if (fone.empty() || !this->validFone(fone))
+            setErro(2);
+        else if (this->telefones() == 1)
+        {
+            cout << "Somente 1 numero associado. Deseja adicionar outro? " << endl;
+            do
+            {
+                cout << "[s/n] >> ";
+                cin >> option;
+            }
+            while (option != 's' && option != 'n');
+            
+            if (option == 's')
+                this->fone2 = fone;
+        }
+        else
+            this->fone2 = fone;
+    }
+
+    void setFone2b(std::string fone)
+    {
+        if (fone.empty() || !this->validFone(fone))
+            setErro(2);
+        else if (this->telefones() != 2)
+            setErro(6);
+        else
+            this->fone2 = fone;
+    }
+
+    void delFone2()
+    {
+        if (this->telefones() != 2)
+            setErro(6);
+        else
+            this->fone2 = "";
     }
 };
 

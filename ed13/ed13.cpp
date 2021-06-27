@@ -139,58 +139,17 @@ void method06()
     cout << endl << "ED11 - Metodo06" << endl << endl;
 
     // criar objetos
-    Contato contato1;
-    ref_Contato contato2;
-    ref_Contato contato3;
-
-    contato1.readNome("Nome (1): ");
-    contato1.readFone("Fone (1): ", 1);
-    contato1.readFone("Fone 2 (1): ", 2);
-
-    contato2 = new Contato("Nome2", "123-456", "789-012");
-    contato3 = new Contato();
-
-    contato3->setNome("Nome3");
-    contato3->setFone("333-444", 2);
-    contato3->setFone("333-333", 1);
+    ref_Contato contato;
+    
+    contato = new Contato();
+    contato->setNome("Nome");
+    contato->setFone("123-4567");
 
     // mostrar dados
-    cout << endl << "Contato 1";
-    if (!contato1.hasErro())
-    {
-        cout << endl << "Nome = " << contato1.getNome()
-             << endl << "Fone_1 = " << contato1.getFone()
-             << endl << "Fone_2 = " << contato1.getFone(2) << endl;
-    }
+    if (!contato->hasErro())
+        cout << contato->toString() << endl;
     else
-    {
-        cout << endl << "Erro encontrado: " << contato1.getErro() << endl; 
-    }
-
-    cout << endl << "Contato 2";
-    if (!contato2->hasErro())
-    {
-        cout << endl << "Nome = " << contato2->getNome()
-             << endl << "Fone_1 = " << contato2->getFone()
-             << endl << "Fone_2 = " << contato2->getFone(2) << endl;
-    }
-    else
-    {
-        cout << endl << "Erro encontrado: " << contato2->getErro() << endl; 
-    }
-
-    cout << endl << "Contato 3";
-    if (!contato3->hasErro())
-    {
-        cout << endl << "Nome = " << contato3->getNome()
-             << endl << "Fone_1 = " << contato3->getFone()
-             << endl << "Fone_2 = " << contato3->getFone(2) << endl;
-    }
-    else
-    {
-        cout << endl << "Erro encontrado: " << contato3->getErro() << endl; 
-    }
-
+        cout << "Erro encontrado: " << contato->getErro() << endl; 
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -200,6 +159,21 @@ void method07()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo07" << endl << endl;
+
+    // definir dados
+    int n1 = 0;
+    int n2 = 0;
+
+    // criar objetos
+    ref_Contato contato1 = new Contato("Nome1", "111-111", "");
+    ref_Contato contato2 = new Contato("Nome2", "222-222", "222-223");
+
+    // obter numero de telefones associados
+    n1 = contato1->telefones();
+    n2 = contato2->telefones();
+
+    // mostrar resultado
+    cout << "Contato 1 = " << n1 << endl << "Contato 2 = " << n2 << endl;
 
     // encerrar
     pause("<Enter> para continuar");
@@ -211,6 +185,19 @@ void method08()
     system("clear");
     cout << endl << "ED11 - Metodo08" << endl << endl;
 
+    // criar objeto
+    Contato contato("Nome", "1234", "");
+
+    // primeira atribuicao
+    contato.setFone2a("5678");
+    cout << endl << contato.toString()
+         << endl << "Telefones = " << contato.telefones() << endl;
+
+    // segunda atribuicao
+    contato.setFone2a("9012");
+    cout << endl << contato.toString()
+         << endl << "Telefones = " << contato.telefones() << endl;
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -221,6 +208,27 @@ void method09()
     system("clear");
     cout << endl << "ED11 - Metodo09" << endl << endl;
 
+    // criar objetos
+    Contato contato1("Nome1", "111-111", "");
+    Contato contato2("Nome2", "222-222", "222-223");
+
+    // alterar valores
+    contato1.setFone2b("111-112");
+    contato2.setFone2b("222-000");
+
+    // mostrar
+    cout << "Contato 1" << endl;
+    if (!contato1.hasErro())
+        cout << contato1.toString() << endl;
+    else
+        cout << "Erro encontrado: " << contato1.getErro() << endl;
+
+    cout << "Contato 2" << endl;
+    if (!contato2.hasErro())
+        cout << contato2.toString() << endl;
+    else
+        cout << "Erro encontrado: " << contato2.getErro() << endl;
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -230,6 +238,30 @@ void method10()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo10" << endl << endl;
+
+    // criar objeto
+    Contato contato("Nome", "111-111", "");
+
+    // mostrar
+    cout << "(1) " << contato.toString() << endl;
+
+    // tentar remover segundo telefone
+    contato.delFone2();
+
+    // mostrar novamente
+    cout << "(2) ";
+    if (!contato.hasErro())
+        cout << contato.toString() << endl;
+    else
+        cout << "Erro encontrado: " << contato.getErro() << endl;
+
+    // acrescentar segundo telefone e mostrar
+    contato.setFone2a("222-222");
+    cout << "(3) " << contato.toString() << endl;
+
+    // tentar remover novamente e mostrar
+    contato.delFone2();
+    cout << "(4) " << contato.toString() << endl;
 
     // encerrar
     pause("<Enter> para continuar");
