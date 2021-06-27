@@ -65,6 +65,18 @@ void method03()
     system("clear");
     cout << endl << "ED11 - Metodo03" << endl << endl;
 
+    // criar objeto
+    Contato pessoa;
+
+    // ler atributo
+    pessoa.readFone("Fone: ");
+
+    // mostrar resultado
+    if (!pessoa.hasErro())
+        cout << endl << "Fone = " << pessoa.getFone() << endl;
+    else
+        cout << endl << "Erro encontrado: " << pessoa.getErro() << endl; 
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -74,6 +86,21 @@ void method04()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo04" << endl << endl;
+
+    // criar objeto
+    Contato pessoa;
+
+    // ler do arquivo
+    pessoa.fromFile("contato.txt");
+
+    // mostrar resultado
+    if (!pessoa.hasErro())
+    {
+        cout << endl << "Nome = " << pessoa.getNome()
+             << endl << "Fone = " << pessoa.getFone() << endl;
+    }
+    else
+        cout << endl << "Erro encontrado: " << pessoa.getErro() << endl; 
 
     // encerrar
     pause("<Enter> para continuar");
@@ -85,6 +112,22 @@ void method05()
     system("clear");
     cout << endl << "ED11 - Metodo05" << endl << endl;
 
+    // criar objeto
+    Contato pessoa;
+
+    // ler dados
+    pessoa.readNome("Nome: ");
+    pessoa.readFone("Fone: ");
+
+    // informar erro ao usuario, caso exista
+    if (pessoa.hasErro())
+    {
+        cout << endl << "Erro encontrado: " << pessoa.getErro() << endl;
+    }
+
+    // gravar em arquivo
+    pessoa.toFile("contato.txt");
+
     // encerrar
     pause("<Enter> para continuar");
 }
@@ -94,6 +137,59 @@ void method06()
     // identificar metodo
     system("clear");
     cout << endl << "ED11 - Metodo06" << endl << endl;
+
+    // criar objetos
+    Contato contato1;
+    ref_Contato contato2;
+    ref_Contato contato3;
+
+    contato1.readNome("Nome (1): ");
+    contato1.readFone("Fone (1): ", 1);
+    contato1.readFone("Fone 2 (1): ", 2);
+
+    contato2 = new Contato("Nome2", "123-456", "789-012");
+    contato3 = new Contato();
+
+    contato3->setNome("Nome3");
+    contato3->setFone("333-444", 2);
+    contato3->setFone("333-333", 1);
+
+    // mostrar dados
+    cout << endl << "Contato 1";
+    if (!contato1.hasErro())
+    {
+        cout << endl << "Nome = " << contato1.getNome()
+             << endl << "Fone_1 = " << contato1.getFone()
+             << endl << "Fone_2 = " << contato1.getFone(2) << endl;
+    }
+    else
+    {
+        cout << endl << "Erro encontrado: " << contato1.getErro() << endl; 
+    }
+
+    cout << endl << "Contato 2";
+    if (!contato2->hasErro())
+    {
+        cout << endl << "Nome = " << contato2->getNome()
+             << endl << "Fone_1 = " << contato2->getFone()
+             << endl << "Fone_2 = " << contato2->getFone(2) << endl;
+    }
+    else
+    {
+        cout << endl << "Erro encontrado: " << contato2->getErro() << endl; 
+    }
+
+    cout << endl << "Contato 3";
+    if (!contato3->hasErro())
+    {
+        cout << endl << "Nome = " << contato3->getNome()
+             << endl << "Fone_1 = " << contato3->getFone()
+             << endl << "Fone_2 = " << contato3->getFone(2) << endl;
+    }
+    else
+    {
+        cout << endl << "Erro encontrado: " << contato3->getErro() << endl; 
+    }
 
     // encerrar
     pause("<Enter> para continuar");

@@ -18,6 +18,8 @@ using std::string;
 using std::ofstream;
 using std::ifstream;
 
+#include <string>
+
 
 // outras dependencias
 void pause(std::string text)
@@ -42,10 +44,22 @@ class Contato : public Erro
 private:
     string nome;
     string fone;
+    string fone2;
 
     bool validFone(std::string fone)
     {
-        
+        bool result = true;
+        int len = fone.size();
+        int i = 0;
+        int c = '\0';
+
+        while (result && i < len)
+        {
+            c = fone[i];
+            result = result && (('0' <= c && c <= '9') || (c == '-'));
+            i++;
+        }
+        return result;
     }
 
 public:
@@ -63,16 +77,19 @@ public:
         setErro(0);
         nome = "";
         fone = "";
+        fone2 = "";
     }
 
     /**
      * Construtor alternativo
      */
-    Contato(std::string nome_inicial, std::string fone_inicial)
+    Contato(std::string nome_inicial, std::string fone_inicial,
+            std::string fone_alt)
     {
         setErro(0);
         nome = nome_inicial;
         fone = fone_inicial;
+        fone2 = fone_alt;
     }
 
     /**
@@ -83,6 +100,7 @@ public:
         setErro(0);
         setNome(another.nome);
         setFone(another.fone);
+        setFone(another.fone2, 2);
     }
 
     // metodos para acesso
@@ -94,12 +112,25 @@ public:
             this->nome = nome;
     }
 
-    void setFone(std::string fone)
+    void setFone(std::string fone, int opt=1)
     {
-        if (fone.empty())
+        if (fone.empty() || !this->validFone(fone))
             setErro(2);
         else
-            this->fone = fone;
+        {
+            switch (opt)
+            {
+            case 1:
+                this->fone = fone;
+                break;
+            case 2:
+                this->fone2 = fone;
+                break;
+            default:
+                setErro(6);
+                break;
+            }
+        }
     }
 
     std::string getNome()
@@ -107,9 +138,20 @@ public:
         return (this->nome);
     }
 
-    std::string getFone()
+    std::string getFone(int opt=1)
     {
-        return (this->fone);
+        switch (opt)
+        {
+        case 1:
+            return this->fone;
+            break;
+        case 2:
+            return this->fone2;
+            break;
+        default:
+            return "";
+            break;
+        }
     }
 
     std::string toString()
@@ -135,17 +177,66 @@ public:
             this->nome = nome;
     }
 
-    void readFone(std::string text)
+    void readFone(std::string text, int opt=1)
     {
         std::string fone = "";
 
         cout << text;
         cin >> fone;
 
-        if (fone.empty())
+        if (fone.empty() || !this->validFone(fone))
             setErro(4);
         else
-            this->fone = fone;
+        {
+            switch (opt)
+            {
+            case 1:
+                this->fone = fone;
+                break;
+            case 2:
+                this->fone2 = fone;
+                break;
+                break;
+            default:
+                setErro(6);
+                break;
+            }
+        }
+    }
+
+    void fromFile(std::string fileName)
+    {
+        std::ifstream afile;
+        std::string nome = "";
+        std::string fone = "";
+
+        afile.open(fileName);
+
+        // testar se arquivo existe
+        if (!afile.is_open())
+        {
+            setErro(5);
+        }
+        else
+        {
+            afile >> nome;
+            afile >> fone;
+            this->setNome(nome);
+            this->setFone(fone); // possibilita validar formato
+        }
+        afile.close();
+    }
+
+    void toFile(std::string fileName)
+    {
+        std::ofstream afile;
+
+        afile.open(fileName);
+
+        afile << this->nome << endl;
+        afile << this->fone << endl;
+
+        afile.close();
     }
 };
 
