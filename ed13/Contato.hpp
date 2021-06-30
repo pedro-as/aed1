@@ -18,9 +18,6 @@ using std::string;
 using std::ofstream;
 using std::ifstream;
 
-#include <string>
-
-
 // outras dependencias
 void pause(std::string text)
 {

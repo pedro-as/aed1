@@ -15,3 +15,8 @@
 # ignorar diretórios de referências e exemplos
 ref/
 ex/
+
+# não ignorar shell scripts e templates
+!zip.sh
+!mk*.sh
+!*00.c*
